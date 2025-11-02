@@ -140,7 +140,13 @@ export default function Header() {
                                     <li key={index}>
                                         <Link
                                             href={link.href}
-                                            onClick={(e) => handleSmoothScroll(e, link.href)}
+                                            onClick={(e) => {
+                                              if (link.href.startsWith('#')) {
+                                                handleSmoothScroll(e, link.href);
+                                              } else {
+                                                setSideOpen(false);
+                                              }
+                                            }}
                                             className="flex items-center gap-3 hover:text-appPrimary transition py-3"
                                         >
                                             {Icon && <Icon size={20} />}

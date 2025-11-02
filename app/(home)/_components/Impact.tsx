@@ -26,7 +26,7 @@ export default function Impact(){
                             </div>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-4 md:gap-5 xl:gap-6 justify-center">
-                            <img src="/N.png" alt="N" className="w-auto max-w-[120px] sm:max-w-none" />
+                            <img src="/N.png" alt="N" className="w-auto max-w-[120px] hidden sm:inline sm:max-w-none" />
                             <img src="/card2.png" alt="card2" className="rounded-2xl w-full sm:w-auto sm:max-w-[380px] md:max-w-[420px] xl:max-w-[464px]"/>
                         </div>
                     </div>

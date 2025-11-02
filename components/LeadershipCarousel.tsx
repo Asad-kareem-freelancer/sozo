@@ -1,6 +1,8 @@
 'use client';
 
+import { useState, useCallback, useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const leadershipData = [
   {
@@ -34,7 +36,7 @@ const leadershipData = [
 ];
 
 export default function LeadershipCarousel() {
-  const [emblaRef] = useEmblaCarousel({
+  const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     slidesToScroll: 1,
     breakpoints: {
@@ -43,9 +45,48 @@ export default function LeadershipCarousel() {
     }
   });
 
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+  }, [emblaApi, onSelect]);
+
   return (
     <div className="relative">
-      <div className="overflow-hidden" ref={emblaRef}>
+      {/* Previous Arrow */}
+      <button
+        onClick={scrollPrev}
+        disabled={!prevBtnEnabled}
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-2 md:p-3 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+      </button>
+
+      {/* Next Arrow */}
+      <button
+        onClick={scrollNext}
+        disabled={!nextBtnEnabled}
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-2 md:p-3 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+      </button>
+
+      <div className="overflow-hidden px-10 md:px-12" ref={emblaRef}>
         <div className="flex gap-6">
           {leadershipData.map((member) => (
             <div

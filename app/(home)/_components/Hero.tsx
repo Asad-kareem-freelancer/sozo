@@ -15,7 +15,7 @@ export default function Hero(){
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/[0.192] to-black/80"></div>
                 </div>
-                <div className="flex flex-col lg:flex-row justify-center lg:justify-between absolute inset-0 p-4 sm:p-6 md:p-10 lg:p-16 items-center lg:items-end gap-8 lg:gap-4">
+                <div className="flex flex-col lg:flex-row justify-end lg:justify-between absolute inset-0 p-4 sm:p-6 md:p-10 lg:p-16 items-center lg:items-end gap-8 lg:gap-4">
                     <div className="space-y-5 md:space-y-6 lg:space-y-6 max-w-full lg:max-w-[45%] text-center lg:text-left">
                         <h1 className="text-white font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[54px] leading-tight lg:leading-15">From Insight to Impact in Rural Health</h1>
                         <h5 className="font-medium text-sm md:text-base text-white">Advancing data-driven equity across rural health systems.</h5>
@@ -30,7 +30,7 @@ export default function Hero(){
                         </div>
                     </div>
 
-                    <div className="flex flex-col space-y-4 md:space-y-5 w-full lg:w-auto items-center lg:items-start">
+                    <div className="hidden lg:flex flex-col space-y-4 md:space-y-5 w-full lg:w-auto items-center lg:items-start">
                         <div className="flex flex-row gap-2 sm:gap-4 items-stretch justify-center lg:justify-start">
                             <Card className="w-full lg:min-w-72 py-0 flex flex-col">
                                 <CardContent className="flex justify-between items-center relative px-0 overflow-hidden flex-1">
