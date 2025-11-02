@@ -29,7 +29,7 @@ export default function AboutUsPage() {
                     <div className="py-12 md:py-16 lg:py-20 px-6 text-center rounded-3xl bg-no-repeat bg-cover" style={{
                         backgroundImage: `url(/footer.jpg)`,
                     }}>
-                        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-[54px]">About the SozoRock Foundation</h1>
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-[54px] mb-2">About the SozoRock Foundation</h1>
                         <span className="block text-sm md:text-base">Advancing rural health equity through research, leadership, and collaboration.</span>
                     </div>
                 </Container>
