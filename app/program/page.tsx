@@ -5,6 +5,7 @@ import ProgramHero from "@/app/program/_components/ProgramHero";
 import Container from "@/components/ui/container";
 import {Button} from "@/components/ui/button";
 import { AccessDayModal, LibraryHubModal, NursingXchangeModal } from '@/components/modals';
+import Footer from "@/components/Footer";
 
 // Common class patterns
 const SECTION_HEADING = "text-3xl md:text-[44px] font-normal mb-6 text-balance";
@@ -153,6 +154,22 @@ export default function ProgramPage() {
             <AccessDayModal open={accessDayOpen} onOpenChange={setAccessDayOpen} />
             <LibraryHubModal open={libraryHubOpen} onOpenChange={setLibraryHubOpen} />
             <NursingXchangeModal open={nursingXchangeOpen} onOpenChange={setNursingXchangeOpen} />
+
+            <Footer
+                title="Evidence that informs action."
+                subTitle="Advancing SozoRock programs from concept to scalable rural-equity systems."
+                buttonOne={
+                    <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                        Partner With US
+                    </Button>
+                }
+
+                buttonTwo={
+                    <Button size="lg" variant="outline" className="border-none w-full sm:w-auto">
+                        Learn More
+                    </Button>
+                }
+            />
         </>
     )
 }

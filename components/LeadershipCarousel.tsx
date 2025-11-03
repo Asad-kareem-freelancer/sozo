@@ -70,7 +70,7 @@ export default function LeadershipCarousel() {
       <button
         onClick={scrollPrev}
         disabled={!prevBtnEnabled}
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-2 md:p-3 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-2 md:p-3 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all sm:hidden"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
@@ -80,18 +80,18 @@ export default function LeadershipCarousel() {
       <button
         onClick={scrollNext}
         disabled={!nextBtnEnabled}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-2 md:p-3 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-2 md:p-3 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all sm:hidden"
         aria-label="Next slide"
       >
         <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
       </button>
 
-      <div className="overflow-hidden px-10 md:px-12" ref={emblaRef}>
-        <div className="flex gap-6">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex">
           {leadershipData.map((member) => (
             <div
               key={member.id}
-              className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-8px)] lg:flex-[0_0_calc(25%-12px)]"
+              className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-8px)] lg:flex-[0_0_calc(25%-12px)] px-4"
             >
               <div className="h-full border-none">
                   <div className="aspect-square bg-gray-200 rounded-[20px] mb-4 overflow-hidden">

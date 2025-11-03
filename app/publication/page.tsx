@@ -1,6 +1,7 @@
 import PublicHero from "@/app/publication/_components/PublicHero";
 import {Button} from "@/components/ui/button";
 import Container from "@/components/ui/container";
+import Footer from "@/components/Footer";
 
 // Common class patterns
 const SECTION_HEADING = "text-2xl md:text-3xl lg:text-[44px] font-normal mb-6 text-balance";
@@ -87,7 +88,7 @@ export default function PublicationPage() {
                                 </span>
 
                         <div className="space-y-3 mb-8 text-sm md:text-base">
-                            <p className="font-semibold">Inside you'll find:</p>
+                            <p className="font-semibold">Inside you&#39;ll find:</p>
                             <ul className="list-disc list-inside space-y-2 leading-tight">
                                 <li>Frameworks for implementation and measurement</li>
                                 <li>Expert commentary and case studies</li>
@@ -135,6 +136,21 @@ export default function PublicationPage() {
                     </div>
                 </Container>
             </section>
+            <Footer
+                title="From pilot to permanence."
+                subTitle="Access our publications to explore frameworks advancing rural health equity."
+                buttonOne={
+                    <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                        Partner With US
+                    </Button>
+                }
+
+                buttonTwo={
+                    <Button size="lg" variant="outline" className="border-none w-full sm:w-auto">
+                        Learn More
+                    </Button>
+                }
+            />
         </>
     )
 }

@@ -1,11 +1,18 @@
 import Link from "next/link";
 import Container from "@/components/ui/container";
 import Image from "next/image";
-import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {navigation} from "@/const/nav";
+import {ReactNode} from "react";
 
-export default function Footer() {
+type Props = {
+    title: string;
+    subTitle: string;
+    buttonOne: ReactNode;
+    buttonTwo: ReactNode;
+}
+
+export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props) {
 
   return (
     <footer className="py-8 md:py-12 lg:py-16 bg-no-repeat bg-cover" style={{
@@ -17,24 +24,18 @@ export default function Footer() {
               <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 lg:gap-8">
                   <div className="space-y-3 md:space-y-4 max-w-full lg:max-w-lg font-medium">
                       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight">
-                          Collaboration drives measurable change.
+                          {title}
                       </h2>
                       <span className="text-sm sm:text-base block">
-                            Turning research into action to advance rural health equity.
-                          </span>
+                            {subTitle}
+                      </span>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-                      <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                          Partner With US
-                      </Button>
-
-                      <Button size="lg" variant="outline" className="border-none w-full sm:w-auto">
-                          Support Our Work
-                      </Button>
+                      {buttonOne}
+                      {buttonTwo}
                   </div>
               </div>
 
-              {/* Social Media Section */}
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-10 sm:items-center">
                       <span className="text-sm sm:text-base font-medium">
                           Stay connected with The SozoRock Foundation:

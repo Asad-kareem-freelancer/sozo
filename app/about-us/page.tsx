@@ -2,6 +2,8 @@ import Container from "@/components/ui/container";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import Link from "next/link";
 import LeadershipCarousel from "@/components/LeadershipCarousel";
+import {Button} from "@/components/ui/button";
+import Footer from "@/components/Footer";
 
 const arr = [
     {
@@ -96,6 +98,55 @@ export default function AboutUsPage() {
                     <LeadershipCarousel />
                 </Container>
             </section>
+
+            <section className="py-12 md:py-16 lg:py-24">
+                <Container variant="compact">
+                    <div className="flex flex-col lg:flex-row gap-8 items-start">
+                        <div className="w-full lg:max-w-[610px]">
+                            <h1 className="text-3xl md:text-4xl lg:text-[44px] mb-6">Our Vision</h1>
+                            <span className="block mb-4 md:mb-6 text-sm md:text-base">
+                                To advance measurable rural health equity through replicable, data-driven systems that strengthen access, literacy, and workforce sustainability.
+                            </span>
+
+                            <span className="block mb-4 md:mb-6 text-sm md:text-base">
+                                The Foundation transforms insight into action by aligning education, technology, and governance within an integrated model of community care.
+                            </span>
+
+                            <span className="block mb-4 md:mb-6 text-sm md:text-base">
+                                The SozoRock Foundation contributes to a coordinated movement for rural health equity across North America—linking evidence, policy, and practice to create accountable systems that deliver measurable public value.
+                            </span>
+                        </div>
+                        <Card className="w-full lg:max-w-[249px] flex flex-col py-1 bg-[#F0F6F6] gap-0">
+                            <CardHeader className="flex gap-2 sm:gap-3 px-3 sm:px-4 lg:px-5 py-3 sm:py-4">
+                                <img src="/bulb.png" alt="responsive" className="w-6 h-6 sm:w-8 sm:h-8 lg:w-auto lg:h-auto" />
+                                <span className="text-xs lg:text-sm">Insight</span>
+                            </CardHeader>
+                            <CardContent className="px-3 sm:px-4 lg:px-5 pb-3 sm:pb-4 lg:pb-5 flex-1">
+                                <h3 className="text-2xl lg:text-[32px]">65%</h3>
+                                <h4 className="text-base py-2">Communities identified</h4>
+                                <span className="text-xs lg:text-sm leading-tight">For early engagement and partnership development under Access Day and the Library Health Equity Hub.</span>
+                            </CardContent>
+                        </Card>
+                        <img src="/v1.png" className="w-full lg:w-[377px]" />
+                    </div>
+                </Container>
+            </section>
+
+            <Footer
+                title="Purpose. Partnership. Proof."
+                subTitle="Collaborate with us to advance rural health equity through measurable impact."
+                buttonOne={
+                    <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                        Partner With US
+                    </Button>
+                }
+
+                buttonTwo={
+                    <Button size="lg" variant="outline" className="border-none w-full sm:w-auto">
+                        Learn More
+                    </Button>
+                }
+            />
         </>
     )
 }
