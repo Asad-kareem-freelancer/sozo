@@ -76,7 +76,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
             <Link href="/" className="text-xl font-bold text-gray-900">
-              <Image src="/logo.png" alt="Logo" width={118} height={24} />
+                <Image src="/footer-logo.png" alt="Footer Logo" width={118} height={24} />
             </Link>
           </div>
 

@@ -1,4 +1,4 @@
-import PublicHero from "@/app/publication/_components/PublicHero";
+import PublicHero from "@/app/publication/[id]/_components/PublicHero";
 import {Button} from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import Footer from "@/components/Footer";
@@ -46,8 +46,8 @@ export default function PublicationPage() {
                             </figure>
 
                             <div className={`py-8 lg:py-12 space-y-1 ${CONTENT_MAX_WIDTH}`}>
-                                <p className="font-semibold text-sm md:text-base">Oluwabuyi Adeyemo, MBA <span className="font-normal inline">— Principal Author</span></p>
-                                <p className="font-semibold text-sm md:text-base">Jordan Hare, BSN, RN <span className="font-normal inline">— Contributing Author</span></p>
+                                <p className="font-semibold text-sm md:text-base">Oluwabiyi Adeyemo, MBA <span className="font-normal inline">— Principal Author</span></p>
+                                <p className="font-semibold text-sm md:text-base">Jordan Hare, BSN, RN <span className="font-normal inline">— Contributor</span></p>
                                 <div className='p-4 bg-[#F0F6F6] rounded-xl mt-8'>
                                     <p className="text-xs">
                                         SozoRock Foundation (2025). Rural Equity Blueprint Series, Volume 1 — Building a Framework for Rural

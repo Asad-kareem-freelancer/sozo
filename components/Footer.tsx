@@ -95,10 +95,14 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
                       <div className="space-y-6 md:space-y-8 lg:space-y-12">
                           <div>
                               <label className="text-xs opacity-60 block mb-1">Email</label>
-                              <b className="text-sm break-all">info@sozorockfoundation.org</b>
+                              <a href="mailto:contact@sozorockfoundation.org" className="text-sm break-all font-bold hover:underline">
+                                  contact@sozorockfoundation.org
+                              </a>
                           </div>
 
-                          <p className="text-xs sm:text-sm">Privacy | Accessibility | Nondiscrimination</p>
+                          <p className="text-xs sm:text-sm">
+                              <Link href="/policies#privacy" className="hover:underline">Privacy</Link> | <Link href="/policies#accessibility" className="hover:underline">Accessibility</Link> | <Link href="/policies#nondiscrimination" className="hover:underline">Nondiscrimination</Link>
+                          </p>
 
                           <p className="opacity-50 text-xs">© 2025 — All rights reserved.</p>
                       </div>
