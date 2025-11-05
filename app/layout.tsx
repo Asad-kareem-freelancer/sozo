@@ -9,8 +9,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sozorock - Rural Health Impact",
-  description: "From Insight to Impact in Rural Health - Empowering communities through health research and programs",
+  title: "The SozoRock Foundation — Advancing Equity, Systems, and Resilience",
+  description: "The SozoRock® Foundation is a New York–based nonprofit that advances health equity, education access, and systems resilience through community programs, policy research, and digital innovation.",
+   icons: {
+    icon: "/favicon.png", // /favicon.ico is the path to the file in the public folder
+  },
 };
 
 export default function RootLayout({
