@@ -20,7 +20,7 @@ export default function AccessDayModal({ open, onOpenChange }: AccessDayModalPro
         <DialogHeader>
           <DialogTitle className="text-2xl md:text-3xl">Access Day</DialogTitle>
         </DialogHeader>
-        <AccessDayForm />
+        <AccessDayForm onOpenChange={onOpenChange} />
       </DialogContent>
     </Dialog>
   );

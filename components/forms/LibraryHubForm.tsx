@@ -7,11 +7,15 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 
-export default function LibraryHubForm() {
-  const { register, handleSubmit, errors, control, isSubmitting } = useLibraryHubForm();
+type Props = {
+  onOpenChange: (open: boolean) => void;
+}
+
+export default function LibraryHubForm({onOpenChange}: Props) {
+  const { register, onSubmit, errors, control, isSubmitting, handleSubmit } = useLibraryHubForm();
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit(data => onSubmit(data, ()=>onOpenChange(false)))} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="firstName">First name</Label>

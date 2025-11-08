@@ -47,12 +47,22 @@ async function submitForm<T>(
       body: JSON.stringify(payload),
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
     const result = await response.json();
-    return result;
+
+    if (response.ok) {
+      // Normalize successful response
+      return {
+        success: true,
+        message: result.message || 'Submission successful',
+      };
+    } else {
+      // Normalize error response
+      return {
+        success: false,
+        error: result.error || result.message || 'Submission failed',
+        message: result.message,
+      };
+    }
   } catch (error) {
     console.error('API submission error:', error);
     return {

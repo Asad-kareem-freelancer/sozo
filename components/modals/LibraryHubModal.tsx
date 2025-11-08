@@ -20,7 +20,7 @@ export default function LibraryHubModal({ open, onOpenChange }: LibraryHubModalP
         <DialogHeader>
           <DialogTitle className="text-2xl md:text-3xl">Library Health Equity Hub</DialogTitle>
         </DialogHeader>
-        <LibraryHubForm />
+        <LibraryHubForm onOpenChange={onOpenChange} />
       </DialogContent>
     </Dialog>
   );

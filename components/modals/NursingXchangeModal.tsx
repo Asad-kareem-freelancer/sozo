@@ -20,7 +20,7 @@ export default function NursingXchangeModal({ open, onOpenChange }: NursingXchan
         <DialogHeader>
           <DialogTitle className="text-2xl md:text-3xl">Nursing Xchange</DialogTitle>
         </DialogHeader>
-        <NursingXchangeForm />
+        <NursingXchangeForm onOpenChange={onOpenChange} />
       </DialogContent>
     </Dialog>
   );
