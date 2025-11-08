@@ -17,7 +17,7 @@ const leadershipData = [
     name: "Anthony Abraham, MSC",
     role: "Director of Global Affairs",
     image: "/m2.png",
-    bio: "Leads the Foundation’s cross-border policy and institutional relations, building collaborative pathways between public-health entities, academic networks, and development partners. Anthony structures global alignment for SozoRock’s equity initiatives, ensuring that pilot models transition into scalable frameworks adaptable across international health systems."
+    bio: "Leads the Foundation’s cross-border policy and institutional relations, building collaborative pathways between public health entities, academic networks, and development partners. Anthony structures global alignment for SozoRock’s equity initiatives, ensuring that pilot models transition into scalable frameworks adaptable across international health systems."
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const leadershipData = [
     name: "Oluwabiyi Adeyemo, MBA",
     role: "Director of Strategic Initiatives",
     image: "/m4.png",
-    bio: "Designs and leads the Foundations strategic architecture for measurable rural-equity impact. His work integrates research, policy, and technology through initiatives such as the Rural Equity Blueprint Series (REBS), Access Day, and the Library Health Equity Hub. Olus approach aligns data governance, workforce renewal, and policy readiness to strengthen the evidence base for sustainable health access across underserved regions."
+    bio: "Designs and leads the Foundation's strategic architecture for measurable rural equity impact. His work integrates research, policy, and technology through initiatives such as the Rural Equity Blueprint Series (REBS), Access Day, and the Library Health Equity Hub. Olu's approach aligns data governance, workforce renewal, and policy readiness to strengthen the evidence base for sustainable health access across underserved regions."
   }
 ];
 

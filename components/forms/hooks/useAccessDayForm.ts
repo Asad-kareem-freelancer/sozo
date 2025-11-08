@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
+import { submitAccessDayForm } from '../_api/formSubmissions';
+import Swal from 'sweetalert2';
 
 const accessDaySchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -39,13 +41,40 @@ export function useAccessDayForm() {
   const onSubmit = async (data: AccessDayFormData) => {
     setIsSubmitting(true);
     try {
-      console.log('Access Day Form Data:', data);
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
-      alert('Thank you for your interest! We will contact you soon.');
-      reset();
+      const result = await submitAccessDayForm(data);
+
+      if (result.success) {
+        await Swal.fire({
+          icon: 'success',
+          title: 'Thank you.',
+          html: `
+            <p>Your submission has been received.</p>
+            <p>The SozoRock Foundation reviews each entry to ensure proper follow-up and documentation.</p>
+            <p style="margin-top: 12px; font-size: 0.9em; color: #666;">A confirmation email has been sent from contact@sozorockfoundation.org for your records.</p>
+          `,
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2563eb'
+        });
+        reset();
+      } else {
+        console.error('API error:', result.error);
+        await Swal.fire({
+          icon: 'error',
+          title: 'Submission Failed',
+          text: result.message || 'Something went wrong. Please try again.',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#2563eb'
+        });
+      }
     } catch (error) {
       console.error('Form submission error:', error);
-      alert('Something went wrong. Please try again.');
+      await Swal.fire({
+        icon: 'error',
+        title: 'Submission Failed',
+        text: 'Something went wrong. Please try again.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2563eb'
+      });
     } finally {
       setIsSubmitting(false);
     }

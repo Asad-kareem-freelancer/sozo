@@ -14,12 +14,12 @@ const arr = [
     {
         id: 2,
         title: "Approach",
-        description: "The Foundation aligns data, governance, and community collaboration to translate public-health priorities into measurable outcomes. Programs move from insight to implementation through structured partnerships across education, policy, and healthcare systems."
+        description: "The Foundation aligns data, governance, and community collaboration to translate public health priorities into measurable outcomes. Programs move from insight to implementation through structured partnerships across education, policy, and healthcare systems."
     },
     {
         id: 3,
         title: "Governance",
-        description: "The Foundation operates under a collaborative governance model that brings together academic, provider, and public-sector partners. Oversight mechanisms ensure transparency, fiscal accountability, and alignment with equity and workforce objectives."
+        description: "The Foundation operates under a collaborative governance model that brings together academic, provider, and public sector partners. Oversight mechanisms ensure transparency, fiscal accountability, and alignment with equity and workforce objectives."
     }
 ]
 

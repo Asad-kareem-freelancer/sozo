@@ -2,6 +2,7 @@ import PublicHero from "@/app/publication/[id]/_components/PublicHero";
 import {Button} from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 // Common class patterns
 const SECTION_HEADING = "text-2xl md:text-3xl lg:text-[44px] font-normal mb-6 text-balance";
@@ -63,11 +64,21 @@ export default function PublicationPage() {
 
                             <div className="space-y-4 leading-relaxed text-balance text-sm md:text-base">
                                 <p>
-                                    The Rural Equity Blueprint Series extends recognition to the county public-health directors and their teams across Western New York for providing access to Community Health Assessment (CHA) and Community Health Improvement Plan (CHIP) documentation, and for sharing comprehensive county health priorities during the pre-planning and information-sharing phase. Their cooperation and contextual data strengthened the precision of regional analysis across all thematic areas — workforce, literacy, prevention, chronic disease, and access equity — and informed the modeling framework developed for this volume.
+                                    The Rural Equity Blueprint Series extends recognition to the county public health directors and their
+                                    teams across Western New York for providing access to Community Health Assessment (CHA) and Community
+                                    Health Improvement Plan (CHIP) documentation, and for sharing comprehensive county health priorities
+                                    during the pre-planning and information-sharing phase. Their cooperation and contextual data strengthened
+                                    the precision of regional analysis across all thematic areas — workforce, literacy, prevention, chronic disease,
+                                    and access equity — and informed the modeling framework developed for this volume.
                                 </p>
 
                                 <p>
-                                    Additional insights were contributed through early academic and sector dialogues that offered perspective on rural service readiness and educational alignment across New York State. These engagements have since concluded, yet their perspectives enriched the Foundation’s understanding of rural health-system dynamics. All modeling, governance design, and analytical synthesis presented in this publication were developed independently by The SozoRock Foundation. The framework, structure, and datasets remain the Foundation’s intellectual property. The analyses and conclusions expressed herein are solely those of The SozoRock® Foundation and do not represent the views of any county department, academic institution, or external contributor.
+                                    Additional insights were contributed through early academic and sector dialogues that offered perspective on rural service
+                                    readiness and educational alignment across New York State. These engagements have since concluded, yet their perspectives
+                                    enriched the Foundation’s understanding of rural health-system dynamics. All modeling, governance design, and analytical
+                                    synthesis presented in this publication were developed independently by The SozoRock Foundation. The framework, structure,
+                                    and datasets remain the Foundation’s intellectual property. The analyses and conclusions expressed herein are solely those
+                                    of The SozoRock® Foundation and do not represent the views of any county department, academic institution, or external contributor.
                                 </p>
                             </div>
                         </div>
@@ -100,7 +111,7 @@ export default function PublicationPage() {
                             variant="secondary"
                             asChild
                         >
-                            <a href="#">Download Report</a>
+                            <Link href="https://sozorock-rebc-publications.s3.us-east-1.amazonaws.com/Rural+Equity+Blueprint+Series+VFF3.pdf" target="_blank">Download Report</Link>
                         </Button>
                     </div>
 

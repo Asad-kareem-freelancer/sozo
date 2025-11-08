@@ -5,11 +5,11 @@ import {Button} from "@/components/ui/button";
 import Image from "next/image";
 import Container from "@/components/ui/container";
 import {navigation} from "@/const/nav";
-import {Menu, Home, Info, GraduationCap, FileText, Mail, LogIn, UserPlus} from "lucide-react";
+import type {LucideIcon} from "lucide-react";
+import {Building2, Users, Briefcase, BookOpen, Mail, Menu} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger,} from "@/components/ui/sheet";
 import {useEffect, useState} from "react";
 import {usePathname, useRouter} from "next/navigation";
-import type {LucideIcon} from "lucide-react";
 
 export default function Header() {
     const router = useRouter();
@@ -17,10 +17,10 @@ export default function Header() {
     const [sideOpen, setSideOpen] = useState(false);
 
     const iconMap: Record<string, LucideIcon> = {
-        Home,
-        Info,
-        GraduationCap,
-        FileText,
+        Building2,
+        Users,
+        Briefcase,
+        BookOpen,
         Mail,
     };
 
@@ -73,14 +73,14 @@ export default function Header() {
   return (
     <header className="bg-white/95 backdrop-blur-sm mb-2">
       <Container>
-        <div className="flex h-16 items-center justify-between">
+        <div className="relative flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
             <Link href="/" className="text-xl font-bold text-gray-900">
                 <Image src="/footer-logo.png" alt="Footer Logo" width={118} height={24} />
             </Link>
           </div>
 
-          <div className="hidden md:flex md:items-center md:gap-8">
+          <div className="hidden md:flex md:items-center md:gap-8 absolute left-1/2 -translate-x-1/2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -90,24 +90,11 @@ export default function Header() {
                     handleSmoothScroll(e, item.href);
                   }
                 }}
-                className="text-sm transition-colors font-normal"
+                className="text-sm transition-colors font-normal hover:text-gray-600 hover:underline underline-offset-4"
               >
                 {item.name}
               </Link>
             ))}
-          </div>
-
-          <div className="hidden md:flex md:items-center md:gap-4">
-            <Link href="/" >
-                <Button variant="outline" size="sm">
-                    Log in
-                </Button>
-            </Link>
-              <Link href="/" >
-                  <Button variant="secondary" size="sm">
-                      Register
-                  </Button>
-              </Link>
           </div>
 
           {/* Mobile Menu */}
@@ -119,7 +106,7 @@ export default function Header() {
                             aria-label="Open menu"
                             className="bg-white text-black p-2 rounded-full shadow-md hover:bg-gray-100 transition"
                         >
-                            <Menu size={20} />
+                            <Menu size={20} strokeWidth={1.5} />
                         </button>
                     </SheetTrigger>
                     <SheetContent
@@ -147,32 +134,15 @@ export default function Header() {
                                                 setSideOpen(false);
                                               }
                                             }}
-                                            className="flex items-center gap-3 hover:text-appPrimary transition py-3"
+                                            className="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 rounded-md"
                                         >
-                                            {Icon && <Icon size={20} />}
+                                            {Icon && <Icon size={20} strokeWidth={1.5} />}
                                             <span>{link.name}</span>
                                         </Link>
                                     </li>
                                 );
                             })}
                         </ul>
-
-                        <div className="px-4 py-4 mt-auto border-t border-gray-200">
-                            <div className="flex flex-col gap-3">
-                                <Link href="/" onClick={() => setSideOpen(false)}>
-                                    <Button variant="outline" size="lg" className="w-full flex items-center gap-2">
-                                        <LogIn size={16} />
-                                        Log in
-                                    </Button>
-                                </Link>
-                                <Link href="/" onClick={() => setSideOpen(false)}>
-                                    <Button variant="secondary" size="lg" className="w-full flex items-center gap-2">
-                                        <UserPlus size={16} />
-                                        Register
-                                    </Button>
-                                </Link>
-                            </div>
-                        </div>
                     </SheetContent>
                 </Sheet>
             </div>

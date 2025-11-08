@@ -157,7 +157,7 @@ export default function ProgramPage() {
 
             <Footer
                 title="Evidence that informs action."
-                subTitle="Advancing SozoRock programs from concept to scalable rural-equity systems."
+                subTitle="Advancing SozoRock programs from concept to scalable rural equity systems."
                 buttonOne={
                     <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                         Partner With US

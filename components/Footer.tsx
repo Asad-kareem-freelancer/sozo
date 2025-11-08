@@ -23,7 +23,7 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
               {/* CTA Section */}
               <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 lg:gap-8">
                   <div className="space-y-3 md:space-y-4 max-w-full lg:max-w-lg font-medium">
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight">
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
                           {title}
                       </h2>
                       <span className="text-sm sm:text-base block">
