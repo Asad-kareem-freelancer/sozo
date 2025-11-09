@@ -40,7 +40,7 @@ export default function AboutUsPage() {
             <section className="py-12 md:py-16 lg:py-24">
                 <Container variant="compact">
                     <div className="flex flex-col lg:flex-row justify-between gap-6 items-start lg:items-center mb-6 md:mb-8 lg:mb-10">
-                        <h1 className="text-3xl md:text-4xl lg:text-[44px] font-normal leading-tight">Building Trust Through Purpose and Accountability</h1>
+                        <h1 className="text-3xl md:text-4xl lg:text-[44px] font-normal leading-tight lg:w-1/2">Building Trust Through Purpose and Accountability</h1>
                         <span className="text-sm md:text-base lg:max-w-[440px]">Our mission, approach, and governance reflect a unified commitment to advancing health equity through research, collaboration, and transparent leadership.</span>
                     </div>
 
