@@ -11,8 +11,10 @@ export default function HomePage() {
         <Services />
         <Impact />
         <Footer
-            title="Collaboration drives measurable change."
-            subTitle="Turning research into action to advance rural health equity."
+            title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
+                Collaboration drives<br /> measurable change.
+            </h2>}
+            subTitle="Turning research into action for health systems equity."
             buttonOne={
                 <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                     Partner With US

@@ -76,7 +76,7 @@ export default function ProgramPage() {
                 <Container className={SECTION_LAYOUT} variant="compact">
                     <div className={CONTENT_MAX_WIDTH}>
                         <h2 className={SECTION_HEADING}>
-                            Library Health Equity Hub — Access through Learning Networks
+                            Library Health Equity Hub&trade; — Access through Learning Networks
                         </h2>
 
                         <span className="block leading-relaxed mb-6">
@@ -156,7 +156,9 @@ export default function ProgramPage() {
             <NursingXchangeModal open={nursingXchangeOpen} onOpenChange={setNursingXchangeOpen} />
 
             <Footer
-                title="Evidence that informs action."
+                title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
+                    Evidence that informs action.
+                </h2>}
                 subTitle="Advancing SozoRock programs from concept to scalable rural equity systems."
                 buttonOne={
                     <Button size="lg" variant="secondary" className="w-full sm:w-auto">

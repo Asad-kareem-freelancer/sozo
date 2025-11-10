@@ -148,7 +148,9 @@ export default function PublicationPage() {
                 </Container>
             </section>
             <Footer
-                title="From pilot to permanence."
+                title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
+                    From pilot to permanence.
+                </h2>}
                 subTitle="Access our publications to explore frameworks advancing rural health equity."
                 buttonOne={
                     <Button size="lg" variant="secondary" className="w-full sm:w-auto">

@@ -1,6 +1,5 @@
 import Container from "@/components/ui/container";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
-import Link from "next/link";
 import LeadershipCarousel from "@/components/LeadershipCarousel";
 import {Button} from "@/components/ui/button";
 import Footer from "@/components/Footer";
@@ -9,7 +8,7 @@ const arr = [
     {
         id: 1,
         title: "Mission",
-        description: "To strengthen rural and underserved health systems by integrating research, literacy, and workforce development into scalable, evidence-driven frameworks that improve access and equity."
+        description: "To advance equitable, evidence-driven health systems by integrating research, literacy, and workforce development into scalable frameworks that strengthen access and outcomes across communities."
     },
     {
         id: 2,
@@ -54,7 +53,7 @@ export default function AboutUsPage() {
                                     <CardHeader>
                                         <h2 className="text-xl md:text-2xl font-medium">{item.title}</h2>
                                     </CardHeader>
-                                    <CardContent className="bg-white/40">
+                                    <CardContent className="bg-white/40 max-w-96">
                                         <span className="text-sm md:text-base">{item.description}</span>
                                     </CardContent>
                                 </Card>
@@ -76,11 +75,11 @@ export default function AboutUsPage() {
                             <span className="block mb-4 md:mb-6 text-sm md:text-base">The Foundation's work centers on three pillars that define its mission and outcomes:</span>
                             <div className="divide-y divide-gray-200">
                                 <div className="py-4 md:py-6">
-                                    <span className="block text-sm md:text-base"><b>Rural Health Equity</b> — advancing access and service delivery for underserved populations.</span>
+                                    <span className="block text-sm md:text-base"><b>Health Systems Equity</b> — advancing access and service delivery for underserved populations.</span>
                                 </div>
 
                                 <div className="py-4 md:py-6">
-                                    <span className="block text-sm md:text-base"><b>Literacy and Workforce Development</b> — integrating education and capacity-building into long-term systeare tehm resilience.</span>
+                                    <span className="block text-sm md:text-base"><b>Literacy and Workforce Development</b> — integrating education and capacity-building into long-term system resilience.</span>
                                 </div>
 
                                 <div className="py-4 md:py-6">
@@ -105,7 +104,7 @@ export default function AboutUsPage() {
                         <div className="w-full lg:max-w-[610px]">
                             <h1 className="text-3xl md:text-4xl lg:text-[44px] mb-6">Our Vision</h1>
                             <span className="block mb-4 md:mb-6 text-sm md:text-base">
-                                To advance measurable rural health equity through replicable, data-driven systems that strengthen access, literacy, and workforce sustainability.
+                                To advance measurable health systems equity through replicable, data-driven systems that strengthen access, literacy, and workforce sustainability.
                             </span>
 
                             <span className="block mb-4 md:mb-6 text-sm md:text-base">
@@ -113,7 +112,7 @@ export default function AboutUsPage() {
                             </span>
 
                             <span className="block mb-4 md:mb-6 text-sm md:text-base">
-                                The SozoRock Foundation contributes to a coordinated movement for rural health equity across North America—linking evidence, policy, and practice to create accountable systems that deliver measurable public value.
+                                The SozoRock Foundation contributes to a coordinated movement for health systems equity across North America—linking evidence, policy, and practice to create accountable systems that deliver measurable public value.
                             </span>
                         </div>
                         <Card className="w-full lg:max-w-[249px] flex flex-col py-1 bg-[#F0F6F6] gap-0">
@@ -133,8 +132,10 @@ export default function AboutUsPage() {
             </section>
 
             <Footer
-                title="Purpose. Partnership. Proof."
-                subTitle="Collaborate with us to advance rural health equity through measurable impact."
+                title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
+                    Purpose.<br /> Partnership. Proof.
+                </h2>}
+                subTitle="Collaborate with us to advance health systems equity through measurable impact."
                 buttonOne={
                     <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                         Partner With US

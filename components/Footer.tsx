@@ -6,7 +6,7 @@ import {navigation} from "@/const/nav";
 import {ReactNode} from "react";
 
 type Props = {
-    title: string;
+    title: ReactNode;
     subTitle: string;
     buttonOne: ReactNode;
     buttonTwo: ReactNode;
@@ -22,10 +22,8 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
           <div className="space-y-6 md:space-y-8">
               {/* CTA Section */}
               <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 lg:gap-8">
-                  <div className="space-y-3 md:space-y-4 max-w-full lg:max-w-lg font-medium">
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
-                          {title}
-                      </h2>
+                  <div className="space-y-3 md:space-y-4 max-w-full font-medium">
+                      {title}
                       <span className="text-sm sm:text-base block">
                             {subTitle}
                       </span>
@@ -38,7 +36,7 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
 
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-10 sm:items-center">
                       <span className="text-sm sm:text-base font-medium">
-                          Stay connected with The SozoRock Foundation:
+                          Stay connected with The SozoRock Foundation
                       </span>
                   <div className="flex gap-4 items-center">
                       <Link
@@ -84,7 +82,7 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
                               <Link
                                   key={item.name}
                                   href={item.href}
-                                  className="text-sm transition-colors font-normal hover:text-primary"
+                                  className="text-sm transition-colors font-normal"
                               >
                                   {item.name}
                               </Link>
@@ -106,9 +104,9 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
 
                           <p className="opacity-50 text-xs">© 2025 — All rights reserved.</p>
                       </div>
-                      <div className="text-xs space-y-2 font-normal max-w-full lg:max-w-[236px]">
+                      <div className="text-xs space-y-2 font-normal max-w-full lg:max-w-[244px]">
                           <Image src="/footer-logo.png" alt="Footer Logo" width={236} height={48} className="mb-4 md:mb-6 w-auto h-auto max-w-full"/>
-                          <h5 className="font-semibold text-xs">From Insight to Impact in Rural Health.</h5>
+                          <h5 className="font-semibold text-xs">From Insight to Impact in Health systems.</h5>
                           <span className="block text-xs">SozoRock® is a registered trademark of SozoRock Tech Inc., used under license by The SozoRock Foundation.</span>
                       </div>
                   </CardContent>

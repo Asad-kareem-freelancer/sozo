@@ -31,7 +31,7 @@ const leadershipData = [
     name: "Oluwabiyi Adeyemo, MBA",
     role: "Director of Strategic Initiatives",
     image: "/m4.png",
-    bio: "Designs and leads the Foundation's strategic architecture for measurable rural equity impact. His work integrates research, policy, and technology through initiatives such as the Rural Equity Blueprint Series (REBS), Access Day, and the Library Health Equity Hub. Olu's approach aligns data governance, workforce renewal, and policy readiness to strengthen the evidence base for sustainable health access across underserved regions."
+    bio: "Designs and leads the Foundation's strategic architecture for measurable health equity systems. His work integrates research, policy, and technology through initiatives such as the Rural Equity Blueprint Series (REBS), Access Day, and the Library Health Equity Hub. Olu's approach aligns data governance, workforce renewal, and policy readiness to strengthen the evidence base for sustainable health access across underserved regions."
   }
 ];
 
@@ -91,10 +91,10 @@ export default function LeadershipCarousel() {
           {leadershipData.map((member) => (
             <div
               key={member.id}
-              className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-8px)] lg:flex-[0_0_calc(25%-12px)] px-4"
+              className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-8px)] lg:flex-[0_0_calc(25%-12px)] px-1 mx-2"
             >
               <div className="h-full border-none">
-                  <div className="aspect-square bg-gray-200 rounded-[20px] mb-4 overflow-hidden">
+                  <div className="aspect-square bg-[#F7F7F7] rounded-[20px] mb-4 overflow-hidden">
                       <img
                           src={member.image}
                           alt={member.name}
@@ -104,7 +104,7 @@ export default function LeadershipCarousel() {
                           }}
                       />
                   </div>
-                <div className="px-4">
+                <div className="px-2">
                     <p className="text-xs mb-2">{member.role}</p>
                     <h3 className="text-base font-medium mb-4">{member.name}</h3>
                   <span className="text-sm">{member.bio}</span>

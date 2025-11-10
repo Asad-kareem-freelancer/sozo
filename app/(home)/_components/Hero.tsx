@@ -16,9 +16,9 @@ export default function Hero(){
                     <div className="absolute inset-0 bg-gradient-to-b from-black/[0.192] to-black/80"></div>
                 </div>
                 <div className="flex flex-col lg:flex-row justify-end lg:justify-between absolute inset-0 p-4 sm:p-6 md:p-10 lg:p-16 items-center lg:items-end gap-8 lg:gap-4">
-                    <div className="space-y-5 md:space-y-6 lg:space-y-6 max-w-full lg:max-w-[45%] text-center lg:text-left">
-                        <h1 className="text-white font-normal text-xl sm:text-4xl md:text-5xl lg:text-[54px] leading-tight lg:leading-15">From Insight to Impact in Rural Health</h1>
-                        <h5 className="font-medium text-sm md:text-base text-white">Advancing data-driven equity across rural health systems.</h5>
+                    <div className="space-y-5 md:space-y-6 lg:space-y-6 max-w-full lg:max-w-[54%] text-center lg:text-left">
+                        <h1 className="text-white font-normal text-xl sm:text-4xl md:text-5xl lg:text-[54px] leading-tight lg:leading-15">From Insight to<br /> Impact in Health systems</h1>
+                        <h5 className="font-medium text-sm md:text-base text-white">Advancing data-driven equity across health systems.</h5>
                         <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-center lg:justify-start">
                             <Button size="default" variant="outline" className="w-full sm:w-auto">
                                 View Rural Equity Blueprint
@@ -44,7 +44,7 @@ export default function Hero(){
                                     <img src="/doc.png" alt="responsive" className="absolute inset-y-0 object-cover transform object-cover h-full -right-2 object-bottom max-w-[80px] sm:max-w-[120px] lg:max-w-[154px]" />
                                 </CardContent>
                             </Card>
-                            <Card className="w-full lg:max-w-[185px] flex flex-col">
+                            <Card className="w-full lg:max-w-[185px] flex flex-col gap-6 py-2.5">
                                 <CardHeader className="flex gap-2 sm:gap-3 px-3 sm:px-4 lg:px-5 py-3 sm:py-4">
                                     <img src="/bulb.png" alt="responsive" className="w-6 h-6 sm:w-8 sm:h-8 lg:w-auto lg:h-auto" />
                                     <span className="text-xs lg:text-sm">Insight</span>

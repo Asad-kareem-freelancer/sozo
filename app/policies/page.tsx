@@ -2,6 +2,7 @@ import Container from "@/components/ui/container";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import Footer from "@/components/Footer";
 import {Button} from "@/components/ui/button";
+import Link from "next/link";
 
 export default function PoliciesPage() {
     return (
@@ -69,7 +70,7 @@ export default function PoliciesPage() {
                                 <div>
                                     <h3 className="text-lg md:text-xl font-semibold mb-3">6 Your Choices</h3>
                                     <p className="text-sm md:text-base">
-                                        You may request access to, correction of, or deletion of your personal information by contacting <a href="mailto:contact@sozorockfoundation.org" className="text-primary hover:underline font-medium">contact@sozorockfoundation.org</a>. Requests are reviewed in accordance with applicable privacy regulations and internal policy.
+                                        You may request access to, correction of, or deletion of your personal information by contacting <a href="mailto:contact@sozorockfoundation.org" className="font-semibold">contact@sozorockfoundation.org</a>. Requests are reviewed in accordance with applicable privacy regulations and internal policy.
                                     </p>
                                 </div>
 
@@ -100,7 +101,7 @@ export default function PoliciesPage() {
                                         <li>Design and test digital content to ensure it remains perceivable, operable, understandable, and robust.</li>
                                         <li>Maintain compatibility with assistive technologies across devices and browsers.</li>
                                         <li>Conduct quarterly accessibility reviews and track remediation through internal governance processes.</li>
-                                        <li>Invite feedback to identify and resolve barriers promptly at <a href="mailto:contact@sozorockfoundation.org" className="text-primary hover:underline font-medium">contact@sozorockfoundation.org</a>.</li>
+                                        <li>Invite feedback to identify and resolve barriers promptly at <a href="mailto:contact@sozorockfoundation.org" className="font-semibold">contact@sozorockfoundation.org</a>.</li>
                                     </ul>
                                 </div>
 
@@ -126,7 +127,7 @@ export default function PoliciesPage() {
                                 </p>
 
                                 <p className="text-sm md:text-base">
-                                    This policy applies to all Foundation activities—including program delivery, employment, procurement, and partnerships. Alleged violations may be reported confidentially to <a href="mailto:contact@sozorockfoundation.org" className="text-primary hover:underline font-medium">contact@sozorockfoundation.org</a> for review.
+                                    This policy applies to all Foundation activities—including program delivery, employment, procurement, and partnerships. Alleged violations may be reported confidentially to <a href="mailto:contact@sozorockfoundation.org" className="font-semibold">contact@sozorockfoundation.org</a> for review.
                                 </p>
 
                                 <p className="text-sm md:text-base">
@@ -151,7 +152,9 @@ export default function PoliciesPage() {
             </section>
 
             <Footer
-                title="Questions About Our Policies?"
+                title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
+                    Questions About Our Policies?
+                </h2>}
                 subTitle="We're here to help. Contact us for more information about our privacy, accessibility, or nondiscrimination policies."
                 buttonOne={
                     <Button size="lg" variant="secondary" className="w-full sm:w-auto" asChild>
@@ -160,7 +163,7 @@ export default function PoliciesPage() {
                 }
                 buttonTwo={
                     <Button size="lg" variant="outline" className="border-none w-full sm:w-auto" asChild>
-                        <a href="/">Back to Home</a>
+                        <Link href="/">Back to Home</Link>
                     </Button>
                 }
             />
