@@ -10,11 +10,13 @@ import {Building2, Users, Briefcase, BookOpen, Mail, Menu} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger,} from "@/components/ui/sheet";
 import {useEffect, useState} from "react";
 import {usePathname, useRouter} from "next/navigation";
+import ContactUsModal from "@/components/modals/ContactUsModal";
 
 export default function Header() {
     const router = useRouter();
     const pathname = usePathname();
     const [sideOpen, setSideOpen] = useState(false);
+    const [contactModalOpen, setContactModalOpen] = useState(false);
 
     const iconMap: Record<string, LucideIcon> = {
         Building2,
@@ -29,6 +31,13 @@ export default function Header() {
         href: string
     ) => {
         e.preventDefault();
+
+        // Check if this is the Contact link
+        if (href === "#contact") {
+            setContactModalOpen(true);
+            setSideOpen(false);
+            return;
+        }
 
         if (pathname === "/") {
             const targetId = href.replace("#", "");
@@ -76,7 +85,7 @@ export default function Header() {
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
             <Link href="/" className="text-xl font-bold text-gray-900">
-                <Image src="/footer-logo.png" alt="Footer Logo" width={236} height={48} className="w-auto h-auto max-w-full" />
+                <Image src="/footer-logo.png" alt="Footer Logo" width={160} height={36} />
             </Link>
           </div>
 
@@ -148,6 +157,7 @@ export default function Header() {
             </div>
         </div>
       </Container>
+      <ContactUsModal open={contactModalOpen} onOpenChange={setContactModalOpen} />
     </header>
   );
 }
