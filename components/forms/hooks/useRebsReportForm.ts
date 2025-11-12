@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
 import { submitRebsReportForm } from '../_api/formSubmissions';
-import { showSuccessAlert, showErrorAlert, showConnectionError } from '../_services/alertService';
+import { showReportSuccessAlert, showErrorAlert, showConnectionError } from '../_services/alertService';
 
 const rebsReportSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -37,26 +37,20 @@ export function useRebsReportForm() {
     },
   });
 
-  const onSubmit = async (data: RebsReportFormData, callback?: () => void) => {
+  const onSubmit = async (data: RebsReportFormData, callback?: (v:boolean) => void) => {
     setIsSubmitting(true);
+
     try {
       const result = await submitRebsReportForm(data);
 
       if (result.success) {
-        await showSuccessAlert();
         reset();
+        callback?.(false);
 
-        // Trigger PDF download
+        // Show success alert with download link
         const pdfUrl = 'https://d9gpta2bry95a.cloudfront.net/publications/REBS_v1.pdf';
-        const link = document.createElement('a');
-        link.href = pdfUrl;
-        link.download = 'REBS_v1.pdf';
-        link.target = '_blank';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        callback?.();
+        const reportTitle = 'Rural Equity Blueprint Series — Volume 1 (2025)';
+        await showReportSuccessAlert(reportTitle, pdfUrl);
       } else {
         console.error('API error:', result.error);
         await showErrorAlert(result.message);

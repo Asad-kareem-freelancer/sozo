@@ -16,7 +16,7 @@ interface AccessDayModalProps {
 export default function AccessDayModal({ open, onOpenChange }: AccessDayModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-6xl">
         <DialogHeader>
           <DialogTitle className="text-2xl md:text-3xl">Access Day</DialogTitle>
         </DialogHeader>

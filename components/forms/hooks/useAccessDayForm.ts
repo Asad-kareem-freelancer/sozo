@@ -44,9 +44,9 @@ export function useAccessDayForm() {
       const result = await submitAccessDayForm(data);
 
       if (result.success) {
-        await showSuccessAlert();
         reset();
         callback?.();
+        await showSuccessAlert();
       } else {
         console.error('API error:', result.error);
         await showErrorAlert(result.message);

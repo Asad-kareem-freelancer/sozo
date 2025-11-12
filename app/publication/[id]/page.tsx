@@ -108,7 +108,7 @@ export default function PublicationPage() {
 
                         <div className="space-y-3 mb-8 text-base">
                             <p className="font-semibold">Inside you&#39;ll find:</p>
-                            <ul className="list-disc list-inside space-y-2 leading-tight">
+                            <ul className="list-disc list-outside pl-5 space-y-2 leading-tight">
                                 <li>Frameworks for implementation and measurement</li>
                                 <li>Expert commentary and case studies</li>
                                 <li>Practical tools for policymakers and practitioners</li>

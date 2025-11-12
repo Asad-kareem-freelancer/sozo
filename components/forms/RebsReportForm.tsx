@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 type Props = {
   onOpenChange: (open: boolean) => void;
@@ -15,7 +16,7 @@ export default function RebsReportForm({ onOpenChange }: Props) {
   const { register, onSubmit, errors, control, isSubmitting, handleSubmit } = useRebsReportForm();
 
   return (
-    <form onSubmit={handleSubmit(data => onSubmit(data, () => onOpenChange(false)))} className="space-y-6">
+    <form onSubmit={handleSubmit(data => onSubmit(data, onOpenChange))} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="firstName">First name</Label>
@@ -70,8 +71,12 @@ export default function RebsReportForm({ onOpenChange }: Props) {
                 checked={field.value === true}
                 onCheckedChange={field.onChange}
               />
-              <Label htmlFor="privacyConsent" className="text-sm font-normal">
-                I agree to the privacy policy and terms
+              <Label htmlFor="privacyConsent" className="text-sm font-normal cursor-pointer inline">
+                  I consent to storing my details to provide this report, in accordance with the{' '}
+                <Link href="/policies#privacy" className="text-inherit underline underline-offset-2 inline">
+                  Privacy Policy
+                </Link>
+                .
               </Label>
             </div>
             {errors.privacyConsent && (

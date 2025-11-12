@@ -43,9 +43,9 @@ export function useNursingXchangeForm() {
       const result = await submitNursingForm(data);
 
       if (result.success) {
-        await showSuccessAlert();
         reset();
         callback?.();
+        await showSuccessAlert();
       } else {
         console.error('API error:', result.error);
         await showErrorAlert(result.message);

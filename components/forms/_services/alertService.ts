@@ -56,3 +56,32 @@ export async function showConnectionError(): Promise<void> {
     ...commonConfig,
   });
 }
+
+/**
+ * Show success alert for report downloads with download link
+ * @param reportTitle - The title/name of the report
+ * @param downloadUrl - The URL to download the report
+ */
+export async function showReportSuccessAlert(reportTitle: string, downloadUrl: string): Promise<void> {
+  await Swal.fire({
+    icon: 'success',
+    title: 'Thank you.',
+    html: `
+      <p>Your request for <strong>${reportTitle}</strong> has been received.</p>
+      <p style="margin-top: 12px;">Click the button below to download your report:</p>
+      <p style="margin-top: 16px;">
+        <a href="${downloadUrl}"
+           download
+           target="_blank"
+           style="display: inline-block; padding: 10px 24px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 6px; font-weight: 500;">
+          Download Report
+        </a>
+      </p>
+    `,
+    showConfirmButton: false,
+    zIndex: 99999,
+    customClass: {
+      popup: 'bg-white rounded-lg p-6 shadow-lg pointer-events-auto',
+    },
+  });
+}

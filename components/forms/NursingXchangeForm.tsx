@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 type Props = {
   onOpenChange: (open: boolean) => void;
@@ -111,8 +112,12 @@ export default function NursingXchangeForm({onOpenChange}: Props) {
                 checked={field.value === true}
                 onCheckedChange={field.onChange}
               />
-              <Label htmlFor="consent" className="text-sm font-normal">
-                I consent to be contacted regarding Nursing Xchange updates.
+              <Label htmlFor="consent" className="text-sm font-normal cursor-pointer inline">
+                I consent to be contacted regarding Nursing Xchange updates, in accordance with the{' '}
+                <Link href="/policies#privacy" className="text-inherit underline underline-offset-2 inline">
+                  Privacy Policy
+                </Link>
+                .
               </Label>
             </div>
             {errors.consent && (

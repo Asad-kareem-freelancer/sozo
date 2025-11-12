@@ -13,28 +13,28 @@ export default function Services(){
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                         <Card className="bg-[#F0F6F6]/60 transition-shadow hover:shadow-lg">
                             <CardHeader>
-                                <h2 className="text-xl md:text-2xl font-normal">01. Research & Publications</h2>
+                                <h2 className="text-xl md:text-2xl font-medium">01. Research & Publications</h2>
                             </CardHeader>
                             <CardContent className="bg-white/40">
-                                <p className="text-base leading-relaxed">Developing evidence-based frameworks, including the Rural Equity Blueprint Series (REBS).</p>
+                                <p className="text-[15px] md:text-base leading-relaxed">Developing evidence-based frameworks, including the Rural Equity Blueprint Series (REBS).</p>
                             </CardContent>
                         </Card>
 
                         <Card className="bg-[#F0F6F6]/60 transition-shadow hover:shadow-lg">
                             <CardHeader>
-                                <h2 className="text-xl md:text-2xl font-normal">02. Programs & Pilots</h2>
+                                <h2 className="text-xl md:text-2xl font-medium">02. Programs & Pilots</h2>
                             </CardHeader>
                             <CardContent className="bg-white/40">
-                                <p className="text-base leading-relaxed">Advancing field initiatives such as Access Day and the Library Health Equity Hub.</p>
+                                <p className="text-[15px] md:text-base leading-relaxed">Advancing field initiatives such as Access Day and the Library Health Equity Hub.</p>
                             </CardContent>
                         </Card>
 
                         <Card className="bg-[#F0F6F6]/60 transition-shadow hover:shadow-lg md:col-span-2 lg:col-span-1">
                             <CardHeader>
-                                <h2 className="text-xl md:text-2xl font-normal">03. People & Partnerships</h2>
+                                <h2 className="text-xl md:text-2xl font-medium">03. People & Partnerships</h2>
                             </CardHeader>
                             <CardContent className="bg-white/40">
-                                <p className="text-base leading-relaxed">Aligning universities, providers, and communities to drive measurable impact across health systems</p>
+                                <p className="text-[15px] md:text-base leading-relaxed">Aligning universities, providers, and communities to drive measurable impact across health systems</p>
                             </CardContent>
                         </Card>
                     </div>
