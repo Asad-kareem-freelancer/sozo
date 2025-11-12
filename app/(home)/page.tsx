@@ -11,6 +11,8 @@ import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 export default function HomePage() {
   const [partnerModalOpen, setPartnerModalOpen] = useState(false);
 
+  console.log(partnerModalOpen)
+
   return (
     <>
         <Hero />

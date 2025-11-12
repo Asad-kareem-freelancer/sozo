@@ -16,7 +16,7 @@ interface PartnerWithUsModalProps {
 export default function PartnerWithUsModal({ open, onOpenChange }: PartnerWithUsModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-6xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl md:text-3xl">Partner With Us</DialogTitle>
         </DialogHeader>

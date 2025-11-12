@@ -13,7 +13,7 @@ export default function PoliciesPage() {
                         backgroundImage: `url(/footer.jpg)`,
                     }}>
                         <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-[54px] mb-2">Policies</h1>
-                        <span className="block text-sm md:text-base">Our commitment to privacy, accessibility, and nondiscrimination.</span>
+                        <span className="block text-[15px] md:text-base leading-relaxed">Our commitment to privacy, accessibility, and nondiscrimination.</span>
                     </div>
                 </Container>
             </section>
@@ -28,53 +28,53 @@ export default function PoliciesPage() {
                                 <p className="text-sm text-gray-600">Effective Date: November 2025 | Version 1.0</p>
                             </CardHeader>
                             <CardContent className="space-y-6">
-                                <p className="text-sm md:text-base">
+                                <p className="text-[15px] md:text-base leading-relaxed">
                                     The SozoRock® Foundation values the privacy and confidence of everyone who engages with our work. We collect and use only the information necessary to operate our website, administer programs, and meet our legal and reporting obligations as a nonprofit organization incorporated in the State of New York.
                                 </p>
 
                                 <div>
                                     <h3 className="text-lg md:text-xl font-semibold mb-3">1 Information We Collect</h3>
-                                    <p className="text-sm md:text-base">
+                                    <p className="text-[15px] md:text-base leading-relaxed">
                                         We may collect limited personal information such as name, email address, phone number, and organization affiliation when individuals register for programs, submit forms, or request information from the Foundation.
                                     </p>
                                 </div>
 
                                 <div>
                                     <h3 className="text-lg md:text-xl font-semibold mb-3">2 Use of Information</h3>
-                                    <p className="text-sm md:text-base">
+                                    <p className="text-[15px] md:text-base leading-relaxed">
                                         Collected data are used solely to manage participation in Foundation programs, communicate relevant updates, and fulfill legitimate operational or compliance requirements.
                                     </p>
                                 </div>
 
                                 <div>
                                     <h3 className="text-lg md:text-xl font-semibold mb-3">3 Disclosure to Third Parties</h3>
-                                    <p className="text-sm md:text-base">
+                                    <p className="text-[15px] md:text-base leading-relaxed">
                                         The Foundation does not sell or rent personal data. Information may be processed by service providers who assist in website, communication, or administrative functions under confidentiality and security obligations consistent with applicable law.
                                     </p>
                                 </div>
 
                                 <div>
                                     <h3 className="text-lg md:text-xl font-semibold mb-3">4 Data Retention and Security</h3>
-                                    <p className="text-sm md:text-base">
+                                    <p className="text-[15px] md:text-base leading-relaxed">
                                         Personal information is retained only as long as necessary to meet the purpose for which it was collected or as required by law. Access is restricted to authorized personnel following the Foundation's internal data-governance standards.
                                     </p>
                                 </div>
 
                                 <div>
                                     <h3 className="text-lg md:text-xl font-semibold mb-3">5 Lawful Basis</h3>
-                                    <p className="text-sm md:text-base">
+                                    <p className="text-[15px] md:text-base leading-relaxed">
                                         Information is processed under the Foundation's legitimate interest in operating charitable and educational programs, or as required to comply with legal or regulatory obligations.
                                     </p>
                                 </div>
 
                                 <div>
                                     <h3 className="text-lg md:text-xl font-semibold mb-3">6 Your Choices</h3>
-                                    <p className="text-sm md:text-base">
+                                    <p className="text-[15px] md:text-base leading-relaxed">
                                         You may request access to, correction of, or deletion of your personal information by contacting <a href="mailto:contact@sozorockfoundation.org" className="font-semibold">contact@sozorockfoundation.org</a>. Requests are reviewed in accordance with applicable privacy regulations and internal policy.
                                     </p>
                                 </div>
 
-                                <p className="text-sm md:text-base">
+                                <p className="text-[15px] md:text-base leading-relaxed">
                                     The SozoRock Foundation follows applicable federal and state privacy requirements for charitable entities. Policies are reviewed annually or as required by law.
                                 </p>
 
@@ -91,13 +91,13 @@ export default function PoliciesPage() {
                                 <p className="text-sm text-gray-600">Effective Date: November 2025 | Version 1.0</p>
                             </CardHeader>
                             <CardContent className="space-y-6">
-                                <p className="text-sm md:text-base">
+                                <p className="text-[15px] md:text-base leading-relaxed">
                                     The SozoRock® Foundation is committed to equitable access for all individuals. We design and maintain our digital materials to align with the Web Content Accessibility Guidelines (WCAG) 2.1 AA standard.
                                 </p>
 
                                 <div>
                                     <h3 className="text-lg md:text-xl font-semibold mb-3">Our Commitment</h3>
-                                    <ul className="list-disc pl-6 space-y-2 text-sm md:text-base">
+                                    <ul className="list-disc pl-6 space-y-2 text-[15px] md:text-base leading-relaxed">
                                         <li>Design and test digital content to ensure it remains perceivable, operable, understandable, and robust.</li>
                                         <li>Maintain compatibility with assistive technologies across devices and browsers.</li>
                                         <li>Conduct quarterly accessibility reviews and track remediation through internal governance processes.</li>
@@ -105,7 +105,7 @@ export default function PoliciesPage() {
                                     </ul>
                                 </div>
 
-                                <p className="text-sm md:text-base">
+                                <p className="text-[15px] md:text-base leading-relaxed">
                                     The SozoRock Foundation is incorporated in the State of New York and complies with relevant accessibility and equal-access statutes. Policies are reviewed annually or as required by law.
                                 </p>
 
@@ -122,23 +122,23 @@ export default function PoliciesPage() {
                                 <p className="text-sm text-gray-600">Effective Date: November 2025 | Version 1.0</p>
                             </CardHeader>
                             <CardContent className="space-y-6">
-                                <p className="text-sm md:text-base">
+                                <p className="text-[15px] md:text-base leading-relaxed">
                                     The SozoRock® Foundation upholds the principle that dignity and opportunity must be extended to all. In accordance with federal, state, and local laws, the Foundation prohibits discrimination in every aspect of its operations.
                                 </p>
 
-                                <p className="text-sm md:text-base">
+                                <p className="text-[15px] md:text-base leading-relaxed">
                                     This policy applies to all Foundation activities—including program delivery, employment, procurement, and partnerships. Alleged violations may be reported confidentially to <a href="mailto:contact@sozorockfoundation.org" className="font-semibold">contact@sozorockfoundation.org</a> for review.
                                 </p>
 
-                                <p className="text-sm md:text-base">
+                                <p className="text-[15px] md:text-base leading-relaxed">
                                     The Foundation does not discriminate on the basis of race, color, religion, creed, sex, gender identity or expression, sexual orientation, age, national origin, disability, marital status, veteran status, or any other category protected by law.
                                 </p>
 
-                                <p className="text-sm md:text-base">
+                                <p className="text-[15px] md:text-base leading-relaxed">
                                     The Foundation adheres to the New York State Human Rights Law and applicable federal civil-rights statutes administered by the U.S. Equal Employment Opportunity Commission.
                                 </p>
 
-                                <p className="text-sm md:text-base">
+                                <p className="text-[15px] md:text-base leading-relaxed">
                                     The SozoRock Foundation is incorporated in the State of New York and complies with all relevant legal obligations for charitable entities. Policies are reviewed annually or as required by law.
                                 </p>
 

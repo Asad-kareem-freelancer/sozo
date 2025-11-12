@@ -32,7 +32,7 @@ export default function Impact(){
                     </div>
                     <div className="mt-6 xl:mt-0 flex flex-col">
                         <h1 className="text-3xl md:text-4xl xl:text-[44px] mb-2">Impact Programs</h1>
-                        <span className="block mb-6 text-base">The SozoRock Foundation develops field-tested models that translate research into measurable outcomes.</span>
+                        <span className="block mb-6 text-[15px] md:text-base leading-relaxed">The SozoRock Foundation develops field-tested models that translate research into measurable outcomes.</span>
                         <div className="divide-y divide-gray-200 flex flex-col justify-between grow">
                             <div className="py-4 space-y-2">
                                 <span className="block text-base leading-relaxed"><b>Access Day</b> — A county-based framework integrating health screenings, preventive education, and literacy outreach to strengthen early detection and community trust in rural care systems.</span>

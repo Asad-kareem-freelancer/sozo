@@ -59,12 +59,7 @@ export function usePartnerWithUsForm() {
   const onSubmit = async (data: PartnerWithUsFormValues, callback?: () => void) => {
     setIsSubmitting(true);
     try {
-      const formattedData = {
-        ...data,
-        phoneNumber: data.phoneNumber.replace(/\D/g, '')
-      };
-
-      const result = await submitPartnerWithUsForm(formattedData);
+      const result = await submitPartnerWithUsForm(data);
 
       if (result.success) {
         await showSuccessAlert();

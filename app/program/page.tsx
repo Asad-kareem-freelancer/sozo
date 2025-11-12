@@ -24,7 +24,7 @@ export default function ProgramPage() {
             <ProgramHero />
             <section className="py-12">
                 <Container variant="compact">
-                    <div className="mb-8 leading-relaxed block max-w-[626px] space-y-2">
+                    <div className="mb-8 text-[15px] md:text-base leading-relaxed block max-w-[626px] space-y-2">
                         <span className="block">
                             The Foundation's programs connect research, practice, and policy to strengthen rural health equity. Each initiative is evidence-based, outcome-measured, and designed for replication across counties and states.
                         </span>
@@ -47,7 +47,7 @@ export default function ProgramPage() {
                                 Access Day — Pilot for System Readiness
                             </h1>
 
-                            <div className="space-y-4 leading-relaxed text-balance">
+                            <div className="space-y-4 text-[15px] md:text-base leading-relaxed text-balance">
                                 <span className="block">
                                     Access Day serves as the Foundation's flagship initiative, integrating preventive care, chronic illness management, literacy advancement, and access to essential services such as screening, referral, and telehealth support, and community engagement into a single coordinated platform.
                                 </span>
@@ -79,16 +79,16 @@ export default function ProgramPage() {
                             Library Health Equity Hub&trade; — Access through Learning Networks
                         </h2>
 
-                        <span className="block leading-relaxed mb-6">
+                        <span className="block text-[15px] md:text-base leading-relaxed mb-6">
                             Gain exclusive insights into emerging strategies, policy recommendations, and real-world data shaping
                             the future of equitable rural health systems.
                         </span>
 
-                        <span className="block leading-relaxed mb-6">
+                        <span className="block text-[15px] md:text-base leading-relaxed mb-6">
                              Through partnerships with educational institutions and local governments, the Hub builds digital confidence, supports early detection readiness, and strengthens rural connectivity for vulnerable populations.
                         </span>
 
-                        <span className="block leading-relaxed mb-6">
+                        <span className="block text-[15px] md:text-base leading-relaxed mb-6">
                             The model aligns with county-level CHA and CHIP objectives and is designed for replication across library systems in New York and beyond.
                         </span>
 
@@ -125,7 +125,7 @@ export default function ProgramPage() {
                                 Nursing Xchange
                             </h1>
 
-                            <div className="space-y-4 leading-relaxed text-balance">
+                            <div className="space-y-4 text-[15px] md:text-base leading-relaxed text-balance">
                                 <span className="block">
                                     Nursing Xchange is a professional and academic fellowship structured to strengthen leadership within nursing and allied health. Launching in 2026, it links academic learning, clinical application, and systems innovation under a single framework that prepares professionals to lead change in rural and underserved communities. The fellowship advances applied research, mentorship, and rotational practice to translate evidence into measurable outcomes. Each cohort focuses on competencies in governance, quality improvement, and digital integration, ensuring participants can align clinical impact with institutional reform.
                                 </span>

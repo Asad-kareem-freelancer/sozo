@@ -31,7 +31,7 @@ export default function AboutUsPage() {
                         backgroundImage: `url(/footer.jpg)`,
                     }}>
                         <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-[54px] mb-2">About the SozoRock Foundation</h1>
-                        <span className="block text-sm md:text-base">Advancing rural health equity through research, leadership, and collaboration.</span>
+                        <span className="block text-[15px] md:text-base leading-relaxed">Advancing rural health equity through research, leadership, and collaboration.</span>
                     </div>
                 </Container>
             </section>
@@ -40,7 +40,7 @@ export default function AboutUsPage() {
                 <Container variant="compact">
                     <div className="flex flex-col lg:flex-row justify-between gap-6 items-start lg:items-center mb-6 md:mb-8 lg:mb-10">
                         <h1 className="text-3xl md:text-4xl lg:text-[44px] font-normal leading-tight lg:w-1/2">Building Trust Through Purpose and Accountability</h1>
-                        <span className="text-sm md:text-base lg:max-w-[440px]">Our mission, approach, and governance reflect a unified commitment to advancing health equity through research, collaboration, and transparent leadership.</span>
+                        <span className="text-[15px] md:text-base leading-relaxed lg:max-w-[440px]">Our mission, approach, and governance reflect a unified commitment to advancing health equity through research, collaboration, and transparent leadership.</span>
                     </div>
 
                     <div className="flex flex-col lg:flex-row gap-4 md:gap-6 lg:gap-4 xl:gap-6 justify-between">
@@ -54,7 +54,7 @@ export default function AboutUsPage() {
                                         <h2 className="text-xl md:text-2xl font-medium">{item.title}</h2>
                                     </CardHeader>
                                     <CardContent className="bg-white/40 max-w-96">
-                                        <span className="text-sm md:text-base">{item.description}</span>
+                                        <span className="text-[15px] md:text-base leading-relaxed">{item.description}</span>
                                     </CardContent>
                                 </Card>
                             ))}
@@ -72,18 +72,18 @@ export default function AboutUsPage() {
                         </div>
                         <div>
                             <h1 className="text-3xl md:text-4xl lg:text-[44px] mb-2">Focus Areas</h1>
-                            <span className="block mb-4 md:mb-6 text-sm md:text-base">The Foundation's work centers on three pillars that define its mission and outcomes:</span>
+                            <span className="block mb-4 md:mb-6 text-[15px] md:text-base leading-relaxed">The Foundation's work centers on three pillars that define its mission and outcomes:</span>
                             <div className="divide-y divide-gray-200">
                                 <div className="py-4 md:py-6">
-                                    <span className="block text-sm md:text-base"><b>Health Systems Equity</b> — advancing access and service delivery for underserved populations.</span>
+                                    <span className="block text-[15px] md:text-base leading-relaxed"><b>Health Systems Equity</b> — advancing access and service delivery for underserved populations.</span>
                                 </div>
 
                                 <div className="py-4 md:py-6">
-                                    <span className="block text-sm md:text-base"><b>Literacy and Workforce Development</b> — integrating education and capacity-building into long-term system resilience.</span>
+                                    <span className="block text-[15px] md:text-base leading-relaxed"><b>Literacy and Workforce Development</b> — integrating education and capacity-building into long-term system resilience.</span>
                                 </div>
 
                                 <div className="py-4 md:py-6">
-                                    <span className="block text-sm md:text-base"><b>Research and Data Systems</b> — applying evidence-based insights to guide policy, funding, and governance decisions.</span>
+                                    <span className="block text-[15px] md:text-base leading-relaxed"><b>Research and Data Systems</b> — applying evidence-based insights to guide policy, funding, and governance decisions.</span>
                                 </div>
                             </div>
                         </div>
@@ -103,15 +103,15 @@ export default function AboutUsPage() {
                     <div className="flex flex-col lg:flex-row gap-8 items-start">
                         <div className="w-full lg:max-w-[610px]">
                             <h1 className="text-3xl md:text-4xl lg:text-[44px] mb-6">Our Vision</h1>
-                            <span className="block mb-4 md:mb-6 text-sm md:text-base">
+                            <span className="block mb-4 md:mb-6 text-[15px] md:text-base leading-relaxed">
                                 To advance measurable health systems equity through replicable, data-driven systems that strengthen access, literacy, and workforce sustainability.
                             </span>
 
-                            <span className="block mb-4 md:mb-6 text-sm md:text-base">
+                            <span className="block mb-4 md:mb-6 text-[15px] md:text-base leading-relaxed">
                                 The Foundation transforms insight into action by aligning education, technology, and governance within an integrated model of community care.
                             </span>
 
-                            <span className="block mb-4 md:mb-6 text-sm md:text-base">
+                            <span className="block mb-4 md:mb-6 text-[15px] md:text-base leading-relaxed">
                                 The SozoRock Foundation contributes to a coordinated movement for health systems equity across North America—linking evidence, policy, and practice to create accountable systems that deliver measurable public value.
                             </span>
                         </div>

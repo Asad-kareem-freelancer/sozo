@@ -132,7 +132,7 @@ export default function LibraryHubForm({onOpenChange}: Props) {
         )}
       />
 
-      <Button type="submit" disabled={isSubmitting} className="w-auto">
+      <Button type="submit" variant="secondary" disabled={isSubmitting} className="w-full sm:w-auto text-sm sm:text-base">
         {isSubmitting ? 'Submitting...' : 'Submit Interest'}
       </Button>
     </form>

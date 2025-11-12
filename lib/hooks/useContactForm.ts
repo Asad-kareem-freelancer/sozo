@@ -45,12 +45,7 @@ export function useContactForm() {
   const onSubmit = async (data: ContactFormValues, callback?: () => void) => {
     setIsSubmitting(true);
     try {
-      const formattedData = {
-        ...data,
-        phoneNumber: data.phoneNumber.replace(/\D/g, '')
-      };
-
-      const result = await submitContactForm(formattedData);
+      const result = await submitContactForm(data);
 
       if (result.success) {
         await showSuccessAlert();

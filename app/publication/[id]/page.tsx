@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useState } from "react";
 import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
+import RebsReportModal from "@/components/modals/RebsReportModal";
 
 // Common class patterns
 const SECTION_HEADING = "text-2xl md:text-3xl lg:text-[44px] font-normal mb-6 text-balance";
@@ -28,6 +29,7 @@ const publications = [
 
 export default function PublicationPage() {
     const [partnerModalOpen, setPartnerModalOpen] = useState(false);
+    const [rebsModalOpen, setRebsModalOpen] = useState(false);
 
     return(
         <>
@@ -115,9 +117,9 @@ export default function PublicationPage() {
 
                         <Button
                             variant="secondary"
-                            asChild
+                            onClick={() => setRebsModalOpen(true)}
                         >
-                            <Link href="https://sozorock-rebc-publications.s3.us-east-1.amazonaws.com/Rural+Equity+Blueprint+Series+VFF3.pdf" target="_blank">Download Report</Link>
+                            Download Report
                         </Button>
                     </div>
 
@@ -176,6 +178,7 @@ export default function PublicationPage() {
                 }
             />
             <PartnerWithUsModal open={partnerModalOpen} onOpenChange={setPartnerModalOpen} />
+            <RebsReportModal open={rebsModalOpen} onOpenChange={setRebsModalOpen} />
         </>
     )
 }

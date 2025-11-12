@@ -122,7 +122,7 @@ export default function NursingXchangeForm({onOpenChange}: Props) {
         )}
       />
 
-      <Button type="submit" disabled={isSubmitting} className="w-auto">
+      <Button type="submit" variant="secondary" disabled={isSubmitting} className="w-full sm:w-auto text-sm sm:text-base">
         {isSubmitting ? 'Submitting...' : 'Register Interest'}
       </Button>
     </form>
