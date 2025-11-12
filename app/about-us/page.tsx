@@ -45,7 +45,7 @@ export default function AboutUsPage() {
 
                     <div className="flex flex-col lg:flex-row gap-4 md:gap-6 lg:gap-4 xl:gap-6 justify-between">
                         <div className="w-full lg:w-[360px] xl:w-[400px]">
-                            <img src="/about.png" alt="About Us" className="w-full rounded-2xl"/>
+                            <img src="/about.png" alt="About Us" className="w-full rounded-2xl sm:h-full"/>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 flex-1">
                             {arr.map(item => (
@@ -53,7 +53,7 @@ export default function AboutUsPage() {
                                     <CardHeader>
                                         <h2 className="text-xl md:text-2xl font-medium">{item.title}</h2>
                                     </CardHeader>
-                                    <CardContent className="bg-white/40 max-w-96">
+                                    <CardContent className="bg-white/40">
                                         <span className="text-[15px] md:text-base leading-relaxed">{item.description}</span>
                                     </CardContent>
                                 </Card>
