@@ -1,8 +1,12 @@
+'use client';
+
+import { useState } from 'react';
 import Container from "@/components/ui/container";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import LeadershipCarousel from "@/components/LeadershipCarousel";
 import {Button} from "@/components/ui/button";
 import Footer from "@/components/Footer";
+import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 
 const arr = [
     {
@@ -23,6 +27,8 @@ const arr = [
 ]
 
 export default function AboutUsPage() {
+    const [partnerModalOpen, setPartnerModalOpen] = useState(false);
+
     return (
         <>
             <section>
@@ -137,7 +143,7 @@ export default function AboutUsPage() {
                 </h2>}
                 subTitle="Collaborate with us to advance health systems equity through measurable impact."
                 buttonOne={
-                    <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                    <Button size="lg" variant="secondary" className="w-full sm:w-auto" onClick={() => setPartnerModalOpen(true)}>
                         Partner With US
                     </Button>
                 }
@@ -148,6 +154,7 @@ export default function AboutUsPage() {
                     </Button>
                 }
             />
+            <PartnerWithUsModal open={partnerModalOpen} onOpenChange={setPartnerModalOpen} />
         </>
     )
 }

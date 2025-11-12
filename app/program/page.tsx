@@ -5,6 +5,7 @@ import ProgramHero from "@/app/program/_components/ProgramHero";
 import Container from "@/components/ui/container";
 import {Button} from "@/components/ui/button";
 import { AccessDayModal, LibraryHubModal, NursingXchangeModal } from '@/components/modals';
+import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 import Footer from "@/components/Footer";
 
 // Common class patterns
@@ -18,6 +19,7 @@ export default function ProgramPage() {
     const [accessDayOpen, setAccessDayOpen] = useState(false);
     const [libraryHubOpen, setLibraryHubOpen] = useState(false);
     const [nursingXchangeOpen, setNursingXchangeOpen] = useState(false);
+    const [partnerModalOpen, setPartnerModalOpen] = useState(false);
 
     return(
         <>
@@ -154,14 +156,15 @@ export default function ProgramPage() {
             <AccessDayModal open={accessDayOpen} onOpenChange={setAccessDayOpen} />
             <LibraryHubModal open={libraryHubOpen} onOpenChange={setLibraryHubOpen} />
             <NursingXchangeModal open={nursingXchangeOpen} onOpenChange={setNursingXchangeOpen} />
+            <PartnerWithUsModal open={partnerModalOpen} onOpenChange={setPartnerModalOpen} />
 
             <Footer
                 title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
-                    Evidence that informs action.
+                    Evidence<br /> that informs action.
                 </h2>}
                 subTitle="Advancing SozoRock programs from concept to scalable rural equity systems."
                 buttonOne={
-                    <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                    <Button size="lg" variant="secondary" className="w-full sm:w-auto" onClick={() => setPartnerModalOpen(true)}>
                         Partner With US
                     </Button>
                 }

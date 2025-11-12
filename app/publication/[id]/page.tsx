@@ -157,9 +157,9 @@ export default function PublicationPage() {
             </section>
             <Footer
                 title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
-                    From pilot to permanence.
+                    From pilot<br /> to permanence.
                 </h2>}
-                subTitle="Access our publications to explore frameworks advancing rural health equity."
+                subTitle="Advancing SozoRock programs from concept to scalable health-equity systems."
                 buttonOne={
                     <Button
                         size="lg"
