@@ -4,8 +4,7 @@ import PublicHero from "@/app/publication/[id]/_components/PublicHero";
 import {Button} from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import Footer from "@/components/Footer";
-import Link from "next/link";
-import { useState } from "react";
+import {useState} from "react";
 import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 import RebsReportModal from "@/components/modals/RebsReportModal";
 
