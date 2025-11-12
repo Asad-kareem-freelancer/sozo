@@ -1,10 +1,16 @@
+'use client';
+
 import Hero from "@/app/(home)/_components/Hero";
 import Services from "@/app/(home)/_components/Services";
 import Impact from "@/app/(home)/_components/Impact";
 import Footer from "@/components/Footer";
 import {Button} from "@/components/ui/button";
+import { useState } from "react";
+import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 
 export default function HomePage() {
+  const [partnerModalOpen, setPartnerModalOpen] = useState(false);
+
   return (
     <>
         <Hero />
@@ -16,7 +22,12 @@ export default function HomePage() {
             </h2>}
             subTitle="Turning research into action for health systems equity."
             buttonOne={
-                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                <Button
+                    size="lg"
+                    variant="secondary"
+                    className="w-full sm:w-auto"
+                    onClick={() => setPartnerModalOpen(true)}
+                >
                     Partner With US
                 </Button>
             }
@@ -27,6 +38,7 @@ export default function HomePage() {
                 </Button>
             }
         />
+        <PartnerWithUsModal open={partnerModalOpen} onOpenChange={setPartnerModalOpen} />
     </>
   );
 }

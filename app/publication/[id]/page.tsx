@@ -1,8 +1,12 @@
+'use client';
+
 import PublicHero from "@/app/publication/[id]/_components/PublicHero";
 import {Button} from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { useState } from "react";
+import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 
 // Common class patterns
 const SECTION_HEADING = "text-2xl md:text-3xl lg:text-[44px] font-normal mb-6 text-balance";
@@ -23,6 +27,8 @@ const publications = [
 ]
 
 export default function PublicationPage() {
+    const [partnerModalOpen, setPartnerModalOpen] = useState(false);
+
     return(
         <>
             <PublicHero />
@@ -30,7 +36,7 @@ export default function PublicationPage() {
             <section className="py-8">
                 <Container variant="compact">
                     <div>
-                        <span className="mb-8 leading-relaxed block max-w-full lg:max-w-[626px]">
+                        <span className="mb-8 leading-relaxed block max-w-full lg:max-w-[626px] text-base">
                             The Rural Equity Blueprint Series (REBS) is the Foundation's flagship publication program. Each volume
                             presents a structured model for equitable access, literacy, and workforce development. Volume 1 defines the
                             core framework guiding all forthcoming pilots, including Access Day and the Library Health Equity Hub.
@@ -47,8 +53,8 @@ export default function PublicationPage() {
                             </figure>
 
                             <div className={`py-8 lg:py-12 space-y-1 ${CONTENT_MAX_WIDTH}`}>
-                                <p className="font-semibold text-sm md:text-base">Oluwabiyi Adeyemo, MBA <span className="font-normal inline">— Principal Author</span></p>
-                                <p className="font-semibold text-sm md:text-base">Jordan Hare, BSN, RN <span className="font-normal inline">— Contributor</span></p>
+                                <p className="font-semibold text-base">Oluwabiyi Adeyemo, MBA <span className="font-normal inline">— Principal Author</span></p>
+                                <p className="font-semibold text-base">Jordan Hare, BSN, RN <span className="font-normal inline">— Contributor</span></p>
                                 <div className='p-4 bg-[#F0F6F6] rounded-xl mt-8'>
                                     <p className="text-xs">
                                         SozoRock Foundation (2025). Rural Equity Blueprint Series, Volume 1 — Building a Framework for Rural
@@ -62,7 +68,7 @@ export default function PublicationPage() {
                                 Access, Literacy, and Leadership — Building a Framework for Rural Health Equity
                             </h1>
 
-                            <div className="space-y-4 leading-relaxed text-balance text-sm md:text-base">
+                            <div className="space-y-6 leading-relaxed text-balance text-base">
                                 <p>
                                     The Rural Equity Blueprint Series extends recognition to the county public health directors and their
                                     teams across Western New York for providing access to Community Health Assessment (CHA) and Community
@@ -75,9 +81,9 @@ export default function PublicationPage() {
                                 <p>
                                     Additional insights were contributed through early academic and sector dialogues that offered perspective on rural service
                                     readiness and educational alignment across New York State. These engagements have since concluded, yet their perspectives
-                                    enriched the Foundation’s understanding of rural health-system dynamics. All modeling, governance design, and analytical
+                                    enriched the Foundation's understanding of rural health-system dynamics. All modeling, governance design, and analytical
                                     synthesis presented in this publication were developed independently by The SozoRock Foundation. The framework, structure,
-                                    and datasets remain the Foundation’s intellectual property. The analyses and conclusions expressed herein are solely those
+                                    and datasets remain the Foundation's intellectual property. The analyses and conclusions expressed herein are solely those
                                     of The SozoRock® Foundation and do not represent the views of any county department, academic institution, or external contributor.
                                 </p>
                             </div>
@@ -93,12 +99,12 @@ export default function PublicationPage() {
                             Download <br/> Our Latest Report
                         </h2>
 
-                        <span className="block leading-relaxed mb-6 text-sm md:text-base">
+                        <span className="block leading-relaxed mb-6 text-base">
                                     Gain exclusive insights into emerging strategies, policy recommendations, and real-world data shaping
                                     the future of equitable rural health systems.
                                 </span>
 
-                        <div className="space-y-3 mb-8 text-sm md:text-base">
+                        <div className="space-y-3 mb-8 text-base">
                             <p className="font-semibold">Inside you&#39;ll find:</p>
                             <ul className="list-disc list-inside space-y-2 leading-tight">
                                 <li>Frameworks for implementation and measurement</li>
@@ -138,9 +144,9 @@ export default function PublicationPage() {
 
                         <div className="space-y-6">
                             {publications.map((pub, index) => (
-                                <div key={index} className="border-l-4 border-blue-200 pl-4 md:pl-6 space-y-2">
-                                    <p className="font-semibold uppercase tracking-wide text-xs md:text-sm">{pub.volume}</p>
-                                    <span className="font-semibold text-sm md:text-base">{pub.title}</span>
+                                <div key={index} className="border-l-4 border-blue-200 pl-6 space-y-2">
+                                    <p className="font-semibold uppercase tracking-wide text-sm">{pub.volume}</p>
+                                    <span className="font-semibold text-base">{pub.title}</span>
                                 </div>
                             ))}
                         </div>
@@ -153,7 +159,12 @@ export default function PublicationPage() {
                 </h2>}
                 subTitle="Access our publications to explore frameworks advancing rural health equity."
                 buttonOne={
-                    <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                    <Button
+                        size="lg"
+                        variant="secondary"
+                        className="w-full sm:w-auto"
+                        onClick={() => setPartnerModalOpen(true)}
+                    >
                         Partner With US
                     </Button>
                 }
@@ -164,6 +175,7 @@ export default function PublicationPage() {
                     </Button>
                 }
             />
+            <PartnerWithUsModal open={partnerModalOpen} onOpenChange={setPartnerModalOpen} />
         </>
     )
 }

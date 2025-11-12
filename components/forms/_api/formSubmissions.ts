@@ -2,12 +2,13 @@ import type { NursingXchangeFormData } from '../hooks/useNursingXchangeForm';
 import type { AccessDayFormData } from '../hooks/useAccessDayForm';
 import type { LibraryHubFormData } from '../hooks/useLibraryHubForm';
 import type { ContactFormValues } from '@/lib/hooks/useContactForm';
+import type { PartnerWithUsFormValues } from '@/lib/hooks/usePartnerWithUsForm';
 
 // API endpoint
 const API_ENDPOINT = 'https://ifadpqxffinephnqbu3rdynqji0tfyqw.lambda-url.us-east-1.on.aws/';
 
 // Form types
-type FormType = 'nursing' | 'accessday' | 'library' | 'contact';
+type FormType = 'nursing' | 'accessday' | 'library' | 'contact' | 'partner';
 
 // Generic API request payload
 interface FormSubmissionPayload<T> {
@@ -97,4 +98,10 @@ export async function submitContactForm(
   data: ContactFormValues
 ): Promise<ApiResponse> {
   return submitForm('contact', data);
+}
+
+export async function submitPartnerWithUsForm(
+  data: PartnerWithUsFormValues
+): Promise<ApiResponse> {
+  return submitForm('partner', data);
 }

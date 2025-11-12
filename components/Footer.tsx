@@ -19,16 +19,16 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
   const [contactModalOpen, setContactModalOpen] = useState(false);
 
   return (
-    <footer className="py-8 md:py-12 lg:py-16 bg-no-repeat bg-cover" style={{
+    <footer className="py-12 md:py-16 bg-no-repeat bg-cover" style={{
         backgroundImage: `url(/footer.jpg)`,
     }}>
         <Container variant="compact">
-          <div className="space-y-6 md:space-y-8">
+          <div className="space-y-8">
               {/* CTA Section */}
               <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 lg:gap-8">
-                  <div className="space-y-3 md:space-y-4 max-w-full font-medium">
+                  <div className="space-y-4 max-w-full font-medium">
                       {title}
-                      <span className="text-sm sm:text-base block">
+                      <span className="text-base block">
                             {subTitle}
                       </span>
                   </div>
@@ -39,7 +39,7 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-10 sm:items-center">
-                      <span className="text-sm sm:text-base font-medium">
+                      <span className="text-base font-medium">
                           Stay connected with The SozoRock Foundation
                       </span>
                   <div className="flex gap-4 items-center">
@@ -79,9 +79,9 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
               </div>
 
               {/* Footer Card */}
-              <Card className="py-6 md:py-8">
-                  <CardHeader className="px-4 sm:px-6 md:px-10">
-                      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 sm:gap-6 md:gap-8">
+              <Card className="py-8">
+                  <CardHeader className="px-6 md:px-10">
+                      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 sm:gap-6">
                           {navigation.map((item) => (
                               item.href === "#contact" ? (
                                   <button
@@ -103,8 +103,8 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
                           ))}
                       </div>
                   </CardHeader>
-                  <CardContent className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-8 lg:gap-4 px-4 sm:px-6 md:px-10">
-                      <div className="space-y-6 md:space-y-8 lg:space-y-12">
+                  <CardContent className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-8 lg:gap-4 px-6 md:px-10">
+                      <div className="space-y-8 lg:space-y-10">
                           <div>
                               <label className="text-xs opacity-60 block mb-1">Email</label>
                               <a href="mailto:contact@sozorockfoundation.org" className="text-sm break-all font-bold hover:underline">
@@ -112,14 +112,14 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
                               </a>
                           </div>
 
-                          <p className="text-xs sm:text-sm">
+                          <p className="text-sm">
                               <Link href="/policies#privacy" className="hover:underline">Privacy</Link> | <Link href="/policies#accessibility" className="hover:underline">Accessibility</Link> | <Link href="/policies#nondiscrimination" className="hover:underline">Nondiscrimination</Link>
                           </p>
 
                           <p className="opacity-50 text-xs">© 2025 — All rights reserved.</p>
                       </div>
                       <div className="text-xs space-y-2 font-normal max-w-full lg:max-w-[244px]">
-                          <Image src="/footer-logo.png" alt="Footer Logo" width={160} height={36} className="mb-4 md:mb-6 "/>
+                          <Image src="/footer-logo.png" alt="Footer Logo" width={160} height={36} className="mb-6"/>
                           <h5 className="font-semibold text-xs">From Insight to Impact in Health systems.</h5>
                           <span className="block text-xs">SozoRock® is a registered trademark of SozoRock Tech Inc., used under license by The SozoRock Foundation.</span>
                       </div>
