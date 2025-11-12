@@ -7,13 +7,14 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { formatPhoneNumber } from '@/lib/utils';
 
 type Props = {
   onOpenChange: (open: boolean) => void;
 }
 
 export default function NursingXchangeForm({onOpenChange}: Props) {
-  const { register, onSubmit, errors, control, isSubmitting, handleSubmit } = useNursingXchangeForm();
+  const { register, onSubmit, errors, control, isSubmitting, handleSubmit, trigger } = useNursingXchangeForm();
 
   return (
     <form onSubmit={handleSubmit(data => onSubmit(data, ()=>onOpenChange(false)))} className="space-y-6">
@@ -51,12 +52,23 @@ export default function NursingXchangeForm({onOpenChange}: Props) {
 
         <div>
           <Label htmlFor="phone">Phone</Label>
-          <Input
-            id="phone"
-            type="tel"
-            placeholder="(555) 123-4567"
-            {...register('phone')}
-            error={errors.phone?.message}
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field }) => (
+              <Input
+                id="phone"
+                type="tel"
+                placeholder="518-444-8765"
+                value={field.value}
+                onChange={(e) => {
+                  const formatted = formatPhoneNumber(e.target.value);
+                  field.onChange(formatted);
+                }}
+                onBlur={() => trigger('phone')}
+                error={errors.phone?.message}
+              />
+            )}
           />
         </div>
 
