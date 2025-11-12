@@ -79,7 +79,6 @@ export async function showReportSuccessAlert(reportTitle: string, downloadUrl: s
       </p>
     `,
     showConfirmButton: false,
-    zIndex: 99999,
     customClass: {
       popup: 'bg-white rounded-lg p-6 shadow-lg pointer-events-auto',
     },
