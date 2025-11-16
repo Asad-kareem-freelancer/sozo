@@ -8,7 +8,16 @@ import { showReportSuccessAlert, showErrorAlert, showConnectionError } from '../
 const rebsReportSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters').max(35, 'First name must not exceed 35 characters'),
   lastName: z.string().min(2, 'Last name must be at least 2 characters').max(35, 'Last name must not exceed 35 characters'),
-  email: z.string().email('Please enter a valid email address'),
+  email: z.email('Please enter a valid email address'),
+  phoneNumber: z.string().optional().refine((val) => {
+    if (!val || val.trim().length === 0) return true;
+    const phoneRegex = /^(\+\d{1,3}[- ]?)?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/;
+    return phoneRegex.test(val.replace(/\s/g, ''));
+  }, "Phone number must be in a valid format (e.g., xxx-xxx-xxxx)"),
+  intendedUse: z.string().min(1, 'Intended use is required'),
+  intendedUseOther: z.string().optional().refine((val) => !val || val.length <= 100, {
+    message: 'Intended use must not exceed 100 characters',
+  }),
   organizationType: z.string().min(1, 'Organization type is required'),
   organizationCustom: z.string().optional().refine((val) => !val || val.length <= 100, {
     message: 'Organization must not exceed 100 characters',
@@ -23,6 +32,21 @@ const rebsReportSchema = z.object({
   privacyConsent: z.boolean().refine((val) => val === true, {
     message: 'You must agree to the privacy policy',
   }),
+  newsletterOptIn: z.boolean().optional(),
+  privacyTermsConsent: z.boolean().refine((val) => val === true, {
+    message: 'You must confirm the information provided is correct',
+  }),
+  disclaimerConsent: z.boolean().refine((val) => val === true, {
+    message: 'You must acknowledge the use disclaimer',
+  }),
+}).refine((data) => {
+  if (data.intendedUse === 'Other') {
+    return data.intendedUseOther && data.intendedUseOther.trim().length > 0;
+  }
+  return true;
+}, {
+  message: 'Please specify your intended use',
+  path: ['intendedUseOther'],
 }).refine((data) => {
   if (data.organizationType === 'Other') {
     return data.organizationCustom && data.organizationCustom.trim().length > 0;
@@ -54,12 +78,16 @@ export function useRebsReportForm() {
     reset,
     watch,
     setValue,
+    trigger,
   } = useForm<RebsReportFormData>({
     resolver: zodResolver(rebsReportSchema),
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
+      phoneNumber: '',
+      intendedUse: '',
+      intendedUseOther: '',
       organizationType: '',
       organizationCustom: '',
       country: 'US',
@@ -68,6 +96,9 @@ export function useRebsReportForm() {
       primaryRole: '',
       primaryRoleOther: '',
       privacyConsent: false,
+      newsletterOptIn: false,
+      privacyTermsConsent: false,
+      disclaimerConsent: false,
     },
   });
 
@@ -106,5 +137,6 @@ export function useRebsReportForm() {
     isSubmitting,
     watch,
     setValue,
+    trigger,
   };
 }

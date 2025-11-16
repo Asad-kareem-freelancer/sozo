@@ -17,7 +17,7 @@ export default function RebsReportModal({ open, onOpenChange }: RebsReportModalP
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-6xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl md:text-3xl">
             Rural Equity Blueprint Series — Volume 1 (2025)

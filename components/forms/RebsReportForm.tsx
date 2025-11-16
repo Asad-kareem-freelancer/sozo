@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
+import { formatPhoneNumber } from '@/lib/utils';
 import {
   Select,
   SelectContent,
@@ -17,16 +18,18 @@ import Link from 'next/link';
 import { stateCounties, states, provinces, countries } from '@/const/counties';
 import { organizationTypes } from '@/const/organizations';
 import { primaryRoles } from '@/const/roles';
+import { intendedUses } from '@/const/intendedUses';
 
 type Props = {
   onOpenChange: (open: boolean) => void;
 }
 
 export default function RebsReportForm({ onOpenChange }: Props) {
-  const { register, onSubmit, errors, control, isSubmitting, handleSubmit, watch, setValue } = useRebsReportForm();
+  const { register, onSubmit, errors, control, isSubmitting, handleSubmit, watch, setValue, trigger } = useRebsReportForm();
 
   const selectedCountry = watch('country');
   const selectedState = watch('state');
+  const selectedIntendedUse = watch('intendedUse');
   const selectedOrgType = watch('organizationType');
   const selectedPrimaryRole = watch('primaryRole');
 
@@ -79,6 +82,86 @@ export default function RebsReportForm({ onOpenChange }: Props) {
           {...register('email')}
         />
         {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
+      </div>
+
+      {/* Phone Number (optional) */}
+      <div className="space-y-1 sm:space-y-2">
+        <Label htmlFor="phoneNumber" className="text-xs sm:text-sm font-medium font-inter">
+          Phone number (optional)
+        </Label>
+        <Controller
+          name="phoneNumber"
+          control={control}
+          render={({ field }) => (
+            <Input
+              id="phoneNumber"
+              type="tel"
+              placeholder="518-444-8765"
+              className="w-full border-[#E2E8F0] font-inter text-sm sm:text-base"
+              value={field.value}
+              onChange={(e) => {
+                const formatted = formatPhoneNumber(e.target.value);
+                field.onChange(formatted);
+              }}
+              onBlur={() => trigger('phoneNumber')}
+            />
+          )}
+        />
+        {errors.phoneNumber && (
+          <p className="text-xs text-red-500">{errors.phoneNumber.message}</p>
+        )}
+      </div>
+
+      {/* Intended Use Section */}
+      <div className={selectedIntendedUse === 'Other' ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6" : "space-y-1 sm:space-y-2"}>
+        <div className="space-y-1 sm:space-y-2">
+          <Label htmlFor="intendedUse" className="text-xs sm:text-sm font-medium font-inter">
+            Intended use <span className="text-red-500">*</span>
+          </Label>
+          <Controller
+            name="intendedUse"
+            control={control}
+            render={({ field }) => (
+              <Select
+                onValueChange={(value) => {
+                  field.onChange(value);
+                  if (value !== 'Other') {
+                    setValue('intendedUseOther', '');
+                  }
+                }}
+                value={field.value}
+              >
+                <SelectTrigger className="border-[#E2E8F0] text-sm sm:text-base">
+                  <SelectValue placeholder="Select intended use" />
+                </SelectTrigger>
+                <SelectContent>
+                  {intendedUses.map((use) => (
+                    <SelectItem key={use.value} value={use.value}>
+                      {use.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {errors.intendedUse && <p className="text-xs text-red-500">{errors.intendedUse.message}</p>}
+        </div>
+
+        {selectedIntendedUse === 'Other' && (
+          <div className="space-y-1 sm:space-y-2">
+            <Label htmlFor="intendedUseOther" className="text-xs sm:text-sm font-medium font-inter">
+              Please specify <span className="text-red-500">*</span>
+            </Label>
+            <Input
+              id="intendedUseOther"
+              type="text"
+              placeholder="Please specify your intended use"
+              className="w-full border-[#E2E8F0] font-inter text-sm sm:text-base"
+              {...register('intendedUseOther')}
+            />
+            {errors.intendedUseOther && <p className="text-xs text-red-500">{errors.intendedUseOther.message}</p>}
+          </div>
+        )}
       </div>
 
       {/* Organization/Affiliation Section */}
@@ -280,7 +363,7 @@ export default function RebsReportForm({ onOpenChange }: Props) {
         )}
       </div>
 
-      <div className="flex items-start space-x-3 pt-1 sm:pt-2">
+      <div className="flex items-start space-x-3">
         <Controller
           name="privacyConsent"
           control={control}
@@ -302,6 +385,62 @@ export default function RebsReportForm({ onOpenChange }: Props) {
         </Label>
       </div>
       {errors.privacyConsent && <p className="text-xs text-red-500">{errors.privacyConsent.message}</p>}
+
+      <div className="flex items-start space-x-3 pt-1 sm:pt-2">
+        <Controller
+          name="newsletterOptIn"
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              id="newsletterOptIn"
+              className="mt-1"
+              checked={field.value}
+              onCheckedChange={(checked) => field.onChange(!!checked)}
+            />
+          )}
+        />
+        <Label htmlFor="newsletterOptIn" className="text-xs sm:text-sm leading-relaxed cursor-pointer font-normal inline">
+          Keep me informed about future SozoRock Foundation publications and rural equity initiatives.
+        </Label>
+      </div>
+
+      <div className="flex items-start space-x-3 pt-1 sm:pt-2">
+        <Controller
+          name="privacyTermsConsent"
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              id="privacyTermsConsent"
+              className="mt-1"
+              checked={field.value}
+              onCheckedChange={(checked) => field.onChange(!!checked)}
+            />
+          )}
+        />
+        <Label htmlFor="privacyTermsConsent" className="text-xs sm:text-sm leading-relaxed cursor-pointer font-normal inline">
+          I confirm that the information provided is correct and consent to its use as described in the SozoRock Foundation Privacy Policy.
+        </Label>
+      </div>
+      {errors.privacyTermsConsent && <p className="text-xs text-red-500">{errors.privacyTermsConsent.message}</p>}
+
+      <div className="flex items-start space-x-3 pt-1 sm:pt-2">
+        <Controller
+          name="disclaimerConsent"
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              id="disclaimerConsent"
+              className="mt-1"
+              checked={field.value}
+              onCheckedChange={(checked) => field.onChange(!!checked)}
+            />
+          )}
+        />
+        <Label htmlFor="disclaimerConsent" className="text-xs sm:text-sm leading-relaxed cursor-pointer font-normal inline">
+          I understand this report is for informational and educational purposes and does not constitute legal, clinical, or financial advice.
+        </Label>
+      </div>
+      {errors.disclaimerConsent && <p className="text-xs text-red-500">{errors.disclaimerConsent.message}</p>}
 
       <div className="pt-1 sm:pt-2">
         <Button
