@@ -16,6 +16,7 @@ import {
 import Link from 'next/link';
 import { stateCounties, states, provinces, countries } from '@/const/counties';
 import { organizationTypes } from '@/const/organizations';
+import { primaryRoles } from '@/const/roles';
 
 type Props = {
   onOpenChange: (open: boolean) => void;
@@ -27,6 +28,7 @@ export default function RebsReportForm({ onOpenChange }: Props) {
   const selectedCountry = watch('country');
   const selectedState = watch('state');
   const selectedOrgType = watch('organizationType');
+  const selectedPrimaryRole = watch('primaryRole');
 
   const stateProvinceOptions = selectedCountry === 'CA' ? provinces : states;
   const availableCounties = selectedState ? stateCounties[selectedState as keyof typeof stateCounties] || [] : [];
@@ -79,8 +81,8 @@ export default function RebsReportForm({ onOpenChange }: Props) {
         {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
       </div>
 
-      {/* Row 3: Organization dropdown and conditional custom input (same line) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      {/* Organization/Affiliation Section */}
+      <div className={selectedOrgType === 'Other' ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6" : "space-y-1 sm:space-y-2"}>
         <div className="space-y-1 sm:space-y-2">
           <Label htmlFor="organizationType" className="text-xs sm:text-sm font-medium font-inter">
             Organization/Affiliation <span className="text-red-500">*</span>
@@ -92,7 +94,7 @@ export default function RebsReportForm({ onOpenChange }: Props) {
               <Select
                 onValueChange={(value) => {
                   field.onChange(value);
-                  if (value !== 'other') {
+                  if (value !== 'Other') {
                     setValue('organizationCustom', '');
                   }
                 }}
@@ -114,7 +116,7 @@ export default function RebsReportForm({ onOpenChange }: Props) {
           {errors.organizationType && <p className="text-xs text-red-500">{errors.organizationType.message}</p>}
         </div>
 
-        {selectedOrgType.toLocaleLowerCase() === 'other' && (
+        {selectedOrgType === 'Other' && (
           <div className="space-y-1 sm:space-y-2">
             <Label htmlFor="organizationCustom" className="text-xs sm:text-sm font-medium font-inter">
               Please specify <span className="text-red-500">*</span>
@@ -224,6 +226,58 @@ export default function RebsReportForm({ onOpenChange }: Props) {
           )}
         />
         {errors.county && <p className="text-xs text-red-500">{errors.county.message}</p>}
+      </div>
+
+      {/* Primary Role Section */}
+      <div className={selectedPrimaryRole === 'Other' ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6" : "space-y-1 sm:space-y-2"}>
+        <div className="space-y-1 sm:space-y-2">
+          <Label htmlFor="primaryRole" className="text-xs sm:text-sm font-medium font-inter">
+            Primary role <span className="text-red-500">*</span>
+          </Label>
+          <Controller
+            name="primaryRole"
+            control={control}
+            render={({ field }) => (
+              <Select
+                onValueChange={(value) => {
+                  field.onChange(value);
+                  if (value !== 'Other') {
+                    setValue('primaryRoleOther', '');
+                  }
+                }}
+                value={field.value}
+              >
+                <SelectTrigger className="border-[#E2E8F0] text-sm sm:text-base">
+                  <SelectValue placeholder="Select primary role" />
+                </SelectTrigger>
+                <SelectContent>
+                  {primaryRoles.map((role) => (
+                    <SelectItem key={role.value} value={role.value}>
+                      {role.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {errors.primaryRole && <p className="text-xs text-red-500">{errors.primaryRole.message}</p>}
+        </div>
+
+        {selectedPrimaryRole === 'Other' && (
+          <div className="space-y-1 sm:space-y-2">
+            <Label htmlFor="primaryRoleOther" className="text-xs sm:text-sm font-medium font-inter">
+              Please specify <span className="text-red-500">*</span>
+            </Label>
+            <Input
+              id="primaryRoleOther"
+              type="text"
+              placeholder="Please specify your primary role"
+              className="w-full border-[#E2E8F0] font-inter text-sm sm:text-base"
+              {...register('primaryRoleOther')}
+            />
+            {errors.primaryRoleOther && <p className="text-xs text-red-500">{errors.primaryRoleOther.message}</p>}
+          </div>
+        )}
       </div>
 
       <div className="flex items-start space-x-3 pt-1 sm:pt-2">

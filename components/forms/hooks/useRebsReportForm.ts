@@ -16,17 +16,29 @@ const rebsReportSchema = z.object({
   country: z.string().min(1, 'Country is required'),
   state: z.string().min(1, 'State/Province is required'),
   county: z.string().min(1, 'County/Region is required'),
+  primaryRole: z.string().min(1, 'Primary role is required'),
+  primaryRoleOther: z.string().optional().refine((val) => !val || val.length <= 100, {
+    message: 'Primary role must not exceed 100 characters',
+  }),
   privacyConsent: z.boolean().refine((val) => val === true, {
     message: 'You must agree to the privacy policy',
   }),
 }).refine((data) => {
-  if (data.organizationType === 'other') {
+  if (data.organizationType === 'Other') {
     return data.organizationCustom && data.organizationCustom.trim().length > 0;
   }
   return true;
 }, {
   message: 'Please specify your organization',
   path: ['organizationCustom'],
+}).refine((data) => {
+  if (data.primaryRole === 'Other') {
+    return data.primaryRoleOther && data.primaryRoleOther.trim().length > 0;
+  }
+  return true;
+}, {
+  message: 'Please specify your primary role',
+  path: ['primaryRoleOther'],
 });
 
 export type RebsReportFormData = z.infer<typeof rebsReportSchema>;
@@ -53,6 +65,8 @@ export function useRebsReportForm() {
       country: 'US',
       state: '',
       county: '',
+      primaryRole: '',
+      primaryRoleOther: '',
       privacyConsent: false,
     },
   });
