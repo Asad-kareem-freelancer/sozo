@@ -36,17 +36,17 @@ export default function Impact(){
                         <div className="divide-y divide-gray-200 flex flex-col justify-between grow">
                             <div className="py-4 space-y-2">
                                 <span className="block text-base leading-relaxed"><b>Access Day</b> — A county-based framework integrating health screenings, preventive education, and literacy outreach to strengthen early detection and community trust in rural care systems.</span>
-                                <Link href="/" className="text-[#009E9B] underline text-sm inline-block">View Program Overview</Link>
+                                <Link href="/program#access-day" className="text-[#009E9B] underline text-sm inline-block">View Program Overview</Link>
                             </div>
 
                             <div className="py-4 space-y-2">
                                 <span className="block text-base leading-relaxed"><b>Library Health Equity Hub&trade;</b> — A scalable model transforming local libraries into trusted community health access points for telehealth, translation, and literacy programs.</span>
-                                <Link href="/" className="text-[#009E9B] underline text-sm inline-block">Explore the Hub</Link>
+                                <Link href="/program#library-hub" className="text-[#009E9B] underline text-sm inline-block">Explore the Hub</Link>
                             </div>
 
                             <div className="pt-4 space-y-2">
                                 <span className="block text-base leading-relaxed"><b>Rural Equity Blueprint Series (REBS)</b> — The Foundation&#39;s research and publication series defining replicable frameworks for equitable rural health systems.</span>
-                                <Link href="/" className="text-[#009E9B] underline text-sm inline-block">View Volume 1</Link>
+                                <Link href="/publication/rebs-v1-2025#framework" className="text-[#009E9B] underline text-sm inline-block">View Volume 1</Link>
                             </div>
                         </div>
                     </div>

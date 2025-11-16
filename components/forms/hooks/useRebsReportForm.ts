@@ -6,13 +6,27 @@ import { submitRebsReportForm } from '../_api/formSubmissions';
 import { showReportSuccessAlert, showErrorAlert, showConnectionError } from '../_services/alertService';
 
 const rebsReportSchema = z.object({
-  firstName: z.string().min(2, 'First name must be at least 2 characters'),
-  lastName: z.string().min(2, 'Last name must be at least 2 characters'),
+  firstName: z.string().min(2, 'First name must be at least 2 characters').max(35, 'First name must not exceed 35 characters'),
+  lastName: z.string().min(2, 'Last name must be at least 2 characters').max(35, 'Last name must not exceed 35 characters'),
   email: z.string().email('Please enter a valid email address'),
-  organization: z.string().optional(),
+  organizationType: z.string().min(1, 'Organization type is required'),
+  organizationCustom: z.string().optional().refine((val) => !val || val.length <= 100, {
+    message: 'Organization must not exceed 100 characters',
+  }),
+  country: z.string().min(1, 'Country is required'),
+  state: z.string().min(1, 'State/Province is required'),
+  county: z.string().min(1, 'County/Region is required'),
   privacyConsent: z.boolean().refine((val) => val === true, {
     message: 'You must agree to the privacy policy',
   }),
+}).refine((data) => {
+  if (data.organizationType === 'other') {
+    return data.organizationCustom && data.organizationCustom.trim().length > 0;
+  }
+  return true;
+}, {
+  message: 'Please specify your organization',
+  path: ['organizationCustom'],
 });
 
 export type RebsReportFormData = z.infer<typeof rebsReportSchema>;
@@ -26,13 +40,19 @@ export function useRebsReportForm() {
     formState: { errors },
     control,
     reset,
+    watch,
+    setValue,
   } = useForm<RebsReportFormData>({
     resolver: zodResolver(rebsReportSchema),
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
-      organization: '',
+      organizationType: '',
+      organizationCustom: '',
+      country: 'US',
+      state: '',
+      county: '',
       privacyConsent: false,
     },
   });
@@ -70,5 +90,7 @@ export function useRebsReportForm() {
     handleSubmit,
     control,
     isSubmitting,
+    watch,
+    setValue,
   };
 }

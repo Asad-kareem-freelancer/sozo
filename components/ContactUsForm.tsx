@@ -28,7 +28,7 @@ export default function ContactUsForm({ onOpenChange }: Props) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-1 sm:space-y-2">
                     <Label htmlFor="fullName" className="text-xs sm:text-sm font-medium font-inter">
-                        Full Name
+                        Full Name <span className="text-red-500">*</span>
                     </Label>
                     <Input
                         id="fullName"
@@ -44,7 +44,7 @@ export default function ContactUsForm({ onOpenChange }: Props) {
 
                 <div className="space-y-1 sm:space-y-2">
                     <Label htmlFor="email" className="text-xs sm:text-sm font-medium font-inter">
-                        Email Address
+                        Email Address <span className="text-red-500">*</span>
                     </Label>
                     <Input
                         id="email"
@@ -61,7 +61,7 @@ export default function ContactUsForm({ onOpenChange }: Props) {
 
             <div className="space-y-1 sm:space-y-2">
                 <Label htmlFor="phoneNumber" className="text-xs sm:text-sm font-medium font-inter">
-                    Phone Number
+                    Phone Number <span className="text-red-500">*</span>
                 </Label>
                 <Controller
                     name="phoneNumber"
@@ -88,7 +88,7 @@ export default function ContactUsForm({ onOpenChange }: Props) {
 
             <div className="space-y-1 sm:space-y-2">
                 <Label htmlFor="message" className="text-xs sm:text-sm font-medium font-inter">
-                    Message
+                    Message <span className="text-red-500">*</span>
                 </Label>
                 <Textarea
                     id="message"

@@ -7,7 +7,7 @@ import { showSuccessAlert, showErrorAlert, showConnectionError } from '@/compone
 
 const contactFormSchema = z.object({
   fullName: z.string().min(1, 'Full name is required').max(70, 'Full name must not exceed 70 characters'),
-  email: z.string().email('Invalid email address'),
+  email: z.string().email('Please enter a valid email address'),
   phoneNumber: z
       .string()
       .min(1, 'Phone number is required')
@@ -15,7 +15,7 @@ const contactFormSchema = z.object({
         const phoneRegex = /^(\+\d{1,3}[- ]?)?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/;
         return phoneRegex.test(val.replace(/\s/g, ''));
       }, "Phone number must be in a valid format (e.g., xxx-xxx-xxxx)"),
-  message: z.string().min(1, 'Message is required'),
+  message: z.string().min(1, 'Message is required').max(500, 'Message must not exceed 500 characters'),
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;

@@ -107,7 +107,7 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
                       <div className="space-y-8 lg:space-y-10">
                           <div>
                               <label className="text-xs opacity-60 block mb-1">Email</label>
-                              <a href="mailto:contact@sozorockfoundation.org" className="text-sm break-all font-bold hover:underline">
+                              <a href="mailto:contact@sozorockfoundation.org" className="text-sm break-all hover:underline">
                                   contact@sozorockfoundation.org
                               </a>
                           </div>

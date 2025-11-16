@@ -24,7 +24,7 @@ export default function ProgramPage() {
     return(
         <>
             <ProgramHero />
-            <section className="py-12">
+            <section id="access-day" className="py-12">
                 <Container variant="compact">
                     <div className="mb-8 text-[15px] md:text-base leading-relaxed block max-w-[626px] space-y-2">
                         <span className="block">
@@ -74,7 +74,7 @@ export default function ProgramPage() {
                 </Container>
             </section>
 
-            <section className="py-12">
+            <section id="library-hub" className="py-12">
                 <Container className={SECTION_LAYOUT} variant="compact">
                     <div className={CONTENT_MAX_WIDTH}>
                         <h2 className={SECTION_HEADING}>
@@ -137,7 +137,7 @@ export default function ProgramPage() {
                                  </span>
 
                                 <span className="block">
-                                    Professional Pathway Context<br />Nursing Xchange operates within the Foundation's Rural Equity Workforce Pathway, aligning education, policy, and institutional design to address persistent provider shortages. The program embeds leadership formation within data-driven initiatives such as Access Day and the Library Health Equity Hub, converting pilot interventions into durable capacity. This structure positions the initiative as a scalable model for workforce renewal—turning professional growth into measurable system strength.
+                                    <b>Professional Pathway Context</b><br />Nursing Xchange operates within the Foundation's Rural Equity Workforce Pathway, aligning education, policy, and institutional design to address persistent provider shortages. The program embeds leadership formation within data-driven initiatives such as Access Day and the Library Health Equity Hub, converting pilot interventions into durable capacity. This structure positions the initiative as a scalable model for workforce renewal—turning professional growth into measurable system strength.
                                 </span>
                             </div>
 

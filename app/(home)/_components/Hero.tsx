@@ -2,10 +2,17 @@ import Container from "@/components/ui/container";
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import { Users } from "lucide-react";
+import Link from "next/link";
+import {useState} from "react";
+import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 
 export default function Hero(){
+
+    const [partnerModalOpen, setPartnerModalOpen] = useState(false);
+
     return (
         <Container>
+            <PartnerWithUsModal open={partnerModalOpen} onOpenChange={setPartnerModalOpen} />
             <div className="relative">
                 <div className="rounded-3xl overflow-hidden h-[76vh] md:max-h-[550px] lg:max-h-[700px] transform scale-x-[-1]">
                     <img
@@ -21,10 +28,10 @@ export default function Hero(){
                         <h5 className="font-medium text-[15px] md:text-base text-white tracking-wide leading-relaxed">Advancing data-driven equity across health systems.</h5>
                         <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-center lg:justify-start">
                             <Button size="default" variant="outline" className="w-full sm:w-auto">
-                                View Rural Equity Blueprint
+                                <Link href="/publication/rebs-v1-2025">View Rural Equity Blueprint</Link>
                             </Button>
 
-                            <Button size="default" variant="gray" className="w-full sm:w-auto">
+                            <Button size="default" variant="gray" className="w-full sm:w-auto" onClick={() => setPartnerModalOpen(true)}>
                                 Get Involved
                             </Button>
                         </div>

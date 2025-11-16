@@ -13,7 +13,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import Link from "next/link"
-import { counties } from "@/const/counties"
+import { stateCounties, states, provinces, countries } from "@/const/counties"
+import { organizationTypes } from "@/const/organizations"
 import { Controller } from "react-hook-form"
 import { usePartnerWithUsForm } from "@/lib/hooks/usePartnerWithUsForm";
 import { formatPhoneNumber } from "@/lib/utils";
@@ -30,8 +31,18 @@ export default function PartnerWithUsForm({ onOpenChange }: Props) {
     errors,
     isSubmitting,
     trigger,
-    onSubmit
+    onSubmit,
+    watch,
+    setValue
   } = usePartnerWithUsForm()
+
+  const selectedCountry = watch('country')
+  const selectedState = watch('state')
+  const selectedOrganization = watch('organization')
+
+  const stateProvinceOptions = selectedCountry === 'CA' ? provinces : states
+  const availableCounties = selectedState ? stateCounties[selectedState as keyof typeof stateCounties] || [] : []
+  const showOrganizationOther = selectedOrganization === 'Other'
 
   return (
       <div>
@@ -42,7 +53,7 @@ export default function PartnerWithUsForm({ onOpenChange }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div className="space-y-1 sm:space-y-2">
               <Label htmlFor="fullName" className="text-xs sm:text-sm font-medium font-inter">
-                Full Name
+                Full Name <span className="text-red-500">*</span>
               </Label>
               <Input
                   id="fullName"
@@ -55,7 +66,7 @@ export default function PartnerWithUsForm({ onOpenChange }: Props) {
             </div>
             <div className="space-y-1 sm:space-y-2">
               <Label htmlFor="email" className="text-xs sm:text-sm font-medium font-inter">
-                Email Address
+                Email Address <span className="text-red-500">*</span>
               </Label>
               <Input
                   id="email"
@@ -68,74 +79,177 @@ export default function PartnerWithUsForm({ onOpenChange }: Props) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            <div className="space-y-1 sm:space-y-2">
-              <Label htmlFor="phoneNumber" className="text-xs sm:text-sm font-medium font-inter">
-                Phone Number
-              </Label>
-              <Controller
-                  name="phoneNumber"
-                  control={control}
-                  render={({ field }) => (
-                      <Input
-                          id="phoneNumber"
-                          type="tel"
-                          placeholder="518-444-8765"
-                          className="w-full border-[#E2E8F0] rounded-lg font-inter text-sm sm:text-base"
-                          value={field.value}
-                          onChange={(e) => {
-                            const formatted = formatPhoneNumber(e.target.value);
-                            field.onChange(formatted);
-                          }}
-                          onBlur={() => trigger('phoneNumber')}
-                      />
-                  )}
-              />
-              {errors.phoneNumber && <p className="text-xs text-red-500">{errors.phoneNumber.message}</p>}
-            </div>
+          <div className="space-y-1 sm:space-y-2">
+            <Label htmlFor="phoneNumber" className="text-xs sm:text-sm font-medium font-inter">
+              Phone Number <span className="text-red-500">*</span>
+            </Label>
+            <Controller
+                name="phoneNumber"
+                control={control}
+                render={({ field }) => (
+                    <Input
+                        id="phoneNumber"
+                        type="tel"
+                        placeholder="518-444-8765"
+                        className="w-full border-[#E2E8F0] rounded-lg font-inter text-sm sm:text-base"
+                        value={field.value}
+                        onChange={(e) => {
+                          const formatted = formatPhoneNumber(e.target.value);
+                          field.onChange(formatted);
+                        }}
+                        onBlur={() => trigger('phoneNumber')}
+                    />
+                )}
+            />
+            {errors.phoneNumber && <p className="text-xs text-red-500">{errors.phoneNumber.message}</p>}
+          </div>
+
+          <div className={showOrganizationOther ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6" : "space-y-1 sm:space-y-2"}>
             <div className="space-y-1 sm:space-y-2">
               <Label htmlFor="organization" className="text-xs sm:text-sm font-medium font-inter">
-                Organization
+                Organization/Affiliation <span className="text-red-500">*</span>
               </Label>
-              <Input
-                  id="organization"
-                  type="text"
-                  placeholder="Organization"
-                  className="w-full border-[#E2E8F0] font-inter text-sm sm:text-base"
-                  {...register("organization")}
+              <Controller
+                  name="organization"
+                  control={control}
+                  render={({ field }) => (
+                      <Select
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          if (value !== 'Other') {
+                            setValue('organizationOther', '');
+                          }
+                        }}
+                        value={field.value}
+                      >
+                        <SelectTrigger className="border-[#E2E8F0] text-sm sm:text-base">
+                          <SelectValue placeholder="Select organization type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {organizationTypes.map((org) => (
+                              <SelectItem key={org.value} value={org.value}>
+                                {org.label}
+                              </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                  )}
               />
               {errors.organization && <p className="text-xs text-red-500">{errors.organization.message}</p>}
             </div>
+
+            {showOrganizationOther && (
+              <div className="space-y-1 sm:space-y-2">
+                <Label htmlFor="organizationOther" className="text-xs sm:text-sm font-medium font-inter">
+                  Please specify <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                    id="organizationOther"
+                    type="text"
+                    placeholder="Enter your organization"
+                    className="w-full border-[#E2E8F0] font-inter text-sm sm:text-base"
+                    {...register("organizationOther")}
+                />
+                {errors.organizationOther && <p className="text-xs text-red-500">{errors.organizationOther.message}</p>}
+              </div>
+            )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="space-y-1 sm:space-y-2">
+            <Label htmlFor="role" className="text-xs sm:text-sm font-medium font-inter">
+              Role <span className="text-red-500">*</span>
+            </Label>
+            <Input
+                id="role"
+                type="text"
+                placeholder="Role"
+                className="w-full border-[#E2E8F0] font-inter text-sm sm:text-base"
+                {...register("role")}
+            />
+            {errors.role && <p className="text-xs text-red-500">{errors.role.message}</p>}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <div className="space-y-1 sm:space-y-2">
-              <Label htmlFor="role" className="text-xs sm:text-sm font-medium font-inter">
-                Role
+              <Label htmlFor="country" className="text-xs sm:text-sm font-medium font-inter">
+                Country <span className="text-red-500">*</span>
               </Label>
-              <Input
-                  id="role"
-                  type="text"
-                  placeholder="Role"
-                  className="w-full border-[#E2E8F0] font-inter text-sm sm:text-base"
-                  {...register("role")}
+              <Controller
+                  name="country"
+                  control={control}
+                  render={({ field }) => (
+                      <Select
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          setValue('state', '');
+                          setValue('county', '');
+                        }}
+                        value={field.value}
+                      >
+                        <SelectTrigger className="border-[#E2E8F0] text-sm sm:text-base">
+                          <SelectValue placeholder="Select country" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {countries.map((country) => (
+                              <SelectItem key={country.value} value={country.value}>
+                                {country.label}
+                              </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                  )}
               />
-              {errors.role && <p className="text-xs text-red-500">{errors.role.message}</p>}
+              {errors.country && <p className="text-xs text-red-500">{errors.country.message}</p>}
+            </div>
+            <div className="space-y-1 sm:space-y-2">
+              <Label htmlFor="state" className="text-xs sm:text-sm font-medium font-inter">
+                State/Province <span className="text-red-500">*</span>
+              </Label>
+              <Controller
+                  name="state"
+                  control={control}
+                  render={({ field }) => (
+                      <Select
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          setValue('county', '');
+                        }}
+                        value={field.value}
+                        disabled={!selectedCountry}
+                      >
+                        <SelectTrigger className="border-[#E2E8F0] text-sm sm:text-base">
+                          <SelectValue placeholder={selectedCountry ? (selectedCountry === 'CA' ? "Select province" : "Select state") : "Select country first"} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {stateProvinceOptions.map((option) => (
+                              <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                              </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                  )}
+              />
+              {errors.state && <p className="text-xs text-red-500">{errors.state.message}</p>}
             </div>
             <div className="space-y-1 sm:space-y-2">
               <Label htmlFor="county" className="text-xs sm:text-sm font-medium font-inter">
-                County/Region
+                County/Region <span className="text-red-500">*</span>
               </Label>
               <Controller
                   name="county"
                   control={control}
                   render={({ field }) => (
-                      <Select onValueChange={field.onChange} value={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                        disabled={!selectedState}
+                      >
                         <SelectTrigger className="border-[#E2E8F0] text-sm sm:text-base">
-                          <SelectValue placeholder="Select county" />
+                          <SelectValue placeholder={selectedState ? (selectedCountry === 'CA' ? "Select region" : "Select county") : (selectedCountry === 'CA' ? "Select province first" : "Select state first")} />
                         </SelectTrigger>
                         <SelectContent>
-                          {counties.map((county) => (
+                          {availableCounties.map((county) => (
                               <SelectItem key={county} value={county}>
                                 {county}
                               </SelectItem>
@@ -150,7 +264,7 @@ export default function PartnerWithUsForm({ onOpenChange }: Props) {
 
           <div className="space-y-1 sm:space-y-2">
             <Label htmlFor="focusArea" className="text-xs sm:text-sm font-medium font-inter">
-              Focus Area(s)
+              Focus Area(s) <span className="text-red-500">*</span>
             </Label>
             <Input
                 id="focusArea"
@@ -164,7 +278,7 @@ export default function PartnerWithUsForm({ onOpenChange }: Props) {
 
           <div className="space-y-1 sm:space-y-2">
             <Label htmlFor="message" className="text-xs sm:text-sm font-medium font-inter">
-              Message
+              Message <span className="text-red-500">*</span>
             </Label>
             <Textarea
                 id="message"

@@ -34,7 +34,7 @@ export default function PublicationPage() {
         <>
             <PublicHero />
 
-            <section className="py-8">
+            <section id="framework" className="py-8">
                 <Container variant="compact">
                     <div>
                         <span className="mb-8 leading-relaxed block max-w-full lg:max-w-[626px] text-base">
