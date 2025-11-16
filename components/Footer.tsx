@@ -44,36 +44,36 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
                       </span>
                   <div className="flex gap-4 items-center">
                       <Link
-                          href="https://linkedin.com"
+                          href="https://www.linkedin.com/company/sozorockfoundation"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="hover:opacity-70 transition-opacity"
                       >
-                          <Image src="/ln.svg" alt="Linkedin logo" width={20} height={20} />
+                          <Image src="/ln.svg" alt="LinkedIn logo" width={20} height={20} />
                       </Link>
                       <Link
-                          href="https://twitter.com"
+                          href="https://www.instagram.com/srockfoundation/"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="hover:opacity-70 transition-opacity"
                       >
-                          <Image src="/in.svg" alt="instagram logo" width={20} height={20}/>
+                          <Image src="/in.svg" alt="Instagram logo" width={20} height={20}/>
                       </Link>
                       <Link
-                          href="https://facebook.com"
+                          href="https://x.com/srockfoundation?s=21"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="hover:opacity-70 transition-opacity"
                       >
-                          <Image src="/x.svg" alt="Linkedin logo" width={20} height={20}/>
+                          <Image src="/x.svg" alt="X logo" width={20} height={20}/>
                       </Link>
                       <Link
-                          href="https://instagram.com"
+                          href="https://youtube.com/@srockfoundation?si=BGN1tQ9UKrrknpM9"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="hover:opacity-70 transition-opacity"
                       >
-                          <Image src="/youtube.svg" alt="Linkedin logo" width={20} height={20}/>
+                          <Image src="/youtube.svg" alt="YouTube logo" width={20} height={20}/>
                       </Link>
                   </div>
               </div>
