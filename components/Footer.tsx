@@ -82,25 +82,36 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
               <Card className="py-8">
                   <CardHeader className="px-6 md:px-10">
                       <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 sm:gap-6">
-                          {navigation.map((item) => (
-                              item.href === "#contact" ? (
-                                  <button
-                                      key={item.name}
-                                      onClick={() => setContactModalOpen(true)}
-                                      className="text-sm transition-colors font-normal text-left hover:underline"
-                                  >
-                                      {item.name}
-                                  </button>
-                              ) : (
+                          {navigation.map((item) => {
+                              // Skip items with children (Publications dropdown)
+                              if ('children' in item && item.children) {
+                                  return null;
+                              }
+
+                              // Handle Contact link
+                              if (item.href === "#contact") {
+                                  return (
+                                      <button
+                                          key={item.name}
+                                          onClick={() => setContactModalOpen(true)}
+                                          className="text-sm transition-colors font-normal text-left hover:underline"
+                                      >
+                                          {item.name}
+                                      </button>
+                                  );
+                              }
+
+                              // Handle regular links
+                              return (
                                   <Link
                                       key={item.name}
-                                      href={item.href}
+                                      href={item.href || '/'}
                                       className="text-sm transition-colors font-normal"
                                   >
                                       {item.name}
                                   </Link>
-                              )
-                          ))}
+                              );
+                          })}
                       </div>
                   </CardHeader>
                   <CardContent className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-8 lg:gap-4 px-6 md:px-10">

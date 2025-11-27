@@ -4,12 +4,14 @@ import type { LibraryHubFormData } from '../hooks/useLibraryHubForm';
 import type { ContactFormValues } from '@/lib/hooks/useContactForm';
 import type { PartnerWithUsFormValues } from '@/lib/hooks/usePartnerWithUsForm';
 import type { RebsReportFormData } from '../hooks/useRebsReportForm';
+import type { RrgReportFormData } from '../hooks/useRrgReportForm';
+import type { HsaReportFormData } from '../hooks/useHsaReportForm';
 
 // API endpoint
 const API_ENDPOINT = 'https://ifadpqxffinephnqbu3rdynqji0tfyqw.lambda-url.us-east-1.on.aws/';
 
 // Form types
-type FormType = 'nursing' | 'accessday' | 'library' | 'contact' | 'partner' | 'rebs';
+type FormType = 'nursing' | 'accessday' | 'library' | 'contact' | 'partner' | 'rebs' | 'rrg' | 'hsa';
 
 // Generic API request payload
 interface FormSubmissionPayload<T> {
@@ -111,4 +113,16 @@ export async function submitRebsReportForm(
   data: RebsReportFormData
 ): Promise<ApiResponse> {
   return submitForm('rebs', data);
+}
+
+export async function submitRrgReportForm(
+  data: RrgReportFormData
+): Promise<ApiResponse> {
+  return submitForm('rrg', data);
+}
+
+export async function submitHsaReportForm(
+  data: HsaReportFormData
+): Promise<ApiResponse> {
+  return submitForm('hsa', data);
 }
