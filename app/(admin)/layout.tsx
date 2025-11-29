@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { LogOut } from 'lucide-react';
+import Container from "@/components/ui/container";
 
 export default function AdminLayout({
   children,
@@ -25,11 +24,6 @@ export default function AdminLayout({
     setIsLoading(false);
   }, [router]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
-    router.push('/');
-  };
-
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -45,28 +39,22 @@ export default function AdminLayout({
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Admin Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div>
-              <h1 className="text-xl font-semibold text-gray-900">Admin Dashboard</h1>
-              <p className="text-sm text-gray-500">Manage form submissions</p>
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
+        <Container variant="default">
+          <div className="flex items-center h-20">
+            <div className="space-y-1">
+              <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+              <p className="text-sm text-gray-600">Manage and review form submissions</p>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleLogout}
-            >
-              <LogOut size={16} />
-              Logout
-            </Button>
           </div>
-        </div>
+        </Container>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {children}
+      <main className="py-8">
+        <Container variant="default">
+          {children}
+        </Container>
       </main>
     </div>
   );

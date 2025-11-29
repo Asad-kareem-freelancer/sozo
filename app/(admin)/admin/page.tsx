@@ -1,13 +1,49 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import SubmissionsTable from '@/components/admin/SubmissionsTable';
+import type { AdminAPIResponse, TabConfig } from '@/types/admin';
 
 const API_URL = 'https://24oyp6wkckryj2u2uxwsph5qy40xigim.lambda-url.us-east-1.on.aws/';
 
+const TAB_CONFIGS: TabConfig[] = [
+  { key: 'accessday', label: 'Access Day', description: 'Access Day program submissions' },
+  { key: 'library', label: 'Library', description: 'Library program submissions' },
+  { key: 'nursing', label: 'Nursing', description: 'Nursing program submissions' },
+  { key: 'rebs', label: 'REBS', description: 'REBS publication submissions' },
+  { key: 'contact', label: 'Contact', description: 'Contact form submissions' },
+  { key: 'partner', label: 'Partner', description: 'Partnership inquiries' },
+  { key: 'rrg', label: 'RRG', description: 'RRG submissions' },
+];
+
+// Define which fields to exclude for each form type
+const getExcludeFields = (tabKey: string): string[] => {
+  switch (tabKey) {
+    case 'accessday':
+      return ['consent'];
+    case 'library':
+      return ['consent', 'organizationOther'];
+    case 'nursing':
+      return ['consent'];
+    case 'rebs':
+      return ['privacyConsent', 'privacyTermsConsent', 'disclaimerConsent', 'newsletterOptIn', 'organizationCustom', 'primaryRoleOther', 'intendedUseOther'];
+    case 'contact':
+      return [];
+    case 'partner':
+      return ['organizationOther', 'privacyConsent'];
+    case 'rrg':
+      return ['privacyConsent', 'privacyTermsConsent', 'disclaimerConsent', 'newsletterOptIn', 'organizationCustom', 'primaryRoleOther', 'intendedUseOther'];
+    default:
+      return [];
+  }
+};
+
 export default function AdminDashboard() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<AdminAPIResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState('accessday');
 
   useEffect(() => {
     fetchData();
@@ -29,8 +65,8 @@ export default function AdminDashboard() {
         throw new Error('Failed to fetch data');
       }
 
-      const result = await response.json();
-      setData(Array.isArray(result) ? result : []);
+      const result: AdminAPIResponse = await response.json();
+      setData(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -60,13 +96,26 @@ export default function AdminDashboard() {
     );
   }
 
+  if (!data) {
+    return (
+      <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
+        <p className="text-gray-500">No data available</p>
+      </div>
+    );
+  }
+
+  const totalSubmissions = Object.values(data.data).reduce(
+    (sum, table) => sum + table.count,
+    0
+  );
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Form Submissions</h2>
           <p className="text-sm text-gray-600 mt-1">
-            Total submissions: {data.length}
+            Total submissions: {totalSubmissions}
           </p>
         </div>
         <button
@@ -77,46 +126,40 @@ export default function AdminDashboard() {
         </button>
       </div>
 
-      {data.length === 0 ? (
-        <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
-          <p className="text-gray-500">No submissions found</p>
-        </div>
-      ) : (
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  {Object.keys(data[0] || {}).map((key) => (
-                    <th
-                      key={key}
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      {key}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {data.map((item, index) => (
-                  <tr key={index} className="hover:bg-gray-50 transition">
-                    {Object.entries(item).map(([key, value]) => (
-                      <td
-                        key={key}
-                        className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                      >
-                        {typeof value === 'object'
-                          ? JSON.stringify(value)
-                          : String(value)}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="w-full">
+          {TAB_CONFIGS.map((tab) => (
+            <TabsTrigger key={tab.key} value={tab.key} className="flex-1">
+              {tab.label}
+              <span className="ml-2 inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium bg-gray-200 text-gray-700 rounded-full">
+                {data.data[tab.key].count}
+              </span>
+            </TabsTrigger>
+          ))}
+        </TabsList>
+
+        {TAB_CONFIGS.map((tab) => (
+          <TabsContent key={tab.key} value={tab.key}>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900">{tab.label}</h3>
+                  <p className="text-sm text-gray-600">{tab.description}</p>
+                </div>
+                <div className="text-sm text-gray-500">
+                  {data.data[tab.key].count} submissions
+                </div>
+              </div>
+
+              <SubmissionsTable
+                data={data.data[tab.key].items}
+                title={tab.label}
+                excludeFields={getExcludeFields(tab.key)}
+              />
+            </div>
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
   );
 }

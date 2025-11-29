@@ -5,7 +5,7 @@ import Image from "next/image";
 import Container from "@/components/ui/container";
 import {navigation} from "@/const/nav";
 import type {LucideIcon} from "lucide-react";
-import {BookOpen, Briefcase, Building2, ChevronDown, Mail, Menu, Users} from "lucide-react";
+import {BookOpen, Briefcase, Building2, ChevronDown, LogOut, Mail, Menu, Users} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger,} from "@/components/ui/sheet";
 import {useEffect, useState} from "react";
 import {usePathname, useRouter} from "next/navigation";
@@ -21,6 +21,7 @@ export default function Header() {
     const [contactModalOpen, setContactModalOpen] = useState(false);
     const [publicationsOpen, setPublicationsOpen] = useState(false);
     const [loginModalOpen, setLoginModalOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const iconMap: Record<string, LucideIcon> = {
         Building2,
@@ -61,6 +62,12 @@ export default function Header() {
         setSideOpen(false);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('isAuthenticated');
+        setIsAuthenticated(false);
+        router.push('/');
+    };
+
     useEffect(() => {
         if (pathname === "/") {
             const scrollTarget = localStorage.getItem("scrollToSection");
@@ -82,6 +89,20 @@ export default function Header() {
             }
         }
     }, [pathname]);
+
+    useEffect(() => {
+        // Check authentication status
+        const checkAuth = () => {
+            const auth = localStorage.getItem('isAuthenticated');
+            setIsAuthenticated(auth === 'true');
+        };
+
+        checkAuth();
+
+        // Listen for storage changes (in case of logout in another tab)
+        window.addEventListener('storage', checkAuth);
+        return () => window.removeEventListener('storage', checkAuth);
+    }, []);
 
   return (
     <header className="bg-white/95 backdrop-blur-sm mb-2">
@@ -146,15 +167,26 @@ export default function Header() {
             })}
           </div>
 
-          {/* Login Button - Desktop */}
+          {/* Login/Logout Button - Desktop */}
           <div className="hidden md:block">
-            <Button
-              size="sm"
-              variant="secondary"
-              onClick={() => setLoginModalOpen(true)}
-            >
-              Login
-            </Button>
+            {isAuthenticated ? (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleLogout}
+              >
+                <LogOut size={16} />
+                Logout
+              </Button>
+            ) : (
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => setLoginModalOpen(true)}
+              >
+                Login
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu */}
@@ -248,15 +280,29 @@ export default function Header() {
                         </ul>
 
                         <div className="px-4 py-2 mt-auto border-t border-gray-200">
-                            <Button
-                                className="w-full"
-                                onClick={() => {
-                                    setSideOpen(false);
-                                    setLoginModalOpen(true);
-                                }}
-                            >
-                                Login
-                            </Button>
+                            {isAuthenticated ? (
+                                <Button
+                                    variant="outline"
+                                    className="w-full"
+                                    onClick={() => {
+                                        setSideOpen(false);
+                                        handleLogout();
+                                    }}
+                                >
+                                    <LogOut size={16} />
+                                    Logout
+                                </Button>
+                            ) : (
+                                <Button
+                                    className="w-full"
+                                    onClick={() => {
+                                        setSideOpen(false);
+                                        setLoginModalOpen(true);
+                                    }}
+                                >
+                                    Login
+                                </Button>
+                            )}
                         </div>
                     </SheetContent>
                 </Sheet>
