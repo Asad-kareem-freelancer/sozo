@@ -10,7 +10,9 @@ import {Sheet, SheetContent, SheetTrigger,} from "@/components/ui/sheet";
 import {useEffect, useState} from "react";
 import {usePathname, useRouter} from "next/navigation";
 import ContactUsModal from "@/components/modals/ContactUsModal";
+import LoginModal from "@/components/modals/LoginModal";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 export default function Header() {
     const router = useRouter();
@@ -18,6 +20,7 @@ export default function Header() {
     const [sideOpen, setSideOpen] = useState(false);
     const [contactModalOpen, setContactModalOpen] = useState(false);
     const [publicationsOpen, setPublicationsOpen] = useState(false);
+    const [loginModalOpen, setLoginModalOpen] = useState(false);
 
     const iconMap: Record<string, LucideIcon> = {
         Building2,
@@ -143,6 +146,17 @@ export default function Header() {
             })}
           </div>
 
+          {/* Login Button - Desktop */}
+          <div className="hidden md:block">
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={() => setLoginModalOpen(true)}
+            >
+              Login
+            </Button>
+          </div>
+
           {/* Mobile Menu */}
             <div className="md:hidden">
                 <Sheet open={sideOpen} onOpenChange={setSideOpen}>
@@ -232,12 +246,25 @@ export default function Header() {
                                 );
                             })}
                         </ul>
+
+                        <div className="px-4 py-2 mt-auto border-t border-gray-200">
+                            <Button
+                                className="w-full"
+                                onClick={() => {
+                                    setSideOpen(false);
+                                    setLoginModalOpen(true);
+                                }}
+                            >
+                                Login
+                            </Button>
+                        </div>
                     </SheetContent>
                 </Sheet>
             </div>
         </div>
       </Container>
       <ContactUsModal open={contactModalOpen} onOpenChange={setContactModalOpen} />
+      <LoginModal open={loginModalOpen} onOpenChange={setLoginModalOpen} />
     </header>
   );
 }

@@ -43,7 +43,8 @@ export default function RebsPublication() {
                         <h2 className={SECTION_HEADING}>Overview</h2>
                         <div className="space-y-6 leading-relaxed text-base">
                             <p>
-                                The Rural Equity Blueprint Series establishes a practical model for strengthening readiness, literacy, and access equity across rural and underserved communities. Volume 1 outlines the Foundation's Access Day framework—a scalable approach counties and institutions can adopt to improve patient access, preventive engagement, and community coordination. The report synthesizes field insights, operational data, and systems-level observations to guide local planning, support workforce alignment, and inform forthcoming pilots such as Access Day and the Library Health Equity Hub. The analysis, structure, and modeling presented in this volume were developed independently by The SozoRock Foundation.
+                                The Rural Equity Blueprint Series establishes a practical model for strengthening readiness, literacy, and access equity across rural and underserved communities.
+                                Volume 1 outlines the Foundation&#39;s Access Day framework—a scalable approach counties and institutions can adopt to improve patient access, preventive engagement, and community coordination. The report synthesizes field insights, operational data, and systems-level observations to guide local planning, support workforce alignment, and inform forthcoming pilots such as Access Day and the Library Health Equity Hub. The analysis, structure, and modeling presented in this volume were developed independently by The SozoRock Foundation.
                             </p>
                         </div>
                     </div>
@@ -104,9 +105,9 @@ export default function RebsPublication() {
                                 <p>
                                     Additional insights were contributed through early academic and sector dialogues that offered perspective on rural service
                                     readiness and educational alignment across New York State. These engagements have since concluded, yet their perspectives
-                                    enriched the Foundation's understanding of rural health-system dynamics. All modeling, governance design, and analytical
+                                    enriched the Foundation&#39;s understanding of rural health-system dynamics. All modeling, governance design, and analytical
                                     synthesis presented in this publication were developed independently by The SozoRock Foundation. The framework, structure,
-                                    and datasets remain the Foundation's intellectual property. The analyses and conclusions expressed herein are solely those
+                                    and datasets remain the Foundation&#39;s intellectual property. The analyses and conclusions expressed herein are solely those
                                     of The SozoRock® Foundation and do not represent the views of any county department, academic institution, or external contributor.
                                 </p>
                             </div>
