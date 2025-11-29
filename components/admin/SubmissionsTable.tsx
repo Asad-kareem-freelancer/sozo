@@ -1,16 +1,33 @@
-import { BaseSubmission } from '@/types/admin';
+import {
+  AccessDaySubmission,
+  LibrarySubmission,
+  NursingSubmission,
+  REBSSubmission,
+  ContactSubmission,
+  PartnerSubmission,
+  RRGSubmission,
+} from '@/types/admin';
 
-interface SubmissionsTableProps<T extends BaseSubmission> {
-  data: T[];
+type AnySubmission =
+  | AccessDaySubmission
+  | LibrarySubmission
+  | NursingSubmission
+  | REBSSubmission
+  | ContactSubmission
+  | PartnerSubmission
+  | RRGSubmission;
+
+interface SubmissionsTableProps {
+  data: AnySubmission[];
   title: string;
   excludeFields?: string[];
 }
 
-export default function SubmissionsTable<T extends BaseSubmission>({
+export default function SubmissionsTable({
   data,
   title,
   excludeFields = [],
-}: SubmissionsTableProps<T>) {
+}: SubmissionsTableProps) {
   if (data.length === 0) {
     return (
       <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
@@ -80,41 +97,92 @@ export default function SubmissionsTable<T extends BaseSubmission>({
       .trim();
   };
 
+  // Helper to get display name from submission
+  const getDisplayName = (item: any): string => {
+    if (item.fullName) return item.fullName;
+    if (item.firstName && item.lastName) return `${item.firstName} ${item.lastName}`;
+    if (item.firstName) return item.firstName;
+    if (item.lastName) return item.lastName;
+    return 'Unknown';
+  };
+
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              {sortedKeys.map((key) => (
-                <th
-                  key={key}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
-                >
-                  {formatHeader(key)}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {data.map((item, index) => (
-              <tr key={item.submissionId || index} className="hover:bg-gray-50 transition">
+    <>
+      {/* Desktop Table View */}
+      <div className="hidden md:block bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
                 {sortedKeys.map((key) => (
-                  <td
+                  <th
                     key={key}
-                    className={`px-6 py-4 text-sm text-gray-900 ${
-                      key === 'message' ? 'max-w-lg whitespace-normal' : 'max-w-xs truncate'
-                    }`}
-                    title={key !== 'message' ? formatValue((item as any)[key]) : undefined}
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                   >
-                    {formatValue((item as any)[key])}
-                  </td>
+                    {formatHeader(key)}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {data.map((item, index) => (
+                <tr key={item.submissionId || index} className="hover:bg-gray-50 transition">
+                  {sortedKeys.map((key) => (
+                    <td
+                      key={key}
+                      className={`px-6 py-4 text-sm text-gray-900 ${
+                        key === 'message' ? 'max-w-lg whitespace-normal' : 'max-w-xs truncate'
+                      }`}
+                      title={key !== 'message' ? formatValue((item as any)[key]) : undefined}
+                    >
+                      {formatValue((item as any)[key])}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+
+      {/* Mobile Card View */}
+      <div className="block md:hidden space-y-4">
+        {data.map((item, index) => (
+          <div
+            key={item.submissionId || index}
+            className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden"
+          >
+            {/* Card Header */}
+            <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+              <h3 className="font-semibold text-gray-900">{getDisplayName(item)}</h3>
+              <p className="text-sm text-gray-600 mt-1">{item.email}</p>
+            </div>
+
+            {/* Card Body */}
+            <div className="px-4 py-3 space-y-3">
+              {sortedKeys
+                .filter((key) => !['firstName', 'lastName', 'fullName', 'email'].includes(key))
+                .map((key) => {
+                  const value = formatValue((item as any)[key]);
+                  if (value === '-') return null;
+
+                  return (
+                    <div key={key}>
+                      <dt className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        {formatHeader(key)}
+                      </dt>
+                      <dd className={`mt-1 text-sm text-gray-900 ${
+                        key === 'message' ? 'whitespace-normal' : ''
+                      }`}>
+                        {value}
+                      </dd>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
