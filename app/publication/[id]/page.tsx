@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import RebsPublication from './_components/RebsPublication';
 import RrgPublication from './_components/RrgPublication';
 import HsaPublication from './_components/HsaPublication';
+import UnreadyToLeadPublication from './_components/UnreadyToLeadPublication';
 import { notFound } from 'next/navigation';
 
 export default function PublicationPage() {
@@ -12,6 +13,9 @@ export default function PublicationPage() {
 
     // Route to the appropriate publication component based on ID
     switch (id) {
+        case 'unready-to-lead-2025':
+            return <UnreadyToLeadPublication />;
+
         case 'rebs-v1-2025':
             return <RebsPublication />;
 

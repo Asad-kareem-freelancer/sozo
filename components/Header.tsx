@@ -129,20 +129,48 @@ export default function Header() {
                         className="min-w-[320px] bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50"
                         sideOffset={8}
                       >
-                        {item.children.map((child) => (
-                          <DropdownMenu.Item
-                            key={child.name}
-                            asChild
-                            className="outline-none"
-                          >
-                            <Link
-                              href={child.href}
-                              className="block px-4 py-3 text-sm hover:bg-gray-50 transition-colors cursor-pointer"
+                        {item.children.map((child) => {
+                          // Handle category with nested children
+                          if ('isCategory' in child && child.isCategory && 'children' in child) {
+                            return (
+                              <div key={child.name}>
+                                <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                  {child.name}
+                                </div>
+                                {child.children.map((nestedChild: any) => (
+                                  <DropdownMenu.Item
+                                    key={nestedChild.name}
+                                    asChild
+                                    className="outline-none"
+                                  >
+                                    <Link
+                                      href={nestedChild.href}
+                                      className="block px-4 py-3 pl-6 text-sm hover:bg-gray-50 transition-colors cursor-pointer"
+                                    >
+                                      {nestedChild.name}
+                                    </Link>
+                                  </DropdownMenu.Item>
+                                ))}
+                              </div>
+                            );
+                          }
+
+                          // Handle regular child items
+                          return (
+                            <DropdownMenu.Item
+                              key={child.name}
+                              asChild
+                              className="outline-none"
                             >
-                              {child.name}
-                            </Link>
-                          </DropdownMenu.Item>
-                        ))}
+                              <Link
+                                href={('href' in child ? child.href : '#') as string}
+                                className="block px-4 py-3 text-sm hover:bg-gray-50 transition-colors cursor-pointer"
+                              >
+                                {child.name}
+                              </Link>
+                            </DropdownMenu.Item>
+                          );
+                        })}
                       </DropdownMenu.Content>
                     </DropdownMenu.Portal>
                   </DropdownMenu.Root>
@@ -237,20 +265,50 @@ export default function Header() {
 
                                             {publicationsOpen && (
                                                 <ul className="mt-1 ml-9 space-y-1">
-                                                    {link.children.map((child, childIndex) => (
-                                                        <li key={childIndex}>
-                                                            <Link
-                                                                href={child.href}
-                                                                onClick={() => {
-                                                                    setSideOpen(false);
-                                                                    setPublicationsOpen(false);
-                                                                }}
-                                                                className="block px-3 py-2 text-sm hover:bg-gray-50 rounded-md"
-                                                            >
-                                                                {child.name}
-                                                            </Link>
-                                                        </li>
-                                                    ))}
+                                                    {link.children.map((child, childIndex) => {
+                                                        // Handle category with nested children
+                                                        if ('isCategory' in child && child.isCategory && 'children' in child) {
+                                                            return (
+                                                                <li key={childIndex}>
+                                                                    <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase">
+                                                                        {child.name}
+                                                                    </div>
+                                                                    <ul className="ml-2 space-y-1">
+                                                                        {child.children.map((nestedChild: any, nestedIndex: number) => (
+                                                                            <li key={nestedIndex}>
+                                                                                <Link
+                                                                                    href={nestedChild.href}
+                                                                                    onClick={() => {
+                                                                                        setSideOpen(false);
+                                                                                        setPublicationsOpen(false);
+                                                                                    }}
+                                                                                    className="block px-3 py-2 text-sm hover:bg-gray-50 rounded-md"
+                                                                                >
+                                                                                    {nestedChild.name}
+                                                                                </Link>
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                </li>
+                                                            );
+                                                        }
+
+                                                        // Handle regular child items
+                                                        return (
+                                                            <li key={childIndex}>
+                                                                <Link
+                                                                    href={('href' in child ? child.href : '#') as string}
+                                                                    onClick={() => {
+                                                                        setSideOpen(false);
+                                                                        setPublicationsOpen(false);
+                                                                    }}
+                                                                    className="block px-3 py-2 text-sm hover:bg-gray-50 rounded-md"
+                                                                >
+                                                                    {child.name}
+                                                                </Link>
+                                                            </li>
+                                                        );
+                                                    })}
                                                 </ul>
                                             )}
                                         </li>

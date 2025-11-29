@@ -6,9 +6,22 @@ export const navigation = [
         name: "Publications",
         icon: "BookOpen",
         children: [
-            { name: "Rural Equity Blueprint Series (REBS) — Volume 1 (2025)", href: "/publication/rebs-v1-2025" },
-            { name: "Rethinking Rural Governance (RRG) — Volume 1 (2025)", href: "/publication/rrg-v1-2025" },
-            { name: "Health Systems Assurance (HSA) — Volume 1 (January 2026)", href: "/publication/hsa-v1-2026" },
+            {
+                name: "Research Series",
+                isCategory: true,
+                children: [
+                    { name: "Rural Equity Blueprint Series (REBS) — Volume 1 (2025)", href: "/publication/rebs-v1-2025" },
+                    { name: "Rethinking Rural Governance (RRG) — Volume 1 (2025)", href: "/publication/rrg-v1-2025" },
+                    { name: "Health Systems Assurance (HSA) — Volume 1 (January 2026)", href: "/publication/hsa-v1-2026" },
+                ]
+            },
+            {
+                name: "Leadership Works",
+                isCategory: true,
+                children: [
+                    { name: "UnReady to Lead: How America's Leaders Are Built", href: "/publication/unready-to-lead-2025" }
+                ]
+            },
         ]
     },
     { name: "Contact", href: "#contact", icon: "Mail" },
