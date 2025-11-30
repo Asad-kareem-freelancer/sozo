@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import SubmissionsTable from '@/components/admin/SubmissionsTable';
+import MasterDetailView from '@/components/admin/MasterDetailView';
 import type { AdminAPIResponse, TabConfig } from '@/types/admin';
 
 const API_URL = 'https://24oyp6wkckryj2u2uxwsph5qy40xigim.lambda-url.us-east-1.on.aws/';
@@ -16,28 +16,6 @@ const TAB_CONFIGS: TabConfig[] = [
   { key: 'partner', label: 'Partner', description: 'Partnership inquiries' },
   { key: 'rrg', label: 'RRG', description: 'RRG submissions' },
 ];
-
-// Define which fields to exclude for each form type
-const getExcludeFields = (tabKey: string): string[] => {
-  switch (tabKey) {
-    case 'accessday':
-      return ['consent'];
-    case 'library':
-      return ['consent', 'organizationOther'];
-    case 'nursing':
-      return ['consent'];
-    case 'rebs':
-      return ['privacyConsent', 'privacyTermsConsent', 'disclaimerConsent', 'newsletterOptIn', 'organizationCustom', 'primaryRoleOther', 'intendedUseOther'];
-    case 'contact':
-      return [];
-    case 'partner':
-      return ['organizationOther', 'privacyConsent'];
-    case 'rrg':
-      return ['privacyConsent', 'privacyTermsConsent', 'disclaimerConsent', 'newsletterOptIn', 'organizationCustom', 'primaryRoleOther', 'intendedUseOther'];
-    default:
-      return [];
-  }
-};
 
 export default function AdminDashboard() {
   const [data, setData] = useState<AdminAPIResponse | null>(null);
@@ -113,14 +91,14 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Form Submissions</h2>
-          <p className="text-sm text-gray-600 mt-1">
+          <h2 className="text-lg sm:text-2xl font-bold text-gray-900">Form Submissions</h2>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">
             Total submissions: {totalSubmissions}
           </p>
         </div>
         <button
           onClick={fetchData}
-          className="px-4 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+          className="px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
         >
           Refresh
         </button>
@@ -143,18 +121,17 @@ export default function AdminDashboard() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">{tab.label}</h3>
-                  <p className="text-sm text-gray-600">{tab.description}</p>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">{tab.label}</h3>
+                  <p className="text-xs sm:text-sm text-gray-600">{tab.description}</p>
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-xs sm:text-sm text-gray-500">
                   {data.data[tab.key].count} submissions
                 </div>
               </div>
 
-              <SubmissionsTable
+              <MasterDetailView
                 data={data.data[tab.key].items}
                 title={tab.label}
-                excludeFields={getExcludeFields(tab.key)}
               />
             </div>
           </TabsContent>
