@@ -10,7 +10,6 @@ import {Sheet, SheetContent, SheetTrigger,} from "@/components/ui/sheet";
 import {useEffect, useState} from "react";
 import {usePathname, useRouter} from "next/navigation";
 import ContactUsModal from "@/components/modals/ContactUsModal";
-import LoginModal from "@/components/modals/LoginModal";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
 
@@ -20,7 +19,6 @@ export default function Header() {
     const [sideOpen, setSideOpen] = useState(false);
     const [contactModalOpen, setContactModalOpen] = useState(false);
     const [publicationsOpen, setPublicationsOpen] = useState(false);
-    const [loginModalOpen, setLoginModalOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const iconMap: Record<string, LucideIcon> = {
@@ -195,9 +193,9 @@ export default function Header() {
             })}
           </div>
 
-          {/* Login/Logout Button - Desktop */}
-          <div className="hidden md:block">
-            {isAuthenticated ? (
+          {/* Logout Button - Desktop */}
+          {isAuthenticated && (
+            <div className="hidden md:block">
               <Button
                 size="sm"
                 variant="outline"
@@ -206,16 +204,8 @@ export default function Header() {
                 <LogOut size={16} />
                 Logout
               </Button>
-            ) : (
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={() => setLoginModalOpen(true)}
-              >
-                Login
-              </Button>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Mobile Menu */}
             <div className="md:hidden">
@@ -337,8 +327,8 @@ export default function Header() {
                             })}
                         </ul>
 
-                        <div className="px-4 py-2 mt-auto border-t border-gray-200">
-                            {isAuthenticated ? (
+                        {isAuthenticated && (
+                            <div className="px-4 py-2 mt-auto border-t border-gray-200">
                                 <Button
                                     variant="outline"
                                     className="w-full"
@@ -350,25 +340,14 @@ export default function Header() {
                                     <LogOut size={16} />
                                     Logout
                                 </Button>
-                            ) : (
-                                <Button
-                                    className="w-full"
-                                    onClick={() => {
-                                        setSideOpen(false);
-                                        setLoginModalOpen(true);
-                                    }}
-                                >
-                                    Login
-                                </Button>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </SheetContent>
                 </Sheet>
             </div>
         </div>
       </Container>
       <ContactUsModal open={contactModalOpen} onOpenChange={setContactModalOpen} />
-      <LoginModal open={loginModalOpen} onOpenChange={setLoginModalOpen} />
     </header>
   );
 }

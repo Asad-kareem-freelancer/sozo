@@ -43,13 +43,60 @@ export default function SubmissionsTable({
     )
   );
 
+  // Helper to create merged data with combined columns
+  const getMergedValue = (item: any, key: string): string => {
+    if (key === 'name') {
+      if (item.fullName) return item.fullName;
+      if (item.firstName && item.lastName) return `${item.firstName} ${item.lastName}`;
+      if (item.firstName) return item.firstName;
+      if (item.lastName) return item.lastName;
+      return '-';
+    }
+
+    if (key === 'contact') {
+      const email = item.email || '';
+      const phone = item.phoneNumber || '';
+      if (email && phone) return `${email} (${phone})`;
+      if (email) return email;
+      if (phone) return phone;
+      return '-';
+    }
+
+    if (key === 'location') {
+      const state = item.state || '';
+      const county = item.county || '';
+      if (state && county) return `${state}, ${county}`;
+      if (state) return state;
+      if (county) return county;
+      return '-';
+    }
+
+    return formatValue((item as any)[key]);
+  };
+
+  // Helper to render contact column with styled phone number
+  const renderContactCell = (item: any) => {
+    const email = item.email || '';
+    const phone = item.phoneNumber || '';
+
+    if (email && phone) {
+      return (
+        <div className="flex flex-col gap-1">
+          <div>{email}</div>
+          <div className="text-gray-500">{phone}</div>
+        </div>
+      );
+    }
+    if (email) return email;
+    if (phone) return <span className="text-gray-500">{phone}</span>;
+    return '-';
+  };
+
   // Define important fields to display (filter out unnecessary fields)
+  // Using merged columns: name, contact, location
   const importantFields = [
-    'firstName',
-    'lastName',
-    'fullName',
-    'email',
-    'phoneNumber',
+    'name',
+    'contact',
     'organization',
     'organizationType',
     'institution',
@@ -60,15 +107,24 @@ export default function SubmissionsTable({
     'intendedUse',
     'message',
     'country',
-    'state',
-    'county',
+    'location',
   ];
 
-  // Filter to only show important fields, maintaining priority order
-  // Also exclude any fields specified in excludeFields prop
-  const sortedKeys = importantFields
-    .filter((key) => allKeys.includes(key))
-    .filter((key) => !excludeFields.includes(key));
+  // Filter to only show important fields that have data
+  const sortedKeys = importantFields.filter((key) => {
+    // For merged columns, check if any of the source fields exist
+    if (key === 'name') {
+      return allKeys.includes('firstName') || allKeys.includes('lastName') || allKeys.includes('fullName');
+    }
+    if (key === 'contact') {
+      return allKeys.includes('email') || allKeys.includes('phoneNumber');
+    }
+    if (key === 'location') {
+      return allKeys.includes('state') || allKeys.includes('county');
+    }
+    // For regular fields, check if they exist
+    return allKeys.includes(key);
+  }).filter((key) => !excludeFields.includes(key));
 
   const formatValue = (value: any): string => {
     if (value === null || value === undefined) return '-';
@@ -86,7 +142,12 @@ export default function SubmissionsTable({
   };
 
   const formatHeader = (key: string): string => {
-    // Special cases for location fields
+    // Special cases for merged columns
+    if (key === 'name') return 'Name';
+    if (key === 'contact') return 'Contact';
+    if (key === 'location') return 'Location';
+
+    // Special cases for location fields (kept for backward compatibility)
     if (key === 'state') return 'State/Province';
     if (key === 'county') return 'County/Region';
 
@@ -127,17 +188,22 @@ export default function SubmissionsTable({
             <tbody className="bg-white divide-y divide-gray-200">
               {data.map((item, index) => (
                 <tr key={item.submissionId || index} className="hover:bg-gray-50 transition">
-                  {sortedKeys.map((key) => (
-                    <td
-                      key={key}
-                      className={`px-6 py-4 text-sm text-gray-900 ${
-                        key === 'message' ? 'max-w-lg whitespace-normal' : 'max-w-xs truncate'
-                      }`}
-                      title={key !== 'message' ? formatValue((item as any)[key]) : undefined}
-                    >
-                      {formatValue((item as any)[key])}
-                    </td>
-                  ))}
+                  {sortedKeys.map((key) => {
+                    const displayValue = key === 'contact' ? null : getMergedValue(item, key);
+                    return (
+                      <td
+                        key={key}
+                        className={`px-6 py-4 text-sm text-gray-900 ${
+                          key === 'message' ? 'max-w-lg whitespace-normal' :
+                          key === 'contact' ? 'max-w-sm whitespace-normal' :
+                          'max-w-xs truncate'
+                        }`}
+                        title={key !== 'message' && key !== 'contact' ? displayValue ?? undefined : undefined}
+                      >
+                        {key === 'contact' ? renderContactCell(item) : displayValue}
+                      </td>
+                    );
+                  })}
                 </tr>
               ))}
             </tbody>
@@ -154,16 +220,16 @@ export default function SubmissionsTable({
           >
             {/* Card Header */}
             <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
-              <h3 className="font-semibold text-gray-900">{getDisplayName(item)}</h3>
-              <p className="text-sm text-gray-600 mt-1">{item.email}</p>
+              <h3 className="font-semibold text-gray-900">{getMergedValue(item, 'name')}</h3>
+              <p className="text-sm text-gray-600 mt-1">{renderContactCell(item)}</p>
             </div>
 
             {/* Card Body */}
             <div className="px-4 py-3 space-y-3">
               {sortedKeys
-                .filter((key) => !['firstName', 'lastName', 'fullName', 'email'].includes(key))
+                .filter((key) => !['name', 'contact'].includes(key))
                 .map((key) => {
-                  const value = formatValue((item as any)[key]);
+                  const value = getMergedValue(item, key);
                   if (value === '-') return null;
 
                   return (
@@ -172,7 +238,7 @@ export default function SubmissionsTable({
                         {formatHeader(key)}
                       </dt>
                       <dd className={`mt-1 text-sm text-gray-900 ${
-                        key === 'message' ? 'whitespace-normal' : ''
+                        key === 'message' || key === 'location' ? 'whitespace-normal' : ''
                       }`}>
                         {value}
                       </dd>

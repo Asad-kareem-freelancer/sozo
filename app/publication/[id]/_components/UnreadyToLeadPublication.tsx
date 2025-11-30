@@ -24,7 +24,7 @@ export default function UnreadyToLeadPublication() {
                         <img
                             src="/book/img.png"
                             alt="UnReady to Lead - Leadership development"
-                            className="h-full w-full object-cover"
+                            className="h-full w-full object-cover max-sm:object-[-274px_center]"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-black/[0.192] to-black/80 rounded-3xl"></div>
                     </div>
@@ -85,7 +85,7 @@ export default function UnreadyToLeadPublication() {
                                         <p><strong>Location:</strong> Albany, New York</p>
                                         <p><strong>Publication Date:</strong> 2025</p>
                                         <p><strong>Author:</strong> Oluwabiyi Adeyemo</p>
-                                        <p><strong>Series:</strong> Leadership Works (Volume 1 of 2)</p>
+                                        <p><strong>Series:</strong> Leadership Works (Series 1 of 2)</p>
                                         <p><strong>ISBN:</strong> 979-8-3507-5308-6</p>
                                     </div>
                                     <div className="mt-4 pt-4 border-t border-gray-300">
