@@ -16,7 +16,7 @@ export const navigation = [
                 ]
             },
             {
-                name: "Leadership Works",
+                name: "Leadership Series",
                 isCategory: true,
                 children: [
                     { name: "UnReady to Lead: How America's Leaders Are Built", href: "/publication/unready-to-lead-2025" }
