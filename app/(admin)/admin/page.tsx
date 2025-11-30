@@ -88,8 +88,8 @@ export default function AdminDashboard() {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="h-full flex flex-col gap-4">
+      <div className="flex items-center justify-between flex-shrink-0">
         <div>
           <h2 className="text-lg sm:text-2xl font-bold text-gray-900">Form Submissions</h2>
           <p className="text-xs sm:text-sm text-gray-600 mt-1">
@@ -104,12 +104,13 @@ export default function AdminDashboard() {
         </button>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden">
+        <TabsList className="w-full flex-shrink-0">
           {TAB_CONFIGS.map((tab) => (
-            <TabsTrigger key={tab.key} value={tab.key} className="flex-1">
-              {tab.label}
-              <span className="ml-2 inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium bg-gray-200 text-gray-700 rounded-full">
+            <TabsTrigger key={tab.key} value={tab.key} className="flex-1 text-xs sm:text-sm">
+              <span className="hidden sm:inline">{tab.label}</span>
+              <span className="sm:hidden">{tab.label.split(' ')[0]}</span>
+              <span className="ml-1 sm:ml-2 inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 text-xs font-medium bg-gray-200 text-gray-700 rounded-full">
                 {data.data[tab.key].count}
               </span>
             </TabsTrigger>
@@ -117,9 +118,9 @@ export default function AdminDashboard() {
         </TabsList>
 
         {TAB_CONFIGS.map((tab) => (
-          <TabsContent key={tab.key} value={tab.key}>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
+          <TabsContent key={tab.key} value={tab.key} className="flex-1 overflow-hidden mt-4">
+            <div className="h-full flex flex-col gap-3">
+              <div className="flex items-center justify-between flex-shrink-0">
                 <div>
                   <h3 className="text-base sm:text-lg font-semibold text-gray-900">{tab.label}</h3>
                   <p className="text-xs sm:text-sm text-gray-600">{tab.description}</p>
@@ -129,10 +130,12 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              <MasterDetailView
-                data={data.data[tab.key].items}
-                title={tab.label}
-              />
+              <div className="flex-1 overflow-hidden">
+                <MasterDetailView
+                  data={data.data[tab.key].items}
+                  title={tab.label}
+                />
+              </div>
             </div>
           </TabsContent>
         ))}

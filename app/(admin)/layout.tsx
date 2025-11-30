@@ -34,7 +34,7 @@ export default function AdminLayout({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center overflow-hidden">
         <div className="text-gray-600">Loading...</div>
       </div>
     );
@@ -45,11 +45,11 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="h-screen bg-gray-50 flex flex-col overflow-hidden">
       {/* Admin Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
+      <header className="bg-white border-b border-gray-200 shadow-sm flex-shrink-0">
         <Container variant="default">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16 sm:h-20">
             <div className="space-y-1">
               <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Admin Dashboard</h1>
               <p className="text-xs sm:text-sm text-gray-600">Manage and review form submissions</p>
@@ -67,9 +67,11 @@ export default function AdminLayout({
       </header>
 
       {/* Main Content */}
-      <main className="py-8">
-        <Container variant="default">
-          {children}
+      <main className="flex-1 overflow-hidden">
+        <Container variant="default" className="h-full">
+          <div className="h-full py-6 overflow-y-auto">
+            {children}
+          </div>
         </Container>
       </main>
     </div>
