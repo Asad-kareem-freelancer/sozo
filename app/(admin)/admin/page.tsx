@@ -8,13 +8,13 @@ import type { AdminAPIResponse, TabConfig } from '@/types/admin';
 const API_URL = 'https://24oyp6wkckryj2u2uxwsph5qy40xigim.lambda-url.us-east-1.on.aws/';
 
 const TAB_CONFIGS: TabConfig[] = [
-  { key: 'accessday', label: 'Access Day', description: 'Access Day program submissions' },
-  { key: 'library', label: 'Library', description: 'Library program submissions' },
-  { key: 'nursing', label: 'Nursing', description: 'Nursing program submissions' },
-  { key: 'rebs', label: 'REBS', description: 'REBS publication submissions' },
-  { key: 'contact', label: 'Contact', description: 'Contact form submissions' },
-  { key: 'partner', label: 'Partner', description: 'Partnership inquiries' },
-  { key: 'rrg', label: 'RRG', description: 'RRG submissions' },
+  { key: 'accessday', label: 'Access Day', description: '' },
+  { key: 'library', label: 'Library', description: '' },
+  { key: 'nursing', label: 'Nursing', description: '' },
+  { key: 'rebs', label: 'REBS', description: '' },
+  { key: 'contact', label: 'Contact', description: '' },
+  { key: 'partner', label: 'Partner', description: '' },
+  { key: 'rrg', label: 'RRG', description: '' },
 ];
 
 export default function AdminDashboard() {
