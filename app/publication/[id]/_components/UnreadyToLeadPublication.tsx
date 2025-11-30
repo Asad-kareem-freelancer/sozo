@@ -7,6 +7,7 @@ import {useState} from "react";
 import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 import Link from "next/link";
 import {ExternalLink} from "lucide-react";
+import Image from "next/image";
 
 // Common class patterns
 const SECTION_HEADING = "text-2xl md:text-3xl lg:text-[44px] font-normal mb-6 text-balance";
@@ -83,15 +84,14 @@ export default function UnreadyToLeadPublication() {
                                     <div className="space-y-2 text-xs">
                                         <p><strong>Publisher:</strong> The SozoRock Foundation</p>
                                         <p><strong>Location:</strong> Albany, New York</p>
-                                        <p><strong>Publication Date:</strong> 2025</p>
-                                        <p><strong>Author:</strong> Oluwabiyi Adeyemo</p>
-                                        <p><strong>Series:</strong> Leadership Works (Series 1 of 2)</p>
-                                        <p><strong>ISBN:</strong> 979-8-3507-5308-6</p>
+                                        <p><strong>Publication Date:</strong> November, 2025</p>
+                                        <p><strong>Leadership Series:</strong> (Series 1 of 2)</p>
+                                        <p><strong>ISBN:</strong> 979-8-9936477-2-2</p>
                                     </div>
                                     <div className="mt-4 pt-4 border-t border-gray-300">
                                         <p className="text-xs font-semibold mb-1">Recommended Citation:</p>
                                         <p className="text-xs">
-                                            Adeyemo, O. (2025). <em>UnReady to Lead: How America's Leaders Are Built</em>. The SozoRock Foundation.
+                                            Adeyemo, O. (2025). <em>UnReady to Lead: How America's Leaders Are Built</em>. The SozoRock Foundation, Inc. ISBN: 979-8-9936477-2-2
                                         </p>
                                     </div>
                                 </div>
@@ -100,15 +100,42 @@ export default function UnreadyToLeadPublication() {
                                 <div className="space-y-3 mt-6">
                                     <h3 className="font-semibold text-lg">Get Your Copy</h3>
                                     <div className="flex flex-col gap-3">
-                                        <Button
-                                            size="lg"
-                                            variant="secondary"
-                                            className="w-full justify-center"
-                                            onClick={() => window.open('https://a.co/d/9ABUtOR', '_blank')}
-                                        >
-                                            <ExternalLink className="w-4 h-4 mr-2" />
-                                            Buy on Amazon
-                                        </Button>
+                                        <div className="flex flex-col sm:flex-row gap-3">
+                                            <Button
+                                                size="lg"
+                                                variant="secondary"
+                                                className="w-full sm:flex-1 justify-center min-h-[44px]"
+                                                onClick={() => window.open('https://a.co/d/9ABUtOR', '_blank')}
+                                            >
+                                                <div className="flex gap-2 items-center min-w-32 sm:min-w-auto mx-auto">
+                                                    <Image
+                                                        src="/svg/amazon.svg"
+                                                        alt="Amazon"
+                                                        width={16}
+                                                        height={16}
+                                                        className="mr-2 brightness-0 invert flex-shrink-0"
+                                                    />
+                                                    <span className="whitespace-nowrap text-white">Kindle</span>
+                                                </div>
+                                            </Button>
+                                            <Button
+                                                size="lg"
+                                                variant="secondary"
+                                                className="w-full sm:flex-1 justify-center min-h-[44px] text-white"
+                                                onClick={() => window.open('https://a.co/d/ij0gaHx', '_blank')}
+                                            >
+                                                <div className="flex gap-2 items-center min-w-32 sm:min-w-auto mx-auto">
+                                                    <Image
+                                                        src="/svg/amazon.svg"
+                                                        alt="Amazon"
+                                                        width={16}
+                                                        height={16}
+                                                        className="mr-2 brightness-0 invert flex-shrink-0"
+                                                    />
+                                                    <p className="whitespace-nowrap text-white">Paper Back</p>
+                                                </div>
+                                            </Button>
+                                        </div>
                                         <Button
                                             size="lg"
                                             variant="outline"
@@ -122,24 +149,6 @@ export default function UnreadyToLeadPublication() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Container>
-            </section>
-
-            {/* About the Author */}
-            <section className="py-8 bg-gray-50">
-                <Container variant="compact">
-                    <h2 className={SECTION_HEADING}>About the Author</h2>
-                    <div className="space-y-4 leading-relaxed text-base">
-                        <p>
-                            <strong>Oluwabiyi Adeyemo</strong> is the founder of The SozoRock Foundation and has spent more than two decades advising senior executives, corporations, and government agencies on strategic decision-making, regulatory compliance, and organizational readiness.
-                        </p>
-                        <p>
-                            His work spans negotiation, risk assessment, and systems-level governance across multiple sectors. Through direct engagement with leadership failures and institutional pressures, he developed the insights that inform this book — a practical examination of what separates prepared leaders from those who are not.
-                        </p>
-                        <p>
-                            Adeyemo holds advanced degrees in law and public policy and has served in advisory capacities to organizations navigating complex regulatory and operational environments. <em>UnReady to Lead</em> is his first published work in a planned leadership series.
-                        </p>
                     </div>
                 </Container>
             </section>
@@ -179,12 +188,12 @@ export default function UnreadyToLeadPublication() {
                     <h2 className={SECTION_HEADING}>Why It Matters to The SozoRock Foundation</h2>
                     <div className="space-y-6 leading-relaxed text-base">
                         <p>
-                            <em>UnReady to Lead</em> represents a critical extension of The SozoRock Foundation's core mission to strengthen institutional capacity across underserved and underperforming systems. The book's central thesis—that leadership failures are preventable through disciplined preparation—directly informs TSF's programmatic approach to rural health equity, governance reform, and systems assurance.
+                            <em>UnReady to Lead</em> represents a critical extension of the SozoRock Foundation's core mission to strengthen institutional capacity across underserved and underperforming systems. The book's central thesis—that leadership failures are preventable through disciplined preparation—directly informs to SozoRock Foundation's programmatic approach to rural health equity, governance reform, and systems assurance.
                         </p>
 
                         <div className="space-y-4">
                             <div className="bg-white p-5 rounded-lg border border-gray-200">
-                                <h3 className="font-semibold text-lg mb-2">Aligns with TSF's Mission</h3>
+                                <h3 className="font-semibold text-lg mb-2">Aligns with SozoRock Foundation's Mission</h3>
                                 <p className="text-gray-700">
                                     The Foundation exists to build America's capacity where it is weakest—in rural counties, in public health infrastructure, and in governance structures that lack both resources and leadership depth. This book provides the conceptual framework for understanding why those weaknesses persist and what readiness truly requires.
                                 </p>
@@ -193,14 +202,14 @@ export default function UnreadyToLeadPublication() {
                             <div className="bg-white p-5 rounded-lg border border-gray-200">
                                 <h3 className="font-semibold text-lg mb-2">Supports REBS and RRG Insights</h3>
                                 <p className="text-gray-700">
-                                    The Rural Equity Blueprint Series and Rethinking Rural Governance both identify leadership deficits as primary barriers to sustainable reform. <em>UnReady to Lead</em> examines those deficits at a systems level, offering insight into why rural institutions repeatedly struggle to attract, develop, and retain leaders capable of executing long-term strategies. The book complements these publications by addressing the human and organizational factors that data alone cannot capture.
+                                    The Rural Equity Blueprint Series and Rethinking Rural Governance Series both identify leadership deficits as primary barriers to sustainable reform. <em>UnReady to Lead</em> examines those deficits at a systems level, offering insight into why rural institutions repeatedly struggle to attract, develop, and retain leaders capable of executing long-term strategies. The book complements these publications by addressing the human and organizational factors that data alone cannot capture.
                                 </p>
                             </div>
 
                             <div className="bg-white p-5 rounded-lg border border-gray-200">
                                 <h3 className="font-semibold text-lg mb-2">Integrates with HSA's Stability Goals</h3>
                                 <p className="text-gray-700">
-                                    Health Systems Assurance depends on leadership that can maintain trust, accountability, and operational integrity under stress. This book outlines the experiences and disciplines required to build that kind of leadership—particularly in environments where institutional memory is weak, regulatory oversight is inconsistent, and external pressures are high. The principles discussed in <em>UnReady to Lead</em> are foundational to TSF's vision of digitally enabled, resilient health infrastructure.
+                                    Health Systems Assurance depends on leadership that can maintain trust, accountability, and operational integrity under stress. This book outlines the experiences and disciplines required to build that kind of leadership—particularly in environments where institutional memory is weak, regulatory oversight is inconsistent, and external pressures are high. The principles discussed in <em>UnReady to Lead</em> are foundational to the SozoRock Foundation's vision of digitally enabled, resilient health infrastructure.
                                 </p>
                             </div>
                         </div>
@@ -212,10 +221,15 @@ export default function UnreadyToLeadPublication() {
                 </Container>
             </section>
 
-            {/* Related Publications */}
+            {/* More From The SozoRock Foundation */}
             <section className="py-8">
                 <Container variant="compact">
-                    <h2 className="text-2xl md:text-3xl font-normal mb-8">Related Publications</h2>
+                    <div className="mb-8">
+                        <h2 className="text-2xl md:text-3xl font-normal mb-3 text-black">More From The SozoRock Foundation</h2>
+                        <p className="text-gray-600 text-sm md:text-base max-w-3xl">
+                            The SozoRock Foundation strengthens health systems, governance, and leadership capacity across the United States through research, publications, and evidence-based initiatives.
+                        </p>
+                    </div>
 
                     <div className="grid md:grid-cols-3 gap-6">
                         <Link
@@ -259,9 +273,9 @@ export default function UnreadyToLeadPublication() {
 
             <Footer
                 title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
-                    Leadership that<br /> lasts.
+                    Advancing Readiness.<br /> Strengthening Capacity.
                 </h2>}
-                subTitle="Building the capacity America needs through principled, prepared leadership."
+                subTitle="Preparing leaders for responsibility, decision quality, and high-stakes environments."
                 buttonOne={
                     <Button
                         size="lg"

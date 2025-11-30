@@ -273,10 +273,15 @@ export default function HsaPublication() {
                 </Container>
             </section>
 
-            {/* Cross-links to Other Publications */}
+            {/* More From The SozoRock Foundation */}
             <section className="py-8 bg-gray-50">
                 <Container variant="compact">
-                    <h2 className="text-2xl md:text-3xl font-normal mb-8">Related Publications</h2>
+                    <div className="mb-8">
+                        <h2 className="text-2xl md:text-3xl font-normal mb-3 text-black">More From The SozoRock Foundation</h2>
+                        <p className="text-gray-600 text-sm md:text-base max-w-3xl">
+                            The SozoRock Foundation strengthens health systems, governance, and leadership capacity across the United States through research, publications, and evidence-based initiatives.
+                        </p>
+                    </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
                         <Link

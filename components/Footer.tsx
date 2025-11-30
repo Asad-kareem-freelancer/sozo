@@ -130,7 +130,7 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
                           <p className="opacity-50 text-xs">© 2025 — All rights reserved.</p>
                       </div>
                       <div className="text-xs space-y-2 font-normal max-w-full lg:max-w-[244px]">
-                          <Image src="/footer-logo.png" alt="Footer Logo" width={160} height={36} className="mb-6"/>
+                          <Link href="/"><Image src="/footer-logo.png" alt="Footer Logo" width={160} height={36} className="mb-6"/></Link>
                           <h5 className="font-semibold text-xs">From Insight to Impact in Health systems.</h5>
                           <span className="block text-xs">SozoRock® is a registered trademark of SozoRock Tech Inc., used under license by The SozoRock Foundation.</span>
                       </div>
