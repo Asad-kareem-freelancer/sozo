@@ -25,7 +25,7 @@ export default function UnreadyToLeadPublication() {
                         <img
                             src="/book/img.png"
                             alt="UnReady to Lead - Leadership development"
-                            className="h-full w-full object-cover max-sm:object-[-274px_center]"
+                            className="h-full w-full object-cover max-sm:object-[-260px_center]"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-black/[0.192] to-black/80 rounded-3xl"></div>
                     </div>
@@ -81,7 +81,7 @@ export default function UnreadyToLeadPublication() {
                                     <div className="mt-4 pt-4 border-t border-gray-300">
                                         <p className="text-xs font-semibold mb-1">Recommended Citation:</p>
                                         <p className="text-xs">
-                                            Adeyemo, O. (2025). <em>UnReady to Lead: How America's Leaders Are Built</em>. The SozoRock Foundation, Inc. ISBN: 979-8-9936477-2-2
+                                            Adeyemo, O. (2025). <em>UnReady to Lead: How America's Leaders Are Built</em>. The SozoRock Foundation, Inc. <br />ISBN: 979-8-9936477-2-2
                                         </p>
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@ export default function UnreadyToLeadPublication() {
             </section>
 
             <Footer
-                title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight w-2/3 sm:w-auto">
+                title={<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] leading-tight">
                     Advancing Readiness.<br /> Strengthening Capacity.
                 </h2>}
                 subTitle="Preparing leaders for responsibility, decision quality, and high-stakes environments."
