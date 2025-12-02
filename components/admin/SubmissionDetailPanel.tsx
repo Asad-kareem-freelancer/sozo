@@ -1,3 +1,5 @@
+'use client';
+
 import {
   AccessDaySubmission,
   LibrarySubmission,
@@ -6,7 +8,14 @@ import {
   ContactSubmission,
   PartnerSubmission,
   RRGSubmission,
+  SubmissionType,
 } from '@/types/admin';
+import { Button } from '@/components/ui/button';
+import { FileText, Sheet } from 'lucide-react';
+import {
+  exportSingleSubmissionToCSV,
+  exportSingleSubmissionToPDF,
+} from '@/lib/utils/exportSingleSubmission';
 
 type AnySubmission =
   | AccessDaySubmission
@@ -19,9 +28,13 @@ type AnySubmission =
 
 interface SubmissionDetailPanelProps {
   submission: AnySubmission | null;
+  submissionType?: SubmissionType;
 }
 
-export default function SubmissionDetailPanel({ submission }: SubmissionDetailPanelProps) {
+export default function SubmissionDetailPanel({
+  submission,
+  submissionType = 'accessday',
+}: SubmissionDetailPanelProps) {
   if (!submission) {
     return (
       <div className="h-full flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
@@ -45,6 +58,14 @@ export default function SubmissionDetailPanel({ submission }: SubmissionDetailPa
       </div>
     );
   }
+
+  const handleExportCSV = () => {
+    exportSingleSubmissionToCSV(submission, submissionType);
+  };
+
+  const handleExportPDF = () => {
+    exportSingleSubmissionToPDF(submission, submissionType);
+  };
 
   const formatValue = (value: any): string => {
     if (value === null || value === undefined || value === '') return '-';
@@ -162,7 +183,7 @@ export default function SubmissionDetailPanel({ submission }: SubmissionDetailPa
   return (
     <div className="h-full bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col">
       {/* Header */}
-      <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
+      <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200 flex-shrink-0">
         <h3 className="text-lg font-semibold text-gray-900">{getName()}</h3>
         <p className="text-sm text-gray-600 mt-1">{submission.email}</p>
       </div>
@@ -180,6 +201,31 @@ export default function SubmissionDetailPanel({ submission }: SubmissionDetailPa
           <FieldGroup title="Additional Information" fields={additionalFields} />
         )}
         <FieldGroup title="Metadata" fields={metadataFields} />
+      </div>
+
+      {/* Export Buttons */}
+      <div className="border-t border-gray-200 p-4 flex-shrink-0 bg-gray-50 space-y-2">
+        <p className="text-xs font-medium text-gray-700 mb-3">Export this submission</p>
+        <div className="grid grid-cols-2 gap-3">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExportCSV}
+            className="w-full"
+          >
+            <Sheet className="h-4 w-4 mr-2" />
+            CSV
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExportPDF}
+            className="w-full"
+          >
+            <FileText className="h-4 w-4 mr-2" />
+            PDF
+          </Button>
+        </div>
       </div>
     </div>
   );

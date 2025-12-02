@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import MasterDetailView from '@/components/admin/MasterDetailView';
-import type { AdminAPIResponse, TabConfig } from '@/types/admin';
+import type { AdminAPIResponse, TabConfig, FilterBarConfig, SubmissionType } from '@/types/admin';
 
 const API_URL = 'https://24oyp6wkckryj2u2uxwsph5qy40xigim.lambda-url.us-east-1.on.aws/';
 
@@ -16,6 +16,57 @@ const TAB_CONFIGS: TabConfig[] = [
   { key: 'partner', label: 'Partner', description: '' },
   { key: 'rrg', label: 'RRG', description: '' },
 ];
+
+// Filter configurations per tab (context-aware)
+const FILTER_CONFIGS: Record<SubmissionType, FilterBarConfig> = {
+  accessday: {
+    showCountry: true,
+    showState: true,
+    showOrganization: true,
+    showDateRange: true,
+    organizationLabel: 'Organization',
+  },
+  library: {
+    showCountry: true,
+    showState: true,
+    showOrganization: true,
+    showDateRange: true,
+    organizationLabel: 'Organization',
+  },
+  nursing: {
+    showCountry: true,
+    showState: true,
+    showOrganization: true,
+    showDateRange: true,
+    organizationLabel: 'Institution',
+  },
+  rebs: {
+    showCountry: true,
+    showState: true,
+    showOrganization: true,
+    showIntendedUse: true,
+    showDateRange: true,
+    organizationLabel: 'Organization Type',
+  },
+  rrg: {
+    showCountry: true,
+    showState: true,
+    showOrganization: true,
+    showIntendedUse: true,
+    showDateRange: true,
+    organizationLabel: 'Organization Type',
+  },
+  contact: {
+    showDateRange: true,
+  },
+  partner: {
+    showCountry: true,
+    showState: true,
+    showOrganization: true,
+    showDateRange: true,
+    organizationLabel: 'Organization',
+  },
+};
 
 export default function AdminDashboard() {
   const [data, setData] = useState<AdminAPIResponse | null>(null);
@@ -134,6 +185,8 @@ export default function AdminDashboard() {
                 <MasterDetailView
                   data={data.data[tab.key].items}
                   title={tab.label}
+                  filterConfig={FILTER_CONFIGS[tab.key]}
+                  submissionType={tab.key}
                 />
               </div>
             </div>

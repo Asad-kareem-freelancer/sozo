@@ -137,3 +137,41 @@ export interface TabConfig {
   label: string;
   description: string;
 }
+
+// Filter types
+export interface FilterConfig {
+  searchText: string;
+  country: string;
+  state: string;
+  organization: string;
+  intendedUse: string;
+  dateRange: {
+    from: Date | null;
+    to: Date | null;
+  };
+}
+
+export interface FilterBarConfig {
+  showCountry?: boolean;
+  showState?: boolean;
+  showOrganization?: boolean;
+  showIntendedUse?: boolean;
+  showDateRange?: boolean;
+  organizationLabel?: string;
+  organizationOptions?: string[];
+  intendedUseOptions?: string[];
+}
+
+// Export types
+export interface ExportColumn {
+  key: string;
+  label: string;
+  enabled: boolean;
+}
+
+export type ExportFormat = 'csv' | 'pdf';
+
+export interface ExportConfig {
+  columns: ExportColumn[];
+  format: ExportFormat;
+}
