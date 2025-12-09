@@ -8,6 +8,7 @@ import {useState} from "react";
 import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 import RebsReportModal from "@/components/modals/RebsReportModal";
 import Link from "next/link";
+import Script from "next/script";
 
 // Common class patterns
 const SECTION_HEADING = "text-2xl md:text-3xl lg:text-[44px] font-normal mb-6 text-balance";
@@ -33,8 +34,53 @@ export default function RebsPublication() {
     const [partnerModalOpen, setPartnerModalOpen] = useState(false);
     const [rebsModalOpen, setRebsModalOpen] = useState(false);
 
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "name": "Rural Equity Blueprint Series, Volume 1: Access Day—Building a Framework for Rural Health Equity in New York State",
+        "headline": "Rural Equity Blueprint Series (REBS) — Volume 1, Western New York",
+        "description": "The Rural Equity Blueprint Series (REBS) Volume 1 presents scalable, evidence-based frameworks that help rural counties strengthen health literacy, preventive pathways, digital readiness, chronic-disease support, and service coordination across Western New York.",
+        "author": [
+            {
+                "@type": "Person",
+                "name": "Oluwabiyi Adeyemo"
+            },
+            {
+                "@type": "Person",
+                "name": "Jordan Hare"
+            }
+        ],
+        "datePublished": "2025-10",
+        "publisher": {
+            "@type": "Organization",
+            "name": "The SozoRock Foundation, Inc.",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Albany",
+                "addressRegion": "NY",
+                "addressCountry": "US"
+            }
+        },
+        "url": "https://sozorockfoundation.org/publication/rebs-v1-2025",
+        "inLanguage": "en-US",
+        "keywords": "Rural Equity Blueprint Series, REBS, Western New York, rural health equity, health literacy, digital navigation, public health strategy, CHA, CHIP, SozoRock Foundation",
+        "about": "Rural health equity frameworks and community health improvement",
+        "identifier": "https://doi.org/10.65473/rebs-v1-2025",
+        "isPartOf": {
+            "@type": "PublicationVolume",
+            "name": "Rural Equity Blueprint Series",
+            "volumeNumber": "1"
+        }
+    };
+
     return(
         <>
+            {/* Schema.org Structured Data */}
+            <Script
+                id="rebs-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+            />
             <PublicHero />
 
             <section id="framework" className="py-8">

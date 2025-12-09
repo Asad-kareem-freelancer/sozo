@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import {useState} from "react";
 import PartnerWithUsModal from "@/components/modals/PartnerWithUsModal";
 import Link from "next/link";
+import Script from "next/script";
 
 // Common class patterns
 const SECTION_HEADING = "text-2xl md:text-3xl lg:text-[44px] font-normal mb-6 text-balance";
@@ -17,8 +18,46 @@ const IMAGE_ROUNDED = "rounded-2xl";
 export default function HsaPublication() {
     const [partnerModalOpen, setPartnerModalOpen] = useState(false);
 
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "name": "Health Systems Assurance (HSA) Series — Volume 1: Building Digital Trust Across Modern Health Infrastructure",
+        "headline": "Health Systems Assurance (HSA) Series | The SozoRock Foundation",
+        "description": "The Health Systems Assurance (HSA) Series delivers practical, security-focused frameworks that help counties, health systems, and digital-health platforms strengthen cybersecurity readiness, compliance maturity, and operational assurance across the United States and Canada.",
+        "author": {
+            "@type": "Person",
+            "name": "Oluwabiyi Adeyemo"
+        },
+        "datePublished": "2026-01",
+        "publisher": {
+            "@type": "Organization",
+            "name": "The SozoRock Foundation, Inc.",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Albany",
+                "addressRegion": "NY",
+                "addressCountry": "US"
+            }
+        },
+        "url": "https://sozorockfoundation.org/publication/hsa-v1-2026",
+        "inLanguage": "en-US",
+        "keywords": "Health Systems Assurance, HSA Series, cybersecurity readiness, digital health compliance, health systems assurance, rural health systems, SozoRock Foundation, privacy frameworks, public health security, HITRUST, HIPAA, PHIPA, SOC 2 readiness",
+        "about": "Health systems cybersecurity, compliance assurance, and digital trust infrastructure",
+        "isPartOf": {
+            "@type": "PublicationVolume",
+            "name": "Health Systems Assurance Series",
+            "volumeNumber": "1"
+        }
+    };
+
     return(
         <>
+            {/* Schema.org Structured Data */}
+            <Script
+                id="hsa-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+            />
             {/* Hero Section */}
             <Container>
                 <div className="relative">

@@ -22,24 +22,35 @@ export default function RrgPublication() {
 
     const schemaData = {
         "@context": "https://schema.org",
-        "@type": "Book",
+        "@type": "ScholarlyArticle",
         "name": "Rethinking Rural Governance: From Compliance to Systems Intelligence",
+        "headline": "Rethinking Rural Governance (RRG) — Volume 1, Delaware County, New York",
+        "description": "Rethinking Rural Governance (RRG) Volume 1 shows how county leaders can move from compliance-driven reporting to systems intelligence in Delaware County, New York, using CHA/CHIP data, equity indicators, and governance tools that can be adapted by other rural regions.",
         "author": {
             "@type": "Person",
             "name": "Oluwabiyi Adeyemo"
         },
-        "bookEdition": "First U.S. Edition",
-        "bookFormat": "EBook",
         "datePublished": "2025-11",
         "publisher": {
             "@type": "Organization",
-            "name": "The SozoRock Foundation, Inc."
+            "name": "The SozoRock Foundation, Inc.",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Albany",
+                "addressRegion": "NY",
+                "addressCountry": "US"
+            }
         },
-        "isbn": "",
-        "url": "https://www.sozorockfoundation.org",
+        "url": "https://sozorockfoundation.org/publication/rrg-v1-2025",
         "inLanguage": "en-US",
-        "keywords": "rural governance, modernization, systems intelligence, fiscal modernization, county government reform, institutional capacity, public administration, modernization framework, rural policy, Delaware County New York, Ontario rural governance, public sector innovation, binational modernization",
-        "identifier": "https://doi.org/10.65473/rrg-v1-2025"
+        "keywords": "Rethinking Rural Governance, RRG, Delaware County New York, rural governance, rural health equity, CHA, CHIP, public health planning, systems intelligence, SozoRock Foundation",
+        "about": "Rural governance modernization and systems intelligence",
+        "identifier": "https://doi.org/10.65473/rrg-v1-2025",
+        "isPartOf": {
+            "@type": "PublicationVolume",
+            "name": "Rethinking Rural Governance",
+            "volumeNumber": "1"
+        }
     };
 
     return(
