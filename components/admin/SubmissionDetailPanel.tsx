@@ -153,42 +153,14 @@ export default function SubmissionDetailPanel({
     additionalFields.push({ key: 'message', label: 'Message', value: submission.message });
   }
 
-  // Helper to render download status
-  const getDownloadStatusDisplay = () => {
-    if ('isDownloaded' in submission) {
-      if (submission.isDownloaded === true) {
-        return (
-          <div className="flex items-center gap-1.5 text-green-600">
-            <CheckCircle2 className="h-4 w-4" />
-            <span>Yes</span>
-          </div>
-        );
-      } else if (submission.isDownloaded === false) {
-        return (
-          <div className="flex items-center gap-1.5 text-gray-500">
-            <XCircle className="h-4 w-4" />
-            <span>No</span>
-          </div>
-        );
-      }
-    }
-    return '-';
-  };
-
   const metadataFields = [
     { key: 'submissionId', label: 'Submission ID', value: submission.submissionId },
     { key: 'submittedAt', label: 'Submitted At', value: formatDate(submission.submittedAt) },
     { key: 'location', label: 'Location', value: getLocation() },
   ];
 
-  // Add download status for REBS and RRG submissions
-  if ((submissionType === 'rebs' || submissionType === 'rrg') && 'isDownloaded' in submission) {
-    metadataFields.push({
-      key: 'isDownloaded',
-      label: 'Report Downloaded',
-      value: getDownloadStatusDisplay(),
-    });
-  }
+  // Check if submission has download tracking
+  const hasDownloadStatus = (submissionType === 'rebs' || submissionType === 'rrg') && 'isDownloaded' in submission;
 
   const FieldGroup = ({ title, fields }: { title: string; fields: Array<{ key: string; label: string; value: any }> }) => {
     const validFields = fields.filter(f => f.value && f.value !== '-');
@@ -232,6 +204,31 @@ export default function SubmissionDetailPanel({
           <FieldGroup title="Additional Information" fields={additionalFields} />
         )}
         <FieldGroup title="Metadata" fields={metadataFields} />
+
+        {/* Download Status for REBS and RRG */}
+        {hasDownloadStatus && (
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wider">Download Status</h4>
+            <div>
+              <dt className="text-sm font-semibold text-gray-800">Report Downloaded</dt>
+              <dd className="mt-1 text-sm">
+                {'isDownloaded' in submission && submission.isDownloaded === true ? (
+                  <div className="flex items-center gap-1.5 text-green-600">
+                    <CheckCircle2 className="h-4 w-4" />
+                    <span>Yes</span>
+                  </div>
+                ) : 'isDownloaded' in submission && submission.isDownloaded === false ? (
+                  <div className="flex items-center gap-1.5 text-gray-500">
+                    <XCircle className="h-4 w-4" />
+                    <span>No</span>
+                  </div>
+                ) : (
+                  <span className="text-gray-500">-</span>
+                )}
+              </dd>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Export Buttons */}
