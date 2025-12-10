@@ -6,8 +6,8 @@ import UnreadyToLeadPublication from './_components/UnreadyToLeadPublication';
 import { notFound } from 'next/navigation';
 
 type Props = {
-    params: Promise<{ id: string }>
-}
+    params: { id: string } | Promise<{ id: string }>;
+  }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { id } = await params;
