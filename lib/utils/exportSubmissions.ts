@@ -1,5 +1,5 @@
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 import type { ExportColumn } from '@/types/admin';
 import { getName, getOrganization, getIntendedUse } from './filterSubmissions';
 
@@ -107,31 +107,19 @@ export function exportToPDF(
   columns: ExportColumn[],
   filename: string,
   title: string
-): void {
+) {
   const enabledColumns = columns.filter((col) => col.enabled);
+  if (enabledColumns.length === 0 || data.length === 0) return;
 
-  if (enabledColumns.length === 0) {
-    alert('Please select at least one column to export');
-    return;
-  }
-
-  if (data.length === 0) {
-    alert('No data to export');
-    return;
-  }
-
-  // Create new PDF document
   const doc = new jsPDF({
     orientation: enabledColumns.length > 5 ? 'landscape' : 'portrait',
     unit: 'mm',
     format: 'a4',
   });
 
-  // Add title
   doc.setFontSize(16);
   doc.text(title, 14, 15);
 
-  // Add subtitle with count and date
   doc.setFontSize(10);
   doc.setTextColor(100);
   doc.text(
@@ -146,33 +134,21 @@ export function exportToPDF(
     22
   );
 
-  // Prepare table data
   const headers = enabledColumns.map((col) => col.label);
   const rows = data.map((item) =>
     enabledColumns.map((col) => getValueFromSubmission(item, col.key))
   );
 
-  // Add table
-  doc.autoTable({
+  autoTable(doc, {
     head: [headers],
     body: rows,
     startY: 28,
-    styles: {
-      fontSize: 8,
-      cellPadding: 2,
-    },
-    headStyles: {
-      fillColor: [71, 85, 105], // slate-600
-      textColor: [255, 255, 255],
-      fontStyle: 'bold',
-    },
-    alternateRowStyles: {
-      fillColor: [249, 250, 251], // gray-50
-    },
+    styles: { fontSize: 8, cellPadding: 2 },
+    headStyles: { fillColor: [71, 85, 105], textColor: [255, 255, 255], fontStyle: 'bold' },
+    alternateRowStyles: { fillColor: [249, 250, 251] },
     margin: { top: 28, right: 14, bottom: 14, left: 14 },
   });
 
-  // Save PDF
   doc.save(`${filename}.pdf`);
 }
 
