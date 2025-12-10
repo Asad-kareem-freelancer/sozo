@@ -132,8 +132,7 @@ export default function Footer({ title, buttonOne, buttonTwo, subTitle }: Props)
                       <div className="text-xs space-y-2 font-normal max-w-full lg:max-w-[244px]">
                           <Link href="/"><Image src="/footer-logo.png" alt="Footer Logo" width={160} height={36} className="mb-6"/></Link>
                           <h5 className="font-semibold text-xs">From Insight to Impact in Health systems.</h5>
-                          {/* <span className="block text-xs">SozoRock® is a registered trademark of SozoRock Tech Inc., used under license by The SozoRock Foundation.</span> */}
-                          <span className="block text-xs">The SozoRock Foundation Inc. is a non-profit, tax-exempt charitable organization (EIN 39-4736725 ) under Section 501(c)(3) of the Internal Revenue Code. Donations are tax-deductible as allowed by law</span>
+                          <span className="block text-xs">SozoRock® is a registered trademark of SozoRock Tech Inc., used under license by The SozoRock Foundation.The SozoRock Foundation Inc. is a non-profit, tax-exempt charitable organization (EIN 39-4736725) under Section 501(c)(3) of the Internal Revenue Code. Donations are tax-deductible as allowed by law</span>
                       </div>
                   </CardContent>
               </Card>
