@@ -7,9 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import Container from "@/components/ui/container";
 import { ShieldCheck } from 'lucide-react';
-
-const VALID_EMAIL = 'thesozorockfoundation@gmail.com';
-const VALID_PASSWORD = 'sozoRockFoundation1122';
+import { login } from '@/lib/api/auth';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -31,7 +29,7 @@ export default function AdminLoginPage() {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({ email: '', password: '', general: '' });
 
@@ -57,20 +55,26 @@ export default function AdminLoginPage() {
       return;
     }
 
-    // Check credentials
+    // Call login API
     setIsLoading(true);
-    setTimeout(() => {
-      if (email === VALID_EMAIL && password === VALID_PASSWORD) {
+    try {
+      const result = await login(email, password);
+
+      if (result.success) {
         // Save to localStorage
         localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('userEmail', email);
 
         // Redirect to admin dashboard
         router.push('/admin');
       } else {
-        setErrors({ email: '', password: '', general: 'Invalid email or password' });
+        setErrors({ email: '', password: '', general: result.error || 'Invalid email or password' });
       }
+    } catch (error) {
+      setErrors({ email: '', password: '', general: 'An unexpected error occurred. Please try again.' });
+    } finally {
       setIsLoading(false);
-    }, 500);
+    }
   };
 
   return (

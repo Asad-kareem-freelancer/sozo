@@ -11,14 +11,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { login } from '@/lib/api/auth';
 
 interface LoginModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
-
-const VALID_EMAIL = 'thesozorockfoundation@gmail.com';
-const VALID_PASSWORD = 'sozoRockFoundation1122';
 
 export default function LoginModal({ open, onOpenChange }: LoginModalProps) {
   const router = useRouter();
@@ -32,7 +30,7 @@ export default function LoginModal({ open, onOpenChange }: LoginModalProps) {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({ email: '', password: '', general: '' });
 
@@ -58,21 +56,27 @@ export default function LoginModal({ open, onOpenChange }: LoginModalProps) {
       return;
     }
 
-    // Check credentials
+    // Call login API
     setIsLoading(true);
-    setTimeout(() => {
-      if (email === VALID_EMAIL && password === VALID_PASSWORD) {
+    try {
+      const result = await login(email, password);
+
+      if (result.success) {
         // Save to localStorage
         localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('userEmail', email);
 
         // Close modal and redirect
         onOpenChange(false);
         router.push('/admin');
       } else {
-        setErrors({ email: '', password: '', general: 'Invalid email or password' });
+        setErrors({ email: '', password: '', general: result.error || 'Invalid email or password' });
       }
+    } catch (error) {
+      setErrors({ email: '', password: '', general: 'An unexpected error occurred. Please try again.' });
+    } finally {
       setIsLoading(false);
-    }, 500);
+    }
   };
 
   const handleClose = () => {

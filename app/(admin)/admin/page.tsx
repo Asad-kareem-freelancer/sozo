@@ -187,6 +187,7 @@ export default function AdminDashboard() {
                   title={tab.label}
                   filterConfig={FILTER_CONFIGS[tab.key]}
                   submissionType={tab.key}
+                  onDataChange={fetchData}
                 />
               </div>
             </div>

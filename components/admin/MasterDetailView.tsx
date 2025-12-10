@@ -20,9 +20,11 @@ import FilterBar from './FilterBar';
 import ExportModal from './ExportModal';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
+import ConfirmationDialog from '@/components/ui/confirmation-dialog';
 import { filterSubmissions, getUniqueValues } from '@/lib/utils/filterSubmissions';
 import { exportToCSV, exportToPDF, getDefaultColumns } from '@/lib/utils/exportSubmissions';
-import { Download } from 'lucide-react';
+import { deleteSubmission } from '@/lib/api/submissions';
+import { Download, Trash2, Loader2 } from 'lucide-react';
 
 type AnySubmission =
   | AccessDaySubmission
@@ -38,12 +40,17 @@ interface MasterDetailViewProps {
   title: string;
   filterConfig: FilterBarConfig;
   submissionType: SubmissionType;
+  onDataChange?: () => void;
 }
 
-export default function MasterDetailView({ data, title, filterConfig, submissionType }: MasterDetailViewProps) {
+export default function MasterDetailView({ data, title, filterConfig, submissionType, onDataChange }: MasterDetailViewProps) {
   const [selectedSubmission, setSelectedSubmission] = useState<AnySubmission | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [submissionToDelete, setSubmissionToDelete] = useState<AnySubmission | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterConfig>({
     searchText: '',
     country: '',
@@ -128,6 +135,42 @@ export default function MasterDetailView({ data, title, filterConfig, submission
     }
   };
 
+  const handleDeleteClick = (submission: AnySubmission, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent row click
+    setSubmissionToDelete(submission);
+    setDeleteConfirmOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!submissionToDelete) return;
+
+    setIsDeleting(true);
+    setDeletingId(submissionToDelete.submissionId);
+
+    try {
+      const result = await deleteSubmission(submissionType, submissionToDelete.submissionId);
+
+      if (result.success) {
+        // Close the confirmation dialog
+        setDeleteConfirmOpen(false);
+        setSubmissionToDelete(null);
+
+        // Notify parent to refresh data
+        if (onDataChange) {
+          onDataChange();
+        }
+      } else {
+        // Show error - you can replace this with a toast notification
+        alert(result.error || 'Failed to delete submission');
+      }
+    } catch (error) {
+      alert('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsDeleting(false);
+      setDeletingId(null);
+    }
+  };
+
   const exportColumns = useMemo(() => getDefaultColumns(submissionType), [submissionType]);
 
   return (
@@ -182,12 +225,15 @@ export default function MasterDetailView({ data, title, filterConfig, submission
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50">
                   Date
                 </th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredData.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-12 text-center text-sm text-gray-500">
+                  <td colSpan={6} className="px-6 py-12 text-center text-sm text-gray-500">
                     No submissions match the current filters
                   </td>
                 </tr>
@@ -213,6 +259,21 @@ export default function MasterDetailView({ data, title, filterConfig, submission
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDate(item.submittedAt)}
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => handleDeleteClick(item, e)}
+                        disabled={deletingId === item.submissionId}
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      >
+                        {deletingId === item.submissionId ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Trash2 className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </td>
                   </tr>
                 ))
               )}
@@ -228,38 +289,55 @@ export default function MasterDetailView({ data, title, filterConfig, submission
             </div>
           ) : (
             filteredData.map((item) => (
-              <button
+              <div
                 key={item.submissionId}
-                onClick={() => handleSelectSubmission(item)}
-                className="w-full text-left px-4 py-4 hover:bg-gray-50 transition-colors active:bg-gray-100"
+                className="relative px-4 py-4 hover:bg-gray-50 transition-colors"
               >
-                <div className="space-y-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <h4 className="font-medium text-sm text-gray-900">
-                      {getName(item)}
-                    </h4>
-                    <span className="text-xs text-gray-500 whitespace-nowrap">
-                      {formatDate(item.submittedAt)}
-                    </span>
-                  </div>
-
-                  <div className="text-xs text-gray-600 space-y-1">
-                    <div className="truncate">
-                      <span className="font-medium text-gray-700">Email:</span> {item.email}
+                <button
+                  onClick={() => handleSelectSubmission(item)}
+                  className="w-full text-left"
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-start justify-between gap-2 pr-8">
+                      <h4 className="font-medium text-sm text-gray-900">
+                        {getName(item)}
+                      </h4>
+                      <span className="text-xs text-gray-500 whitespace-nowrap">
+                        {formatDate(item.submittedAt)}
+                      </span>
                     </div>
-                    {item.phoneNumber && (
-                      <div className="text-gray-500">
-                        <span className="font-medium text-gray-700">Phone:</span> {item.phoneNumber}
-                      </div>
-                    )}
-                    {getOrganization(item) && (
+
+                    <div className="text-xs text-gray-600 space-y-1">
                       <div className="truncate">
-                        <span className="font-medium text-gray-700">Organization:</span> {getOrganization(item)}
+                        <span className="font-medium text-gray-700">Email:</span> {item.email}
                       </div>
-                    )}
+                      {item.phoneNumber && (
+                        <div className="text-gray-500">
+                          <span className="font-medium text-gray-700">Phone:</span> {item.phoneNumber}
+                        </div>
+                      )}
+                      {getOrganization(item) && (
+                        <div className="truncate">
+                          <span className="font-medium text-gray-700">Organization:</span> {getOrganization(item)}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </button>
+                </button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={(e) => handleDeleteClick(item, e)}
+                  disabled={deletingId === item.submissionId}
+                  className="absolute top-4 right-4 text-red-600 hover:text-red-700 hover:bg-red-50 p-2"
+                >
+                  {deletingId === item.submissionId ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Trash2 className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
             ))
           )}
         </div>
@@ -283,6 +361,19 @@ export default function MasterDetailView({ data, title, filterConfig, submission
         onExport={handleExport}
         title={title}
         recordCount={filteredData.length}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <ConfirmationDialog
+        open={deleteConfirmOpen}
+        onOpenChange={setDeleteConfirmOpen}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Submission"
+        description={`Are you sure you want to delete this submission${submissionToDelete ? ` from ${getName(submissionToDelete)}` : ''}? This action cannot be undone.`}
+        confirmText="Delete"
+        cancelText="Cancel"
+        isLoading={isDeleting}
+        variant="danger"
       />
     </>
   );
