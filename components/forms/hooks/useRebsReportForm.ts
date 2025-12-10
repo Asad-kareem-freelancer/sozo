@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
 import { submitRebsReportForm } from '../_api/formSubmissions';
-import { showReportSuccessAlert, showErrorAlert, showConnectionError } from '../_services/alertService';
+import { showReportSuccessAlertWithTracking, showErrorAlert, showConnectionError } from '../_services/alertService';
 
 const rebsReportSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters').max(35, 'First name must not exceed 35 characters'),
@@ -106,19 +106,33 @@ export function useRebsReportForm() {
     setIsSubmitting(true);
 
     try {
-      const result = await submitRebsReportForm(data);
+      // Show success alert with download tracking
+      const pdfUrl = 'https://d9gpta2bry95a.cloudfront.net/publications/REBS_v1.pdf';
+      const reportTitle = 'Rural Equity Blueprint Series — Volume 1 (2025)';
+      const downloadClicked = await showReportSuccessAlertWithTracking(reportTitle, pdfUrl);
 
-      if (result.success) {
-        reset();
-        callback?.(false);
+      if (downloadClicked) {
+        // User clicked download button - call API with is_download: true
+        const result = await submitRebsReportForm(data, true);
 
-        // Show success alert with download link
-        const pdfUrl = 'https://d9gpta2bry95a.cloudfront.net/publications/REBS_v1.pdf';
-        const reportTitle = 'Rural Equity Blueprint Series — Volume 1 (2025)';
-        await showReportSuccessAlert(reportTitle, pdfUrl);
+        if (result.success) {
+          reset();
+          callback?.(false);
+        } else {
+          console.error('API error:', result.error);
+          await showErrorAlert(result.message);
+        }
       } else {
-        console.error('API error:', result.error);
-        await showErrorAlert(result.message);
+        // User dismissed (clicked outside) - call API with is_download: false and close modal
+        const result = await submitRebsReportForm(data, false);
+
+        if (result.success) {
+          reset();
+          callback?.(false);
+        } else {
+          console.error('API error:', result.error);
+          await showErrorAlert(result.message);
+        }
       }
     } catch (error) {
       console.error('Form submission error:', error);

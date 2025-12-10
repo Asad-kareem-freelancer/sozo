@@ -16,8 +16,7 @@ type FormType = 'nursing' | 'accessday' | 'library' | 'contact' | 'partner' | 'r
 // Generic API request payload
 interface FormSubmissionPayload<T> {
   formType: FormType;
-  data: T;
-  is_download?: boolean;
+  data: T & { isDownloaded?: boolean };
 }
 
 // API response types
@@ -43,8 +42,10 @@ async function submitForm<T>(
   try {
     const payload: FormSubmissionPayload<T> = {
       formType,
-      data,
-      is_download: isDownload,
+      data: {
+        ...data,
+        isDownloaded: isDownload,
+      },
     };
 
     const response = await fetch(API_ENDPOINT, {
@@ -113,9 +114,10 @@ export async function submitPartnerWithUsForm(
 }
 
 export async function submitRebsReportForm(
-  data: RebsReportFormData
+  data: RebsReportFormData,
+  isDownload?: boolean
 ): Promise<ApiResponse> {
-  return submitForm('rebs', data);
+  return submitForm('rebs', data, isDownload);
 }
 
 export async function submitRrgReportForm(

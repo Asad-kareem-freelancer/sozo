@@ -65,6 +65,7 @@ export interface REBSSubmission extends BaseSubmission {
   privacyTermsConsent: boolean;
   disclaimerConsent: boolean;
   newsletterOptIn: boolean;
+  isDownloaded?: boolean;
 }
 
 // Contact submission
@@ -107,6 +108,7 @@ export interface RRGSubmission extends BaseSubmission {
   privacyTermsConsent: boolean;
   disclaimerConsent: boolean;
   newsletterOptIn: boolean;
+  isDownloaded?: boolean;
 }
 
 // Table data structure

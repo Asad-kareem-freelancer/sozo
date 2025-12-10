@@ -11,7 +11,7 @@ import {
   SubmissionType,
 } from '@/types/admin';
 import { Button } from '@/components/ui/button';
-import { FileText, Sheet } from 'lucide-react';
+import { FileText, Sheet, CheckCircle2, XCircle } from 'lucide-react';
 import {
   exportSingleSubmissionToCSV,
   exportSingleSubmissionToPDF,
@@ -153,11 +153,42 @@ export default function SubmissionDetailPanel({
     additionalFields.push({ key: 'message', label: 'Message', value: submission.message });
   }
 
+  // Helper to render download status
+  const getDownloadStatusDisplay = () => {
+    if ('isDownloaded' in submission) {
+      if (submission.isDownloaded === true) {
+        return (
+          <div className="flex items-center gap-1.5 text-green-600">
+            <CheckCircle2 className="h-4 w-4" />
+            <span>Yes</span>
+          </div>
+        );
+      } else if (submission.isDownloaded === false) {
+        return (
+          <div className="flex items-center gap-1.5 text-gray-500">
+            <XCircle className="h-4 w-4" />
+            <span>No</span>
+          </div>
+        );
+      }
+    }
+    return '-';
+  };
+
   const metadataFields = [
     { key: 'submissionId', label: 'Submission ID', value: submission.submissionId },
     { key: 'submittedAt', label: 'Submitted At', value: formatDate(submission.submittedAt) },
     { key: 'location', label: 'Location', value: getLocation() },
   ];
+
+  // Add download status for REBS and RRG submissions
+  if ((submissionType === 'rebs' || submissionType === 'rrg') && 'isDownloaded' in submission) {
+    metadataFields.push({
+      key: 'isDownloaded',
+      label: 'Report Downloaded',
+      value: getDownloadStatusDisplay(),
+    });
+  }
 
   const FieldGroup = ({ title, fields }: { title: string; fields: Array<{ key: string; label: string; value: any }> }) => {
     const validFields = fields.filter(f => f.value && f.value !== '-');

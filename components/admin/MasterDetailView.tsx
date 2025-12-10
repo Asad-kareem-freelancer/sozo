@@ -24,7 +24,7 @@ import ConfirmationDialog from '@/components/ui/confirmation-dialog';
 import { filterSubmissions, getUniqueValues } from '@/lib/utils/filterSubmissions';
 import { exportToCSV, exportToPDF, getDefaultColumns } from '@/lib/utils/exportSubmissions';
 import { deleteSubmission } from '@/lib/api/submissions';
-import { Download, Trash2, Loader2 } from 'lucide-react';
+import { Download, Trash2, Loader2, CheckCircle2, XCircle } from 'lucide-react';
 
 type AnySubmission =
   | AccessDaySubmission
@@ -113,6 +113,19 @@ export default function MasterDetailView({ data, title, filterConfig, submission
     } catch {
       return dateString;
     }
+  };
+
+  // Helper to check if submission type supports downloads
+  const hasDownloadTracking = (type: SubmissionType): boolean => {
+    return type === 'rebs' || type === 'rrg';
+  };
+
+  // Helper to get download status
+  const getDownloadStatus = (item: any): boolean | undefined => {
+    if ('isDownloaded' in item) {
+      return item.isDownloaded;
+    }
+    return undefined;
   };
 
   const handleSelectSubmission = (submission: AnySubmission) => {
@@ -222,6 +235,11 @@ export default function MasterDetailView({ data, title, filterConfig, submission
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50">
                   Organization
                 </th>
+                {hasDownloadTracking(submissionType) && (
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50">
+                    Downloaded
+                  </th>
+                )}
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50">
                   Date
                 </th>
@@ -233,7 +251,7 @@ export default function MasterDetailView({ data, title, filterConfig, submission
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredData.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-sm text-gray-500">
+                  <td colSpan={hasDownloadTracking(submissionType) ? 7 : 6} className="px-6 py-12 text-center text-sm text-gray-500">
                     No submissions match the current filters
                   </td>
                 </tr>
@@ -256,6 +274,17 @@ export default function MasterDetailView({ data, title, filterConfig, submission
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                       {getOrganization(item) || '-'}
                     </td>
+                    {hasDownloadTracking(submissionType) && (
+                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                        {getDownloadStatus(item) === true ? (
+                          <CheckCircle2 className="h-5 w-5 text-green-600 inline-block" />
+                        ) : getDownloadStatus(item) === false ? (
+                          <XCircle className="h-5 w-5 text-gray-400 inline-block" />
+                        ) : (
+                          <span className="text-xs text-gray-400">-</span>
+                        )}
+                      </td>
+                    )}
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDate(item.submittedAt)}
                     </td>
@@ -319,6 +348,18 @@ export default function MasterDetailView({ data, title, filterConfig, submission
                       {getOrganization(item) && (
                         <div className="truncate">
                           <span className="font-medium text-gray-700">Organization:</span> {getOrganization(item)}
+                        </div>
+                      )}
+                      {hasDownloadTracking(submissionType) && (
+                        <div className="flex items-center gap-1">
+                          <span className="font-medium text-gray-700">Downloaded:</span>
+                          {getDownloadStatus(item) === true ? (
+                            <CheckCircle2 className="h-4 w-4 text-green-600 inline-block" />
+                          ) : getDownloadStatus(item) === false ? (
+                            <XCircle className="h-4 w-4 text-gray-400 inline-block" />
+                          ) : (
+                            <span className="text-gray-400">-</span>
+                          )}
                         </div>
                       )}
                     </div>
