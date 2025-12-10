@@ -130,7 +130,7 @@ export default function UnreadyToLeadPublication() {
                                             size="lg"
                                             variant="outline"
                                             className="w-full justify-center whitespace-normal h-auto py-3 text-sm md:text-base"
-                                            onClick={() => window.open('https://www.ingramspark.com', '_blank')}
+                                            onClick={() => window.open('https://shop.ingramspark.com/b/084?params=XKZ2K75J4gWvKH090e8jAuuJQTJDIKDUkCwgaXXU3bB', '_blank')}
                                         >
                                             <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0" />
                                             <span className="text-center">Library & Wholesale Ordering — IngramSpark</span>
