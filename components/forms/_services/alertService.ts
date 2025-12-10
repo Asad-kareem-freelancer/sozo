@@ -84,3 +84,37 @@ export async function showReportSuccessAlert(reportTitle: string, downloadUrl: s
     },
   });
 }
+
+/**
+ * Show success alert for report downloads with download tracking
+ * @param reportTitle - The title/name of the report
+ * @param downloadUrl - The URL to download the report
+ * @returns Promise<boolean> - Returns true if download button was clicked, false if dismissed
+ */
+export async function showReportSuccessAlertWithTracking(reportTitle: string, downloadUrl: string): Promise<boolean> {
+  const result = await Swal.fire({
+    icon: 'success',
+    title: 'Thank you.',
+    html: `
+      <p>Your request for <strong>${reportTitle}</strong> has been received.</p>
+      <p style="margin-top: 12px;">Click the button below to download your report:</p>
+    `,
+    showCancelButton: false,
+    confirmButtonText: 'Download Report',
+    confirmButtonColor: '#2563eb',
+    allowOutsideClick: true,
+    allowEscapeKey: true,
+    customClass: {
+      popup: 'bg-white rounded-lg p-6 shadow-lg pointer-events-auto',
+    },
+  });
+
+  // If confirmed (Download button clicked), open the PDF
+  if (result.isConfirmed) {
+    window.open(downloadUrl, '_blank');
+    return true;
+  }
+
+  // If dismissed (clicked outside or escape), return false
+  return false;
+}
