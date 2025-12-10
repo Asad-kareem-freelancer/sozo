@@ -6,11 +6,11 @@ import UnreadyToLeadPublication from './_components/UnreadyToLeadPublication';
 import { notFound } from 'next/navigation';
 
 type Props = {
-    params: { id: string }
-}
+    params: { id: string } | Promise<{ id: string }>;
+  }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { id } = params;
+    const { id } =await params;
 
     switch (id) {
         case 'rrg-v1-2025':
@@ -123,8 +123,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 }
 
-export default function PublicationPage({ params }: Props) {
-    const { id } = params;
+export default async function PublicationPage({ params }: { params: { id: string } | Promise<{ id: string }> }) {
+    const { id } =await params;
 
     // Route to the appropriate publication component based on ID
     switch (id) {
