@@ -202,7 +202,7 @@ export default function MasterDetailView({ data, title, filterConfig, submission
       </div>
 
       {/* Submissions List */}
-      <div className="h-full bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col">
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col">
         <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex-shrink-0 flex items-center justify-between">
           <h3 className="text-xs sm:text-sm font-semibold text-gray-700">
             {title} Submissions ({filteredData.length} {filteredData.length !== data.length ? `of ${data.length}` : ''})
@@ -219,7 +219,7 @@ export default function MasterDetailView({ data, title, filterConfig, submission
         </div>
 
         {/* Desktop Table View */}
-        <div className="hidden md:block overflow-auto flex-1">
+        <div className="hidden md:block">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50 sticky top-0 z-10">
               <tr>
@@ -311,7 +311,7 @@ export default function MasterDetailView({ data, title, filterConfig, submission
         </div>
 
         {/* Mobile Card View */}
-        <div className="md:hidden divide-y divide-gray-200 overflow-auto flex-1">
+        <div className="md:hidden divide-y divide-gray-200">
           {filteredData.length === 0 ? (
             <div className="px-4 py-12 text-center text-sm text-gray-500">
               No submissions match the current filters

@@ -139,7 +139,7 @@ export default function AdminDashboard() {
   );
 
   return (
-    <div className="h-full flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between flex-shrink-0">
         <div>
           <h2 className="text-lg sm:text-2xl font-bold text-gray-900">Form Submissions</h2>
@@ -155,7 +155,7 @@ export default function AdminDashboard() {
         </button>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col">
         <TabsList className="w-full flex-shrink-0">
           {TAB_CONFIGS.map((tab) => (
             <TabsTrigger key={tab.key} value={tab.key} className="flex-1 text-xs sm:text-sm">
@@ -169,8 +169,8 @@ export default function AdminDashboard() {
         </TabsList>
 
         {TAB_CONFIGS.map((tab) => (
-          <TabsContent key={tab.key} value={tab.key} className="flex-1 overflow-hidden mt-4">
-            <div className="h-full flex flex-col gap-3">
+          <TabsContent key={tab.key} value={tab.key} className="mt-4">
+            <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between flex-shrink-0">
                 <div>
                   <h3 className="text-base sm:text-lg font-semibold text-gray-900">{tab.label}</h3>
@@ -181,7 +181,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              <div className="flex-1 overflow-hidden">
+              <div>
                 <MasterDetailView
                   data={data.data[tab.key].items}
                   title={tab.label}
